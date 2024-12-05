@@ -4,16 +4,16 @@ const config = {
 	preprocess: [vitePreprocess()],
 	kit: {
 		adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: null,
-      precompress: false,
-      strict: true
-    }),
+			pages: 'build',
+			assets: 'build',
+			fallback: null,
+			precompress: false,
+			strict: true
+		}),
 		paths: {
-      base: '/ms-svelte'
-    }
-	},
+			base: '/ms-svelte'
+		}
+	}
 };
 
 export default config;

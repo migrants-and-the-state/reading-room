@@ -29,5 +29,8 @@
 	"dependencies": {
 		"flexsearch": "^0.7.43",
 		"vite-plugin-commonjs": "^0.10.4"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "4.9.5"
 	}
 }
