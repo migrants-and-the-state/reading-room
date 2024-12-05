@@ -19,6 +19,7 @@
   let query = '';
   let results = [];
   let selectedFields = [];
+  let selectedPageFields = [];
   let yearMin = 1800;
   let yearMax = 1980;
 
@@ -39,6 +40,7 @@
   $: console.log('query length', query.length);
   $: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
   $: selectedFieldsLabel = selectedFields.length === 0 ? 'Select' : selectedFields.join(', ');
+  $: selectedPageFieldsLabel = selectedPageFields.length === 0 ? 'Select' : selectedPageFields.join(', ');
 </script>
 
 
@@ -47,8 +49,7 @@
   <Tab label="Find Pages" />
   <svelte:fragment slot="content">
     <Tile>
-    <TabContent>
-      
+      <TabContent>
         <Form on:submit={(e) => {
           e.preventDefault();
           handleSearch();
@@ -78,30 +79,42 @@
             </div>
           </FormGroup>
 
-          <div class="py-4 font-bold">Filter by Date Range</div>
-          <FormGroup>     
-            <div class="py-2">Date of Entry (NARA)</div>
+          <div class="py-4 font-bold">Advanced Filters</div>
+
+          <FormGroup legendText="Page Count">     
             <div class="flex justify-start py-2">
               <div class="basis-1/2">
-                <NumberInput inline label="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+                <NumberInput inline helperText="Minimum" value=0 min=0 max=1000 invalidText="Number must be between 0 and 1000."/>
               </div>
               <div class="basis-1/2">
-                <NumberInput inline label="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+                <NumberInput inline helperText="Maximum" value=1000 min=0 max=1000 invalidText="Number must be between 0 and 1000."/>
               </div>
             </div>
+          </FormGroup>
 
-            <div class="py-2">Date of Birth (NARA)</div>
+          
+          <FormGroup legendText="Date of Entry (NARA)">     
             <div class="flex justify-start py-2">
               <div class="basis-1/2">
-                <NumberInput inline label="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+                <NumberInput inline helperText="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
               </div>
               <div class="basis-1/2">
-                <NumberInput inline label="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+                <NumberInput inline helperText="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+              </div>
+            </div>
+          </FormGroup>
+
+          <FormGroup legendText="Date of Birth (NARA)">
+            <div class="flex justify-start py-2">
+              <div class="basis-1/2">
+                <NumberInput inline helperText="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+              </div>
+              <div class="basis-1/2">
+                <NumberInput inline helperText="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
               </div>
             </div>
           </FormGroup> 
 
-          <div class="py-4 font-bold">Segment</div>
           <FormGroup>
             <RadioButtonGroup legendText="Sex (NARA)" name="sex" selected="any">
               <RadioButton labelText="Any" value="any" />
@@ -110,8 +123,6 @@
               <RadioButton labelText="M" value="M" />
             </RadioButtonGroup>
           </FormGroup>
-
-          
 
           <Button on:click={handleSearch}>Submit</Button>
         </Form>
@@ -123,77 +134,65 @@
             {/each}
           </ul>
         </div>
-
-    </TabContent>
-
-
+      </TabContent>
     <TabContent>
-      <form>
-        <label>
-          <div>
-            <span>Search within a field</span>
+      <Form on:submit={(e) => { e.preventDefault(); }}>
+        <div class="py-4 font-bold">Search Within</div>
+        <FormGroup legendText="Fields">
+          <div class="flex flex-row justify-start">
+            <div class="basis-1/3">
+              <MultiSelect
+                label={selectedPageFieldsLabel}
+                selectionFeedback="fixed"
+                bind:selectedIds={selectedPageFields}
+                size="lg"
+                useTitleInItem=true
+                items={[
+                  { id: "Page Text", text: "Page Text (OCR)" },
+                  { id: "Countries", text: "Countries (NLP)" },
+                  { id: "Form Title", text: "Form Title (LLM)" }
+                ]}
+              />
+            </div>
+            <div class="basis-2/3">
+              <TextInput placeholder="Search..." invalidText="Select 1+ fields for the search" bind:value={query} invalid={isSearchInvalid}/>
+            </div>
           </div>
-          <div>
-            <select size="1" aria-label="select field to search within" id="search-limit-select">
-              <option>All</option>
-              <option>OCR Text</option>
-              <option>Countries (NLP)</option>
-              <option>Form Title (LLM)</option>
-            </select>
-            <input size="1" id="search-input" bind:value={query} on:input={handleSearch} placeholder="Search"/>
-            <button size="1" aria-label="submit search query" id="search-submit">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
-            </button>
-          </div>
-        </label>
-      </form>
-  
-      <form>
-        <label>
-          <div>
-            <span>Search for Date of Birth (LLM) within a range</span>
-          </div>
-          <div>
-            <input size="1" id="search-range-start" placeholder="Start"/>
-            <input size="1" id="search-range-end" placeholder="End"/>
-            <button size="1" aria-label="submit search range" id="search-range-submit">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
-            </button>
-          </div>
-        </label>
-      </form>
-  
-      <form>
-        <label>
-          <div>
-            <span>Facet by document type (CNN)</span>
-          </div>
-          <div>
-            <select size="1" aria-label="select document type to facet" id="facet-select">
-              <option>Form</option>
-              <option>Letter</option>
-              <option>Photograph</option>
-              <option>Miscellaneous</option>
-            </select>
-          </div>
-        </label>
-      </form>
-  
-      <br>
-      <form>
-        <label>
-          <div>
-            <span>Facet by sex (LLM)</span>
-          </div>
-          <div>
-            <select size="1" aria-label="select document type to facet" id="facet-select">
-              <option>Female</option>
-              <option>Male</option>
-            </select>
-          </div>
-        </label>
-      </form>
+        </FormGroup>
 
+        <FormGroup legendText="Date of Birth (LLM)">
+          <div class="flex justify-start py-2">
+            <div class="basis-1/2">
+              <NumberInput inline helperText="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+            </div>
+            <div class="basis-1/2">
+              <NumberInput inline helperText="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+            </div>
+          </div>
+        </FormGroup> 
+
+        <FormGroup>
+          <RadioButtonGroup legendText="Document Type (CNN)" name="document type" selected="any">
+            <RadioButton labelText="Any" value="any" />
+            <RadioButton labelText="Unset" value="unset" />
+            <RadioButton labelText="Form" value="form" />
+            <RadioButton labelText="Letter" value="letter" />
+            <RadioButton labelText="Photograph" value="photograph" />
+            <RadioButton labelText="Miscellaneous" value="miscellaneous" />
+          </RadioButtonGroup>
+        </FormGroup>
+
+        <FormGroup>
+          <RadioButtonGroup legendText="Sex (LLM)" name="sex" selected="any">
+            <RadioButton labelText="Any" value="any" />
+            <RadioButton labelText="Unset" value="unset" />
+            <RadioButton labelText="F" value="F" />
+            <RadioButton labelText="M" value="M" />
+          </RadioButtonGroup>
+        </FormGroup>
+
+        <Button>Submit</Button>
+      </Form>
     </TabContent>
     </Tile>
   </svelte:fragment>

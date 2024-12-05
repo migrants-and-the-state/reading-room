@@ -7,8 +7,8 @@
 <div class="min-h-screen p-12">
 	<header>
 		<h1 class="mb-6">M/S Sample Document Explorer</h1>
-		<div class="flex md:flex-nowrap flex-wrap w-full gap-10">
-			<div class="md:basis-1/2">
+		<div class="flex md:flex-nowrap flex-wrap w-full md:gap-10">
+			<div class="md:basis-1/2 basis-full">
 				<ExpandableTile light class="max-w-prose" tileExpandedLabel="Read less" tileCollapsedLabel="Read more">
 					<div slot="above">
 						<h2 class="py-6">About</h2>
@@ -19,7 +19,7 @@
 					</div>
 				</ExpandableTile>
 			</div>
-			<div class="md:basis-1/2">
+			<div class="md:basis-1/2 basis-full">
 				<ExpandableTile light class="max-w-prose" tileExpandedLabel="Read less" tileCollapsedLabel="Read more">
 					<div slot="above">
 						<h2 class="py-6">Statistics</h2>
