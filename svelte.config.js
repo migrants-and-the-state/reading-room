@@ -4,9 +4,15 @@ const config = {
 	preprocess: [vitePreprocess()],
 	kit: {
 		adapter: adapter({
-			out: 'build',
-			envPrefix: ''
-		})
+      pages: 'build',
+      assets: 'build',
+      fallback: null,
+      precompress: false,
+      strict: true
+    }),
+		paths: {
+      base: '/ms-svelte'
+    }
 	},
 };
 

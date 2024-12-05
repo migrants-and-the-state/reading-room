@@ -9,10 +9,10 @@
     RadioButtonGroup, RadioButton,
     MultiSelect,
     TextInput,
-    Button,
+    Button, ButtonSet,
     Tile,
     Tag,
-    Tabs, Tab, TabContent
+    Tabs, Tab, TabContent,
   } from "carbon-components-svelte";
 
 
@@ -43,10 +43,11 @@
   $: selectedPageFieldsLabel = selectedPageFields.length === 0 ? 'Select' : selectedPageFields.join(', ');
 </script>
 
-
-<Tabs type="container" class="py-12">
+<Tabs type="container" class="py-12" autoWidth>
   <Tab label="Find A-Files" />
   <Tab label="Find Pages" />
+  <Tab label="Find G325A Forms" disabled/>
+  <Tab label="Find Naturalization Certificates" disabled/>
   <svelte:fragment slot="content">
     <Tile>
       <TabContent>
@@ -64,12 +65,15 @@
                   bind:selectedIds={selectedFields}
                   size="lg"
                   useTitleInItem=true
+                  sortItem={() => {}}
                   items={[
                     { id: "A-Number", text: "A-Number (NARA)" },
                     { id: "CoB", text: "Country of birth (NARA)" },
                     { id: "Last Name", text: "Last name (NARA)" },
                     { id: "First Name", text: "First name (NARA)" },
-                    { id: "PoE", text: "Port of entry (NARA)"}
+                    { id: "PoE", text: "Port of entry (NARA)"},
+                    { id: "Doc Types", text: "Document Types (CNN)"},
+                    { id: "Form Titles", text: "Form Titles (LLM)"}
                   ]}
                 />
               </div>
@@ -123,8 +127,10 @@
               <RadioButton labelText="M" value="M" />
             </RadioButtonGroup>
           </FormGroup>
-
-          <Button on:click={handleSearch}>Submit</Button>
+          <ButtonSet>
+            <Button kind="secondary">Reset</Button>
+            <Button on:click={handleSearch}>Submit</Button>
+          </ButtonSet>
         </Form>
 
         <div>
@@ -135,65 +141,83 @@
           </ul>
         </div>
       </TabContent>
-    <TabContent>
-      <Form on:submit={(e) => { e.preventDefault(); }}>
-        <div class="py-4 font-bold">Search Within</div>
-        <FormGroup legendText="Fields">
-          <div class="flex flex-row justify-start">
-            <div class="basis-1/3">
-              <MultiSelect
-                label={selectedPageFieldsLabel}
-                selectionFeedback="fixed"
-                bind:selectedIds={selectedPageFields}
-                size="lg"
-                useTitleInItem=true
-                items={[
-                  { id: "Page Text", text: "Page Text (OCR)" },
-                  { id: "Countries", text: "Countries (NLP)" },
-                  { id: "Form Title", text: "Form Title (LLM)" }
-                ]}
-              />
+      <TabContent>
+        <Form on:submit={(e) => { e.preventDefault(); }}>
+          <div class="py-4 font-bold">Search Within</div>
+          <FormGroup legendText="Fields">
+            <div class="flex flex-row justify-start">
+              <div class="basis-1/3">
+                <MultiSelect
+                  label={selectedPageFieldsLabel}
+                  selectionFeedback="fixed"
+                  bind:selectedIds={selectedPageFields}
+                  size="lg"
+                  useTitleInItem=true
+                  sortItem={() => {}}
+                  items={[
+                    { id: "Page Text", text: "Page Text (OCR)" },
+                    { id: "Countries", text: "Countries (NLP)" },
+                    { id: "Form Title", text: "Form Title (LLM)" },
+                    { id: "Years", text: "Years (NLP)" }
+                  ]}
+                />
+              </div>
+              <div class="basis-2/3">
+                <TextInput placeholder="Search..." invalidText="Select 1+ fields for the search" bind:value={query} invalid={isSearchInvalid}/>
+              </div>
             </div>
-            <div class="basis-2/3">
-              <TextInput placeholder="Search..." invalidText="Select 1+ fields for the search" bind:value={query} invalid={isSearchInvalid}/>
+          </FormGroup>
+
+          <div class="py-4 font-bold">Advanced Filters</div>
+
+          <FormGroup legendText="Date of Birth (LLM)">
+            <div class="flex justify-start py-2">
+              <div class="basis-1/2">
+                <NumberInput inline helperText="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+              </div>
+              <div class="basis-1/2">
+                <NumberInput inline helperText="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
+              </div>
             </div>
-          </div>
-        </FormGroup>
+          </FormGroup> 
 
-        <FormGroup legendText="Date of Birth (LLM)">
-          <div class="flex justify-start py-2">
-            <div class="basis-1/2">
-              <NumberInput inline helperText="Start Year" value={yearMin} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
-            </div>
-            <div class="basis-1/2">
-              <NumberInput inline helperText="End Year" value={yearMax} min={yearMin} max={yearMax} invalidText="Number must be between {yearMin} and {yearMax}."/>
-            </div>
-          </div>
-        </FormGroup> 
+          <FormGroup>
+            <RadioButtonGroup legendText="Document Type (CNN)" name="document type" selected="any">
+              <RadioButton labelText="Any" value="any" />
+              <RadioButton labelText="Unset" value="unset" />
+              <RadioButton labelText="Form" value="form" />
+              <RadioButton labelText="Letter" value="letter" />
+              <RadioButton labelText="Photograph" value="photograph" />
+              <RadioButton labelText="Miscellaneous" value="miscellaneous" />
+            </RadioButtonGroup>
+          </FormGroup>
 
-        <FormGroup>
-          <RadioButtonGroup legendText="Document Type (CNN)" name="document type" selected="any">
-            <RadioButton labelText="Any" value="any" />
-            <RadioButton labelText="Unset" value="unset" />
-            <RadioButton labelText="Form" value="form" />
-            <RadioButton labelText="Letter" value="letter" />
-            <RadioButton labelText="Photograph" value="photograph" />
-            <RadioButton labelText="Miscellaneous" value="miscellaneous" />
-          </RadioButtonGroup>
-        </FormGroup>
+          <!-- <FormGroup>
+            <RadioButtonGroup legendText="Form Type (Heuristic)" name="form type" selected="any">
+              <RadioButton labelText="Any" value="any" />
+              <RadioButton labelText="Unset" value="unset" />
+              <RadioButton labelText="G325A" value="g325a" />
+              <RadioButton labelText="Naturalization Cert" value="cert_naturalization" />
+            </RadioButtonGroup>
+          </FormGroup> -->
 
-        <FormGroup>
-          <RadioButtonGroup legendText="Sex (LLM)" name="sex" selected="any">
-            <RadioButton labelText="Any" value="any" />
-            <RadioButton labelText="Unset" value="unset" />
-            <RadioButton labelText="F" value="F" />
-            <RadioButton labelText="M" value="M" />
-          </RadioButtonGroup>
-        </FormGroup>
+          <FormGroup>
+            <RadioButtonGroup legendText="Sex (LLM)" name="sex" selected="any">
+              <RadioButton labelText="Any" value="any" />
+              <RadioButton labelText="Unset" value="unset" />
+              <RadioButton labelText="F" value="F" />
+              <RadioButton labelText="M" value="M" />
+            </RadioButtonGroup>
+          </FormGroup>
 
-        <Button>Submit</Button>
-      </Form>
-    </TabContent>
+          <ButtonSet>
+            <Button kind="secondary">Reset</Button>
+            <Button>Submit</Button>
+          </ButtonSet>
+        </Form>
+      </TabContent>
+      <TabContent>3</TabContent>
+      <TabContent>4</TabContent>
     </Tile>
   </svelte:fragment>
 </Tabs>
