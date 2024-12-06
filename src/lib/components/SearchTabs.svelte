@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { addDocument, search } from '$lib/search';
+	import { base } from '$app/paths';
 
 	import {
 		Form,
@@ -67,7 +68,7 @@
 					<AFileIcon class="inline" size="20" /> <span class="font-bold"> A-Files</span> are Fusce non
 					accumsan diam. Quisque ex felis, semper nec lorem vitae, gravida efficitur ligula.
 				</p>
-				<p class="py-2">Read more in the <Link href="">Data Guide</Link>.</p>
+				<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 			</div>
 			<Form
 				on:submit={(e) => {
@@ -206,7 +207,7 @@
 					<PageIcon class="inline" size="20" /> <span class="font-bold">Pages</span> are Fusce non accumsan
 					diam. Quisque ex felis, semper nec lorem vitae, gravida efficitur ligula.
 				</p>
-				<p class="py-2">Read more in the <Link href="">Data Guide</Link>.</p>
+				<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 			</div>
 			<Form
 				on:submit={(e) => {
@@ -311,7 +312,7 @@
 					<G325AIcon class="inline" size="20" /> <span class="font-bold">G325A Forms</span> are Fusce
 					non accumsan diam. Quisque ex felis, semper nec lorem vitae, gravida efficitur ligula.
 				</p>
-				<p class="py-2">Read more in the <Link href="">Data Guide</Link>.</p>
+				<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 			</div>
 		</TabContent>
 		<TabContent class="bg-white">
@@ -321,7 +322,7 @@
 					<span class="font-bold">Naturalization Certificates</span> are Fusce non accumsan diam. Quisque
 					ex felis, semper nec lorem vitae, gravida efficitur ligula.
 				</p>
-				<p class="py-2">Read more in the <Link href="">Data Guide</Link>.</p>
+				<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 			</div>
 		</TabContent>
 	</svelte:fragment>
