@@ -65,4 +65,8 @@
 			</div>
 		</div>
 	</FormGroup>
+  <ButtonSet>
+		<Button kind="secondary">Reset</Button>
+		<Button>Submit</Button>
+	</ButtonSet>
 </Form>
