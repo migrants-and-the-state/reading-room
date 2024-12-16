@@ -24,8 +24,8 @@
 		</p>
 	</div>
 	<div class="basis-full md:basis-1/2">
-		<div class="max-w-prose">
-			<StructuredList condensed>
+		<div class="max-w-prose mb-12">
+			<StructuredList condensed class="!mb-1">
 				<StructuredListHead>
 					<StructuredListRow head>
 						<StructuredListCell head>Statistics</StructuredListCell>
@@ -47,7 +47,7 @@
 					</StructuredListRow>
 
 					<StructuredListRow>
-						<StructuredListCell noWrap><G325AIcon class="inline" /> G325A Forms*</StructuredListCell
+						<StructuredListCell noWrap><G325AIcon class="inline" /> G325A Forms *</StructuredListCell
 						>
 						<StructuredListCell>0</StructuredListCell>
 						<StructuredListCell>0</StructuredListCell>
@@ -55,13 +55,14 @@
 
 					<StructuredListRow>
 						<StructuredListCell noWrap
-							><NatCertIcon class="inline" /> Naturalization Certificates*</StructuredListCell
+							><NatCertIcon class="inline" /> Naturalization Certificates *</StructuredListCell
 						>
 						<StructuredListCell>0</StructuredListCell>
 						<StructuredListCell>0</StructuredListCell>
 					</StructuredListRow>
 				</StructuredListBody>
 			</StructuredList>
+			<div class="py-1 pl-5 text-xs opacity-70">* As identified by M/S heuristic analysis</div>
 		</div>
 	</div>
 </div>

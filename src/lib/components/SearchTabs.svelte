@@ -1,7 +1,7 @@
 <script>
 	import { base } from '$app/paths';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { getScopeIndex, updateScopeIndex } from '$lib/formScope';
 
 	import AFileSearch from '$lib/components/search/AFile.svelte';
 	import PageSearch from '$lib/components/search/Page.svelte';
@@ -10,19 +10,11 @@
 
 	import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
 
-	const validScopes = ['afile', 'page', 'g325a', 'natcert'];
-
 	$: scope = ($page.url.searchParams.get('scope') || '').toLowerCase();
-	$: scopeIndex = validScopes.indexOf(scope) !== -1 ? validScopes.indexOf(scope) : 0;
-
-	function updateScope(index) {
-		const newScope = validScopes[index];
-		$page.url.searchParams.set('scope', newScope);
-		goto(`?${$page.url.searchParams.toString()}`);
-	}
+	$: scopeIndex = getScopeIndex(scope);
 </script>
 
-<Tabs type="container" selected={scopeIndex} autoWidth on:change={(e) => updateScope(e.detail)}>
+<Tabs type="container" selected={scopeIndex} autoWidth on:change={(e) => updateScopeIndex(e.detail, $page)}>
 	<Tab id="afile" label="Find A-Files" />
 	<Tab id="page" label="Find Pages" />
 	<Tab id="g325a" label="Find G325A Forms *" />
