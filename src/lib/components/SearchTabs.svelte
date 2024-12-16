@@ -1,18 +1,24 @@
 <script>
 	import { base } from '$app/paths';
+	import { page } from '$app/stores';
+	import { getScopeIndex, updateScopeIndex } from '$lib/formScope';
+
 	import AFileSearch from '$lib/components/search/AFile.svelte';
 	import PageSearch from '$lib/components/search/Page.svelte';
 	import G325ASearch from '$lib/components/search/G325A.svelte';
 	import NatCertSearch from '$lib/components/search/NatCert.svelte';
 
 	import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
+
+	$: scope = ($page.url.searchParams.get('scope') || '').toLowerCase();
+	$: scopeIndex = getScopeIndex(scope);
 </script>
 
-<Tabs type="container" autoWidth>
-	<Tab label="Find A-Files" />
-	<Tab label="Find Pages" />
-	<Tab label="Find G325A Forms *" />
-	<Tab label="Find Naturalization Certificates *" />
+<Tabs type="container" selected={scopeIndex} autoWidth on:change={(e) => updateScopeIndex(e.detail, $page)}>
+	<Tab id="afile" label="Find A-Files" />
+	<Tab id="page" label="Find Pages" />
+	<Tab id="g325a" label="Find G325A Forms *" />
+	<Tab id="natcert" label="Find Naturalization Certificates *" />
 	<svelte:fragment slot="content">
 		<TabContent class="bg-white">
 			<AFileSearch />
