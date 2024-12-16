@@ -8,10 +8,14 @@
 	import NatCertSearch from '$lib/components/search/NatCert.svelte';
 
 	import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
+	import { onMount } from 'svelte';
 
 	export let scope;
 
 	$: scopeIndex = getScopeIndex(scope);
+	onMount(() => {
+		updateScopeIndex(scopeIndex);
+	});
 </script>
 
 <Tabs
