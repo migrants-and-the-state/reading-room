@@ -24,7 +24,7 @@
 		</p>
 	</div>
 	<div class="basis-full md:basis-1/2">
-		<div class="max-w-prose mb-12">
+		<div class="mb-12 max-w-prose">
 			<StructuredList condensed class="!mb-1">
 				<StructuredListHead>
 					<StructuredListRow head>
@@ -47,7 +47,8 @@
 					</StructuredListRow>
 
 					<StructuredListRow>
-						<StructuredListCell noWrap><G325AIcon class="inline" /> G325A Forms *</StructuredListCell
+						<StructuredListCell noWrap
+							><G325AIcon class="inline" /> G325A Forms *</StructuredListCell
 						>
 						<StructuredListCell>0</StructuredListCell>
 						<StructuredListCell>0</StructuredListCell>

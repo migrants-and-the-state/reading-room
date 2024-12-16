@@ -1,7 +1,6 @@
 <script>
 	import { base } from '$app/paths';
-	import { page } from '$app/stores';
-	import { getScopeIndex, updateScopeIndex } from '$lib/formScope';
+	import { getScopeIndex, updateScopeIndex } from '$lib/scope';
 
 	import AFileSearch from '$lib/components/search/AFile.svelte';
 	import PageSearch from '$lib/components/search/Page.svelte';
@@ -10,11 +9,17 @@
 
 	import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
 
-	$: scope = ($page.url.searchParams.get('scope') || '').toLowerCase();
+	export let scope;
+
 	$: scopeIndex = getScopeIndex(scope);
 </script>
 
-<Tabs type="container" selected={scopeIndex} autoWidth on:change={(e) => updateScopeIndex(e.detail, $page)}>
+<Tabs
+	type="container"
+	selected={scopeIndex}
+	autoWidth
+	on:change={(e) => updateScopeIndex(e.detail)}
+>
 	<Tab id="afile" label="Find A-Files" />
 	<Tab id="page" label="Find Pages" />
 	<Tab id="g325a" label="Find G325A Forms *" />
