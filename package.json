@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"flexsearch": "^0.7.43",
+		"mirador": "^3.3.0",
 		"vite-plugin-commonjs": "^0.10.4"
 	},
 	"optionalDependencies": {

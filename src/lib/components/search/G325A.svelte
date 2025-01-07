@@ -1,5 +1,6 @@
 <script>
 	import { base } from '$app/paths';
+	import ButtonControls from './forms/ButtonControls.svelte';
 	import { Identification as G325AIcon } from 'carbon-icons-svelte';
 
 	import {
@@ -7,8 +8,6 @@
 		FormGroup,
 		MultiSelect,
 		TextInput,
-		Button,
-		ButtonSet,
 		Link
 	} from 'carbon-components-svelte';
 
@@ -65,8 +64,6 @@
 			</div>
 		</div>
 	</FormGroup>
-	<ButtonSet>
-		<Button kind="secondary">Reset</Button>
-		<Button>Submit</Button>
-	</ButtonSet>
+	
+	<ButtonControls />
 </Form>

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { addDocument, search } from '$lib/search';
 	import { base } from '$app/paths';
-
+	import ButtonControls from './forms/ButtonControls.svelte';
 	import { Document as PageIcon } from 'carbon-icons-svelte';
 	import {
 		Form,
@@ -12,8 +12,6 @@
 		RadioButton,
 		MultiSelect,
 		TextInput,
-		Button,
-		ButtonSet,
 		Link
 	} from 'carbon-components-svelte';
 
@@ -131,8 +129,5 @@
 		</RadioButtonGroup>
 	</FormGroup>
 
-	<ButtonSet>
-		<Button kind="secondary">Reset</Button>
-		<Button>Submit</Button>
-	</ButtonSet>
+	<ButtonControls />
 </Form>

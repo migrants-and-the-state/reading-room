@@ -7,7 +7,7 @@
 	import G325ASearch from '$lib/components/search/G325A.svelte';
 	import NatCertSearch from '$lib/components/search/NatCert.svelte';
 
-	import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
+	import { Tabs, Tab, TabContent, Button } from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 
 	export let scope;

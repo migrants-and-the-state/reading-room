@@ -1,5 +1,6 @@
 <script>
 	import { base } from '$app/paths';
+	import ButtonControls from './forms/ButtonControls.svelte';
 	import { Policy as NatCertIcon } from 'carbon-icons-svelte';
 
 	import {
@@ -8,8 +9,6 @@
 		MultiSelect,
 		TextInput,
 		NumberInput,
-		Button,
-		ButtonSet,
 		Link
 	} from 'carbon-components-svelte';
 
@@ -93,8 +92,6 @@
 			</div>
 		</div>
 	</FormGroup>
-	<ButtonSet>
-		<Button kind="secondary">Reset</Button>
-		<Button>Submit</Button>
-	</ButtonSet>
+	
+	<ButtonControls />
 </Form>
