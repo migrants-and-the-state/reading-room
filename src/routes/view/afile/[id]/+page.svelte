@@ -41,6 +41,8 @@
       const currentCanvas = windows[windowId];
       const currentCanvasId = currentCanvas.canvasId;
 			const currentManifest = state.manifests[manifestId];
+      if (currentManifest === undefined) return;
+      
 			const canvases = currentManifest.json.sequences[0].canvases;
 
 			// Find the index of the current canvas

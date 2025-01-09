@@ -1,6 +1,8 @@
 <script>
 	import { base } from '$app/paths';
 	import { Link, OutboundLink } from 'carbon-components-svelte';
+
+	console.log(base);
 </script>
 
 <header>
