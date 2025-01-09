@@ -6,5 +6,5 @@
 
 <ButtonSet>
   <Button kind="secondary">Reset</Button>
-  <Button href={`${base}/results`}>Submit</Button>
+  <Button href={`${base}/results/afiles`}>Submit</Button>
 </ButtonSet>

@@ -1,16 +1,22 @@
 <script>
+  import { goto } from '$app/navigation';
+  import { base } from '$app/paths';
   import { onMount } from 'svelte';
   import Mirador from 'mirador';
   import { writable } from 'svelte/store';
   import { Tabs, Tab, TabContent } from "carbon-components-svelte";
 
   let { data } = $props();
-	const manifestId = 'https://mats-aperitiiif-presenation-api-store-v1.s3.us-east-1.amazonaws.com/og-2024-sf-nara/A002475884/manifest.json';
+  if (data.status == 404) { goto(`${base}/404.html`); }
+
+  const afile = data.props.afile;
+  const startCanvasId = data.props.canvasId;
+
+	const manifestId = afile.manifest_url;
   const currentPage = writable(0);
 	const numPages = writable(0);
 
   onMount(() => {
-		console.log('hello!');
     const miradorInstance = Mirador.viewer({
       id: 'mirador',
       window: {
@@ -23,7 +29,7 @@
       },
       windows: [{
         manifestId: manifestId,
-        canvasId: 'https://mats-aperitiiif-presenation-api-store-v1.s3.us-east-1.amazonaws.com/canvas/og-2024-sf-nara_A002475884_0006.json'
+        canvasId: startCanvasId
       }],
       thumbnailNavigation: {
         defaultPosition: 'far-right',
@@ -51,18 +57,15 @@
 			// Update the current page based on the canvas index
 			currentPage.set(currentCanvasIndex + 1);
 			numPages.set(canvases.length);
-
-			console.log('Current Canvas Index:', currentCanvasIndex);
-			console.log('Current Page:', currentCanvasIndex + 1);
     });
   });
 </script>
 
 <div class="flex gap-6 md:flex-nowrap flex-wrap">
-  <div class="basis-1/2 h-[60vh] border-none relative">
+  <div class="basis-3/5 h-[60vh] border-none relative">
     <div id="mirador"></div>
   </div>
-  <div class="basis-1/2 h-[60vh] pb-12">
+  <div class="basis-2/5 h-[60vh] pb-12">
     <Tabs autoWidth type="container" class="h-full">
       <Tab id="afile" label="About this A-File" />
       <Tab id="page" label="About this Page ({$currentPage}/{$numPages})" />
@@ -70,9 +73,9 @@
         <TabContent class="bg-white scroll-y h-full">
           <dl class="text-lg">
             <dt class="font-extrabold">A-Number</dt>
-            <dd>{data.id}</dd>
+            <dd>{afile.id}</dd>
             <dt class="font-extrabold">Page Count</dt>
-            <dd>50</dd>
+            <dd>{$numPages}</dd>
             <dt class="font-extrabold">First Name</dt>
             <dd>NATSU</dd>
             <dt class="font-extrabold">Last Name</dt>
