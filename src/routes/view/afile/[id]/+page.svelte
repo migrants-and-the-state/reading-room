@@ -5,10 +5,12 @@
   import { Tabs, Tab, TabContent } from "carbon-components-svelte";
 
   let { data } = $props();
+	const manifestId = 'https://mats-aperitiiif-presenation-api-store-v1.s3.us-east-1.amazonaws.com/og-2024-sf-nara/A002475884/manifest.json';
   const currentPage = writable(0);
 	const numPages = writable(0);
 
   onMount(() => {
+		console.log('hello!');
     const miradorInstance = Mirador.viewer({
       id: 'mirador',
       window: {
@@ -20,7 +22,7 @@
         allowWindowSideBar: false,
       },
       windows: [{
-        manifestId: 'https://mats-aperitiiif-presenation-api-store-v1.s3.us-east-1.amazonaws.com/og-2024-sf-nara/A002475884/manifest.json',
+        manifestId: manifestId,
         canvasId: 'https://mats-aperitiiif-presenation-api-store-v1.s3.us-east-1.amazonaws.com/canvas/og-2024-sf-nara_A002475884_0006.json'
       }],
       thumbnailNavigation: {
@@ -37,19 +39,19 @@
       const windows = state.windows;
       const windowId = Object.keys(windows)[0];
       const currentCanvas = windows[windowId];
-      const currentManifestId = currentCanvas.manifestId;
       const currentCanvasId = currentCanvas.canvasId;
-      const canvases = state.manifests[currentManifestId].json.sequences[0].canvases;
+			const currentManifest = state.manifests[manifestId];
+			const canvases = currentManifest.json.sequences[0].canvases;
 
-      // Find the index of the current canvas
-      const currentCanvasIndex = canvases.findIndex(canvas => canvas['@id'] === currentCanvasId);
+			// Find the index of the current canvas
+			const currentCanvasIndex = canvases.findIndex(canvas => canvas['@id'] === currentCanvasId);
 
-      // Update the current page based on the canvas index
-      currentPage.set(currentCanvasIndex + 1);
+			// Update the current page based on the canvas index
+			currentPage.set(currentCanvasIndex + 1);
 			numPages.set(canvases.length);
 
-      console.log('Current Canvas Index:', currentCanvasIndex);
-      console.log('Current Page:', currentCanvasIndex + 1);
+			console.log('Current Canvas Index:', currentCanvasIndex);
+			console.log('Current Page:', currentCanvasIndex + 1);
     });
   });
 </script>
