@@ -3,8 +3,8 @@
 	import SearchTabs from '$lib/components/SearchTabs.svelte';
 
 	export let data;
-	export let scope = data.props.searchParams.get('scope');
+	export let tab = data.props.searchParams.get('tab');
 </script>
 
 <InfoPane />
-<SearchTabs {scope} />
+<SearchTabs {tab} />
