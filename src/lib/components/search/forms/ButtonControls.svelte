@@ -5,6 +5,6 @@
 </script>
 
 <ButtonSet>
-  <Button kind="secondary">Reset</Button>
+  <Button href="javascript:window.location.reload(true)" kind="secondary">Reset</Button>
   <Button href={`${base}/results/afiles`}>Submit</Button>
 </ButtonSet>
