@@ -1,13 +1,10 @@
 <script>
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { addDocument, search } from '$lib/search';
 	import { base } from '$app/paths';
+	import { handleSubmit } from '$lib/search';
 
-	// import ButtonControls from './forms/ButtonControls.svelte';
+	import ButtonControls from './forms/ButtonControls.svelte';
 	import { FolderShared as AFileIcon } from 'carbon-icons-svelte';
 	import {
-		Button,
 		Form,
 		FormGroup,
 		NumberInput,
@@ -19,50 +16,11 @@
 	} from 'carbon-components-svelte';
 
 	let query = '';
-	// let results = [];
 	let selectedFields = [];
 	let yearMin = 1800;
 	let yearMax = 1980;
 
-	function handleSubmit(event) {
-    event.preventDefault();
-		const formData = {};
-    const form = event.target;
-		console.log('Form:', form);
-    const data = new FormData(form);
-		console.log('Data:', data);
-		const obj = {};
-
-		const formValues = {};
-		for (const [key, value] of data) {
-			if (formValues.hasOwnProperty(key)) {
-				formValues[key] = [].concat(formValues[key], value);
-			} else {
-				formValues[key] = value;
-			}
-		}
-		const queryString = new URLSearchParams(formValues).toString()
-		console.log('Query String:', queryString);
-		goto(`${base}/results/afiles?${queryString}`);
-  }
-
-	// Sample documents
-	// const documents = [
-	// 	{ id: 1, content: 'First document content' },
-	// 	{ id: 2, content: 'Second document content' }
-	// ];
-
-	// onMount(() => {
-	// 	documents.forEach((doc) => addDocument(doc.id, doc.content));
-	// });
-
-	// function handleSearch() {
-	// 	results = search(query, { suggest: true });
-	// }
-
-	$: console.log('query length', query.length);
 	$: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
-	// $: selectedFieldsLabel = selectedFields.length === 0 ? 'Select' : selectedFields.join(', ');
 </script>
 
 <div class="max-w-prose py-4">
@@ -73,10 +31,7 @@
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
 
-
-<Form
-	on:submit={handleSubmit}
-	>
+<Form scope="afile" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>
 	<FormGroup legendText="Fields">
 		<div class="flex flex-row justify-start">
@@ -85,7 +40,7 @@
 					name="fields"
 					label="Select fields"
 					selectionFeedback="fixed"
-					itemToInput={(item) => ({ name: "selectedFields", value: item.id })}
+					itemToInput={(item) => ({ name: 'selectedFields', value: item.id })}
 					bind:selectedIds={selectedFields}
 					size="lg"
 					sortItem={() => {}}
@@ -197,7 +152,6 @@
 			</div>
 		</div>
 	</FormGroup>
-	
-	<!-- <ButtonControls /> -->
-	<Button type="submit">Submit</Button>
+
+	<ButtonControls />
 </Form>

@@ -13,7 +13,7 @@ const config = {
 		paths: {
 			base: '/corpus-ui-sample'
 		},
-    prerender: {
+		prerender: {
 			concurrency: 1,
 			crawl: true,
 			entries: ['*', '/view/afile/*/*']
