@@ -1,15 +1,11 @@
 <script>
 	import { base } from '$app/paths';
+	import { handleSubmit } from '$lib/search';
+
 	import ButtonControls from './forms/ButtonControls.svelte';
 	import { Identification as G325AIcon } from 'carbon-icons-svelte';
 
-	import {
-		Form,
-		FormGroup,
-		MultiSelect,
-		TextInput,
-		Link
-	} from 'carbon-components-svelte';
+	import { Form, FormGroup, MultiSelect, TextInput, Link } from 'carbon-components-svelte';
 
 	let query = '';
 	let results = [];
@@ -19,7 +15,6 @@
 	let yearMax = 1980;
 
 	$: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
-	$: selectedFieldsLabel = selectedFields.length === 0 ? 'Select' : selectedFields.join(', ');
 </script>
 
 <div class="max-w-prose py-4">
@@ -30,21 +25,18 @@
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
 
-<Form
-	on:submit={(e) => {
-		e.preventDefault();
-	}}
->
+<Form scope="g325a" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>
 	<FormGroup legendText="Fields">
 		<div class="flex flex-row justify-start">
 			<div class="basis-1/3">
 				<MultiSelect
-					label={selectedFieldsLabel}
+					name="fields"
+					label="Select fields"
 					selectionFeedback="fixed"
+					itemToInput={(item) => ({ name: 'selectedFields', value: item.id })}
 					bind:selectedIds={selectedFields}
 					size="lg"
-					useTitleInItem="true"
 					sortItem={() => {}}
 					items={[
 						{ id: 'Page Text', text: 'Page Text (OCR)' },
@@ -56,6 +48,7 @@
 			</div>
 			<div class="basis-2/3">
 				<TextInput
+					name="query"
 					placeholder="Search..."
 					invalidText="Select 1+ fields for the search"
 					bind:value={query}
@@ -64,6 +57,6 @@
 			</div>
 		</div>
 	</FormGroup>
-	
+
 	<ButtonControls />
 </Form>

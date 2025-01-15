@@ -18,12 +18,7 @@
 	});
 </script>
 
-<Tabs
-	type="container"
-	selected={tabIndex}
-	autoWidth
-	on:change={(e) => updateTabIndex(e.detail)}
->
+<Tabs type="container" selected={tabIndex} autoWidth on:change={(e) => updateTabIndex(e.detail)}>
 	<Tab id="afile" label="Find A-Files" />
 	<Tab id="page" label="Find Pages" />
 	<Tab id="g325a" label="Find G325A Forms *" />

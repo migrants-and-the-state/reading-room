@@ -1,7 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
-	import { addDocument, search } from '$lib/search';
 	import { base } from '$app/paths';
+	import { handleSubmit } from '$lib/search';
 
 	import ButtonControls from './forms/ButtonControls.svelte';
 	import { FolderShared as AFileIcon } from 'carbon-icons-svelte';
@@ -17,28 +16,11 @@
 	} from 'carbon-components-svelte';
 
 	let query = '';
-	let results = [];
 	let selectedFields = [];
 	let yearMin = 1800;
 	let yearMax = 1980;
 
-	// Sample documents
-	const documents = [
-		{ id: 1, content: 'First document content' },
-		{ id: 2, content: 'Second document content' }
-	];
-
-	onMount(() => {
-		documents.forEach((doc) => addDocument(doc.id, doc.content));
-	});
-
-	function handleSearch() {
-		results = search(query, { suggest: true });
-	}
-
-	$: console.log('query length', query.length);
 	$: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
-	$: selectedFieldsLabel = selectedFields.length === 0 ? 'Select' : selectedFields.join(', ');
 </script>
 
 <div class="max-w-prose py-4">
@@ -48,22 +30,19 @@
 	</p>
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
-<Form
-	on:submit={(e) => {
-		e.preventDefault();
-		handleSearch();
-	}}
->
+
+<Form scope="afile" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>
 	<FormGroup legendText="Fields">
 		<div class="flex flex-row justify-start">
 			<div class="basis-1/3">
 				<MultiSelect
-					label={selectedFieldsLabel}
+					name="fields"
+					label="Select fields"
 					selectionFeedback="fixed"
+					itemToInput={(item) => ({ name: 'selectedFields', value: item.id })}
 					bind:selectedIds={selectedFields}
 					size="lg"
-					useTitleInItem="true"
 					sortItem={() => {}}
 					items={[
 						{ id: 'A-Number', text: 'A-Number (NARA)' },
@@ -78,6 +57,7 @@
 			</div>
 			<div class="basis-2/3">
 				<TextInput
+					name="query"
 					placeholder="Search..."
 					invalidText="Select 1+ fields for the search"
 					bind:value={query}
@@ -89,7 +69,16 @@
 
 	<div class="py-4 font-bold">Advanced Filters</div>
 
-	<FormGroup legendText="Page Count">
+	<FormGroup>
+		<RadioButtonGroup legendText="Sex (NARA)" name="sex" selected="any">
+			<RadioButton labelText="Any" value="any" />
+			<RadioButton labelText="Unset" value="unset" />
+			<RadioButton labelText="F" value="F" />
+			<RadioButton labelText="M" value="M" />
+		</RadioButtonGroup>
+	</FormGroup>
+
+	<FormGroup disabled legendText="Page Count">
 		<div class="flex justify-start py-2">
 			<div class="basis-1/2">
 				<NumberInput
@@ -114,7 +103,7 @@
 		</div>
 	</FormGroup>
 
-	<FormGroup legendText="Date of Entry (NARA)">
+	<FormGroup disabled legendText="Date of Entry (NARA)">
 		<div class="flex justify-start py-2">
 			<div class="basis-1/2">
 				<NumberInput
@@ -139,7 +128,7 @@
 		</div>
 	</FormGroup>
 
-	<FormGroup legendText="Date of Birth (NARA)">
+	<FormGroup disabled legendText="Date of Birth (NARA)">
 		<div class="flex justify-start py-2">
 			<div class="basis-1/2">
 				<NumberInput
@@ -164,14 +153,5 @@
 		</div>
 	</FormGroup>
 
-	<FormGroup>
-		<RadioButtonGroup legendText="Sex (NARA)" name="sex" selected="any">
-			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Unset" value="unset" />
-			<RadioButton labelText="F" value="F" />
-			<RadioButton labelText="M" value="M" />
-		</RadioButtonGroup>
-	</FormGroup>
-	
 	<ButtonControls />
 </Form>
