@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import afiles from '$lib/data/afiles.json';
 
 export async function load({ params }) {
@@ -5,7 +6,7 @@ export async function load({ params }) {
 	const pageIndex = parseInt(params.pageslug) || 0;
 
 	if (!afile) {
-		return { status: 404, error: new Error(`Afile not found`) };
+		error(404, 'Not Found');
 	} else {
 		const resp = await fetch(afile.manifest_url);
 		const json = await resp.json();
