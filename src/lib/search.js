@@ -27,6 +27,5 @@ export function handleSubmit(event) {
 		}
 	}
 	const queryString = new URLSearchParams(formValues).toString();
-	console.log('form values: ', formValues);
 	goto(`${base}/results/${scope}?${queryString}`);
 }

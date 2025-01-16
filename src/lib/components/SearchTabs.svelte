@@ -1,6 +1,6 @@
 <script>
 	import { base } from '$app/paths';
-	import { getTabIndex, updateTabIndex } from '$lib/tabs';
+	import { getScopeIndex, updateScopeIndex } from '$lib/scope';
 
 	import AFileSearch from '$lib/components/search/AFile.svelte';
 	import PageSearch from '$lib/components/search/Page.svelte';
@@ -10,15 +10,20 @@
 	import { Tabs, Tab, TabContent, Button } from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
 
-	export let tab;
+	export let scope;
 
-	$: tabIndex = getTabIndex(tab);
+	$: scopeIndex = getScopeIndex(scope);
 	onMount(() => {
-		updateTabIndex(tabIndex);
+		updateScopeIndex(scopeIndex);
 	});
 </script>
 
-<Tabs type="container" selected={tabIndex} autoWidth on:change={(e) => updateTabIndex(e.detail)}>
+<Tabs
+	type="container"
+	selected={scopeIndex}
+	autoWidth
+	on:change={(e) => updateScopeIndex(e.detail)}
+>
 	<Tab id="afile" label="Find A-Files" />
 	<Tab id="page" label="Find Pages" />
 	<Tab id="g325a" label="Find G325A Forms *" />

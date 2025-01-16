@@ -1,6 +1,11 @@
 <script>
 	import { base } from '$app/paths';
 	import { ClickableTile, Pagination } from 'carbon-components-svelte';
+
+	export let data;
+	console.log(data.scope);
+	console.log(data.searchParams);
+
 	// import { addDocument, search } from '$lib/search';
 
 	// Sample documents
@@ -65,7 +70,7 @@
 			<div class="flex items-center">
 				<img src={item.thumbnail} alt={item.title} class="mr-4 h-32 w-24 rounded object-cover" />
 				<div>
-					<div class="text-lg font-semibold">A-File #{item.id}</div>
+					<div class="text-lg font-semibold">{item.id}</div>
 					<div class="text-sm text-gray-500">{item.pageCount} pages</div>
 					<div class="my-1 text-sm text-gray-700">{item.matchedText}</div>
 				</div>

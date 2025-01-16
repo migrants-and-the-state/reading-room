@@ -16,7 +16,7 @@ const config = {
 		prerender: {
 			concurrency: 1,
 			crawl: true,
-			entries: ['*', '/view/afile/*/*']
+			entries: ['*', '/view/afile/*/*', '/results/*']
 		}
 	}
 };
