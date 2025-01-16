@@ -11,5 +11,3 @@
 		{@render children()}
 	</main>
 </div>
-
-

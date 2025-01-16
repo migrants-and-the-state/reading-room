@@ -18,7 +18,12 @@
 	});
 </script>
 
-<Tabs type="container" selected={scopeIndex} autoWidth on:change={(e) => updateScopeIndex(e.detail)}>
+<Tabs
+	type="container"
+	selected={scopeIndex}
+	autoWidth
+	on:change={(e) => updateScopeIndex(e.detail)}
+>
 	<Tab id="afile" label="Find A-Files" />
 	<Tab id="page" label="Find Pages" />
 	<Tab id="g325a" label="Find G325A Forms *" />
