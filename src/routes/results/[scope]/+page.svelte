@@ -35,8 +35,9 @@
 		const endIndex = startIndex + itemsPerPage;
 		return afiles.slice(startIndex, endIndex).map((afile) => ({
 			id: afile.id,
-			matchedText: afile.metadata?.description || 'No description available',
-			thumbnail: afile.thumbnail_url,
+			name: `${afile.fields.last_name.nara}, ${afile.fields.first_name.nara}`,
+			thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${afile.id}_0000/square/250,/0/default.jpg`,
+			details: `DOB: ${afile.fields.dob?.nara}; SEX: ${afile.fields.sex?.nara}; DOE: ${afile.fields.doe?.nara}, COB: ${afile.fields.cob?.nara}, POE: ${afile.fields.poe?.nara}`,
 			url: `${base}/view/afile/${afile.id}/0000`,
 			pageCount: afile.page_count || 0
 		}));
@@ -70,9 +71,9 @@
 			<div class="flex items-center">
 				<img src={item.thumbnail} alt={item.title} class="mr-4 h-32 w-24 rounded object-cover" />
 				<div>
-					<div class="text-lg font-semibold">{item.id}</div>
+					<div class="text-lg font-semibold">{item.name} | {item.id}</div>
 					<div class="text-sm text-gray-500">{item.pageCount} pages</div>
-					<div class="my-1 text-sm text-gray-700">{item.matchedText}</div>
+					<div class="my-2 font-mono text-xs text-gray-700">{item.details}</div>
 				</div>
 			</div>
 		</ClickableTile>

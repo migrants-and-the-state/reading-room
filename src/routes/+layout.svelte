@@ -7,7 +7,7 @@
 
 <div class="min-h-screen">
 	<Header />
-	<main class="mb-36 w-full p-12">
+	<main class="mb-36 w-full px-12 pb-20">
 		{@render children()}
 	</main>
 </div>

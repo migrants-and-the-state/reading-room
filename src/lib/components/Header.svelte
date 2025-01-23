@@ -17,8 +17,4 @@
 			>
 		</nav>
 	</div>
-
-	<div class="px-12">
-		<Link href={base}><h1>M/S Corpus UI (v1-Sample)</h1></Link>
-	</div>
 </header>

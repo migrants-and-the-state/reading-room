@@ -3,8 +3,9 @@
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
 	import Mirador from 'mirador';
+	import { miradorImageToolsPlugin } from 'mirador-image-tools';
 	import { writable } from 'svelte/store';
-	import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
+	import { Link, Tabs, Tab, TabContent, Tag } from 'carbon-components-svelte';
 
 	let { data } = $props();
 	if (data.status == 404) {
@@ -14,17 +15,17 @@
 	const afile = data.props.afile;
 	const startCanvasId = data.props.canvasId;
 
-	const manifestId = afile.manifest_url;
+	const manifestId = data.props.manifest_url;
 	const currentPage = writable(0);
-	const numPages = writable(0);
+	const numPages = afile.page_count;
 
 	onMount(() => {
-		const miradorInstance = Mirador.viewer({
+		const config = {
 			id: 'mirador',
 			window: {
+				imageToolsEnabled: true,
 				allowClose: false,
 				allowFullscreen: true,
-				hideWindowTitle: true,
 				allowMaximize: false,
 				allowTopMenuButton: false,
 				allowWindowSideBar: false
@@ -41,7 +42,8 @@
 			workspaceControlPanel: {
 				enabled: false
 			}
-		});
+		};
+		const miradorInstance = Mirador.viewer(config, [...miradorImageToolsPlugin]);
 
 		// Subscribe to Mirador store to listen for changes in the canvas
 		miradorInstance.store.subscribe(() => {
@@ -60,30 +62,56 @@
 
 			// Update the current page based on the canvas index
 			currentPage.set(currentCanvasIndex + 1);
-			numPages.set(canvases.length);
 		});
 	});
 </script>
 
+<h1 class="py-4">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
 <div class="flex flex-wrap gap-6 md:flex-nowrap">
 	<div class="relative h-[60vh] basis-3/5 border-none">
 		<div id="mirador"></div>
 	</div>
-	<div class="h-[60vh] basis-2/5 pb-12">
+	<div class="basis-2/5 pb-12">
 		<Tabs autoWidth type="container" class="h-full">
 			<Tab id="afile" label="About this A-File" />
-			<Tab id="page" label="About this Page ({$currentPage}/{$numPages})" />
+			<Tab id="page" label="About this Page ({$currentPage}/{afile.page_count})" />
 			<svelte:fragment slot="content">
 				<TabContent class="scroll-y h-full bg-white">
 					<dl class="text-lg">
-						<dt class="font-extrabold">A-Number</dt>
-						<dd>{afile.id}</dd>
-						<dt class="font-extrabold">Page Count</dt>
-						<dd>{$numPages}</dd>
-						<dt class="font-extrabold">First Name</dt>
-						<dd>NATSU</dd>
-						<dt class="font-extrabold">Last Name</dt>
-						<dd>MIYANISI</dd>
+						{#each Object.entries(afile.fields) as [key, value]}
+							{#if typeof value === 'object'}
+								{#each Object.entries(value) as [k, v]}
+									{#if Array.isArray(v)}
+										<!-- <dt class="font-extrabold">{key}</dt>
+										<dd>
+											<Tag size="sm" type="magenta">{k}</Tag>
+											<ol class="list-decimal list-inside text-xs">
+												{#each v as subvalue}
+													<li>{subvalue}</li>
+												{/each}
+											</ol>
+										</dd> -->
+									{:else}
+										<dt>{key}</dt>
+										<dd>
+											<p class="px-4">
+												{v}
+												<Link href="{base}/data-guide#{k}">
+													{#if k.startsWith('nara')}
+														<Tag interactive size="sm" type="blue" class="font-mono">{k}</Tag>
+													{:else}
+														<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+													{/if}
+												</Link>
+											</p>
+										</dd>
+									{/if}
+								{/each}
+							{:else}
+								<dt class="font-extrabold">{key}</dt>
+								<dd>{value}</dd>
+							{/if}
+						{/each}
 					</dl>
 				</TabContent>
 				<TabContent class="scroll-y h-full bg-white">

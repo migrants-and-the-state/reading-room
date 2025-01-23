@@ -30,6 +30,7 @@
 	"dependencies": {
 		"flexsearch": "^0.7.43",
 		"mirador": "^3.3.0",
+		"mirador-image-tools": "^0.11.0",
 		"vite-plugin-commonjs": "^0.10.4"
 	},
 	"optionalDependencies": {

@@ -68,7 +68,7 @@
 	<FormGroup>
 		<RadioButtonGroup legendText="Document Type (CNN)" name="document type" selected="any">
 			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Unset" value="unset" />
+			<RadioButton labelText="Undefined" value="undefined" />
 			<RadioButton labelText="Form" value="form" />
 			<RadioButton labelText="Letter" value="letter" />
 			<RadioButton labelText="Photograph" value="photograph" />
@@ -79,7 +79,7 @@
 	<FormGroup>
 		<RadioButtonGroup legendText="Sex (LLM)" name="sex" selected="any">
 			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Unset" value="unset" />
+			<RadioButton labelText="Undefined" value="undefined" />
 			<RadioButton labelText="F" value="F" />
 			<RadioButton labelText="M" value="M" />
 		</RadioButtonGroup>

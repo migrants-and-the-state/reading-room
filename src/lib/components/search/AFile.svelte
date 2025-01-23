@@ -72,7 +72,7 @@
 	<FormGroup>
 		<RadioButtonGroup legendText="Sex (NARA)" name="sex" selected="any">
 			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Unset" value="unset" />
+			<RadioButton labelText="Undefined" value="undefined" />
 			<RadioButton labelText="F" value="F" />
 			<RadioButton labelText="M" value="M" />
 		</RadioButtonGroup>
