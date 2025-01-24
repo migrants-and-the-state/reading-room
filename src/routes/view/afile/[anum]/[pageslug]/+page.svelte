@@ -16,8 +16,30 @@
 	const startCanvasId = data.props.canvasId;
 
 	const manifestId = data.props.manifest_url;
-	const currentPage = writable(0);
+	const currentPageIdx = writable(0);
 	const numPages = afile.page_count;
+
+	async function pageDataFromIdx(currentPageIdx) {
+		const paddedPageIdx = currentPageIdx.toString().padStart(4, '0');
+		const jsonPath = `${base}/api/page/${afile.id}_${paddedPageIdx}.json`;
+		console.log(jsonPath);
+		const resp = await fetch(jsonPath);
+		const json = await resp.json();
+		return json;
+	}
+
+	const structurePageField = (field) => {
+		// const startIndex = (page - 1) * itemsPerPage;
+		// const endIndex = startIndex + itemsPerPage;
+		// return afiles.slice(startIndex, endIndex).map((afile) => ({
+		// 	id: afile.id,
+		// 	name: `${afile.fields.last_name.nara}, ${afile.fields.first_name.nara}`,
+		// 	thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${afile.id}_0000/square/250,/0/default.jpg`,
+		// 	details: `DOB: ${afile.fields.dob?.nara}; SEX: ${afile.fields.sex?.nara}; DOE: ${afile.fields.doe?.nara}, COB: ${afile.fields.cob?.nara}, POE: ${afile.fields.poe?.nara}`,
+		// 	url: `${base}/view/afile/${afile.id}/0000`,
+		// 	pageCount: afile.page_count || 0
+		// }));
+	};
 
 	onMount(() => {
 		const config = {
@@ -51,17 +73,18 @@
 			const windows = state.windows;
 			const windowId = Object.keys(windows)[0];
 			const currentCanvas = windows[windowId];
-			const currentCanvasId = currentCanvas.canvasId;
 			const currentManifest = state.manifests[manifestId];
 			if (currentManifest === undefined) return;
 
 			const canvases = currentManifest.json.sequences[0].canvases;
 
 			// Find the index of the current canvas
-			const currentCanvasIndex = canvases.findIndex((canvas) => canvas['@id'] === currentCanvasId);
+			const currentCanvasIndex = canvases.findIndex(
+				(canvas) => canvas['@id'] === currentCanvas.canvasId
+			);
 
 			// Update the current page based on the canvas index
-			currentPage.set(currentCanvasIndex + 1);
+			currentPageIdx.set(currentCanvasIndex);
 		});
 	});
 </script>
@@ -74,10 +97,10 @@
 	<div class="basis-2/5 pb-12">
 		<Tabs autoWidth type="container" class="h-full">
 			<Tab id="afile" label="About this A-File" />
-			<Tab id="page" label="About this Page ({$currentPage}/{afile.page_count})" />
+			<Tab id="page" label="About this Page ({$currentPageIdx + 1}/{afile.page_count})" />
 			<svelte:fragment slot="content">
-				<TabContent class="scroll-y h-full bg-white">
-					<dl class="text-lg">
+				<TabContent class="scroll-y h-full w-full bg-white">
+					<dl>
 						{#each Object.entries(afile.fields) as [key, value]}
 							{#if typeof value === 'object'}
 								{#each Object.entries(value) as [k, v]}
@@ -92,7 +115,7 @@
 											</ol>
 										</dd> -->
 									{:else}
-										<dt>{key}</dt>
+										<dt class="pt-2 text-lg font-semibold">{key}</dt>
 										<dd>
 											<p class="px-4">
 												{v}
@@ -108,14 +131,67 @@
 									{/if}
 								{/each}
 							{:else}
-								<dt class="font-extrabold">{key}</dt>
+								<dt class="pt-2 text-lg font-semibold">{key}</dt>
 								<dd>{value}</dd>
 							{/if}
 						{/each}
 					</dl>
 				</TabContent>
+
 				<TabContent class="scroll-y h-full bg-white">
-					I'm loading info for page {$currentPage}
+					{#await pageDataFromIdx($currentPageIdx) then pageData}
+						{#if pageData}
+							{#each Object.entries(pageData.fields) as [key, value]}
+								<dl>
+									{#if typeof value === 'boolean'}
+										<!--skip for now-->
+									{:else}
+										{#each Object.entries(value) as [k, v]}
+											{#if Array.isArray(v)}
+												<dt class="pt-2 text-lg font-semibold">{key}</dt>
+												<dd class="px-4">
+													{v.join('; ')}
+													<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+												</dd>
+											{:else if typeof v === 'object'}
+												{#each Object.entries(v) as [kk, vv]}
+													<dt class="pt-2 text-lg font-semibold">{k}</dt>
+													<dd class="px-4">
+														{vv}
+														<Tag interactive size="sm" type="green" class="font-mono">{kk}</Tag>
+													</dd>
+												{/each}
+											{:else}
+												<dt class="pt-2 text-lg font-semibold">{key}</dt>
+												<dd class="px-4">
+													{v}
+													<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+												</dd>
+											{/if}
+										{/each}
+									{/if}
+								</dl>
+							{/each}
+							<dl>
+								<dt class="pt-2 text-lg font-semibold">
+									full_text <Link href="{base}/data-guide#ms_ocr_v1"
+										><Tag interactive size="sm" type="green" class="font-mono">ms_ocr_v1</Tag></Link
+									>
+								</dt>
+								<dd>
+									<p class="w-[50ch] max-w-full text-wrap break-words px-4 font-mono text-xs">
+										{#if pageData.full_text}
+											{pageData.full_text}
+										{:else}
+											None
+										{/if}
+									</p>
+								</dd>
+							</dl>
+						{:else}
+							<p>loading...</p>
+						{/if}
+					{/await}
 				</TabContent>
 			</svelte:fragment>
 		</Tabs>
