@@ -3,8 +3,9 @@
 	import { ClickableTile, Pagination } from 'carbon-components-svelte';
 
 	export let data;
-	console.log(data.scope);
 	console.log(data.searchParams);
+	console.log(data.results);
+	const results = data.results;
 
 	// import { addDocument, search } from '$lib/search';
 
@@ -22,25 +23,58 @@
 	// 	results = search(query, { suggest: true });
 	// }
 
-	import afiles from '$lib/data/afiles.json';
+	const safeDetail = (result, label, key, method) => {
+		if (result?.fields?.[key]?.[method]) {
+			return `${label}: ${result.fields[key][method]}; `;
+		}
+		else {
+			return '';
+		}
+	}
 
-	const totalItems = afiles.length;
+	const totalItems = results.length;
 
 	$: currentPage = 1;
 	$: itemsPerPage = 10;
-	$: items = getPageItems(currentPage);
+	$: items = getPaginatedItems(currentPage);
 
-	const getPageItems = (page) => {
+	const templatePageResult = (result) => {
+		const full_text = (result?.full_text ?? '').substring(0,266);
+		const page_number = (result.page_index || 0) + 1;
+		let details = '';
+		details += safeDetail(result, "FORM TITLE", 'form_title', 'ms_form_title_llm_v1');
+		details += safeDetail(result, "DOCUMENT TYPE", 'doctype', 'ms_doctype_v1');
+		details += safeDetail(result, "COUNTRIES", 'countries', 'ms_countries_nlp_v1');
+
+		return {
+			id: result.id,
+			label: `${result.anumber} Page ${page_number}`,
+			thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${result.id}/square/300,/0/default.jpg`,
+			details: details,
+			full_text: full_text,
+			url: `${base}/view/afile/${result.id.replace('_', '/')}?tab=page`,
+			pageInfo: ''
+		};
+	}
+
+	const templateAFileResult = (result) => {
+		return {
+			id: result.id,
+			label: `${result.fields.last_name.nara}, ${result.fields.first_name.nara} | ${result.id}`,
+			thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${result.id}_0000/square/250,/0/default.jpg`,
+			details: `DOB: ${result.fields.dob?.nara}; SEX: ${result.fields.sex?.nara}; DOE: ${result.fields.doe?.nara}, COB: ${result.fields.cob?.nara}, POE: ${result.fields.poe?.nara}`,
+			full_text: '',
+			url: `${base}/view/afile/${result.id}/0000?tab=afile`,
+			pageInfo: (result.page_count || 0) + ' pages'
+		};
+	}
+
+	const getPaginatedItems = (page) => {
 		const startIndex = (page - 1) * itemsPerPage;
 		const endIndex = startIndex + itemsPerPage;
-		return afiles.slice(startIndex, endIndex).map((afile) => ({
-			id: afile.id,
-			name: `${afile.fields.last_name.nara}, ${afile.fields.first_name.nara}`,
-			thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${afile.id}_0000/square/250,/0/default.jpg`,
-			details: `DOB: ${afile.fields.dob?.nara}; SEX: ${afile.fields.sex?.nara}; DOE: ${afile.fields.doe?.nara}, COB: ${afile.fields.cob?.nara}, POE: ${afile.fields.poe?.nara}`,
-			url: `${base}/view/afile/${afile.id}/0000`,
-			pageCount: afile.page_count || 0
-		}));
+		return results.slice(startIndex, endIndex).map((result) => (
+			data.scope === 'afile' ? templateAFileResult(result) : templatePageResult(result)
+		));
 	};
 
 	function handlePaginationChange(event) {
@@ -48,7 +82,8 @@
 
 		itemsPerPage = pageSize;
 		currentPage = page;
-		items = getPageItems(page);
+		console.log('updating!');
+		items = getPaginatedItems(page);
 	}
 </script>
 
@@ -69,11 +104,12 @@
 			class="rounded-lg border p-4 shadow transition-shadow duration-200 hover:shadow-lg"
 		>
 			<div class="flex items-center">
-				<img src={item.thumbnail} alt={item.title} class="mr-4 h-32 w-24 rounded object-cover" />
+				<img src={item.thumbnail} alt={item.label} class="mr-4 h-40 w-36 rounded object-cover" />
 				<div>
-					<div class="text-lg font-semibold">{item.name} | {item.id}</div>
-					<div class="text-sm text-gray-500">{item.pageCount} pages</div>
-					<div class="my-2 font-mono text-xs text-gray-700">{item.details}</div>
+					<div class="text-lg font-semibold">{item.label}</div>
+					<div class="text-sm text-gray-500">{item.pageInfo}</div>
+					<div class="my-2 text-xs text-gray-700">{item.details}</div>
+					<div class="my-2 font-mono text-xs text-gray-700">{item.full_text}</div>
 				</div>
 			</div>
 		</ClickableTile>

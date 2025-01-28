@@ -13,7 +13,6 @@
 		goto(`${base}/404.html`);
 	}
 
-
 	const afile = data.props.afile;
 	const startCanvasId = data.props.canvasId;
 	let scopeIndex = getScopeIndex(data.props.tab);
