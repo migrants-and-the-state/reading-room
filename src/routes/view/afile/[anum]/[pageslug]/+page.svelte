@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import { getScopeIndex, updateScopeIndex } from '$lib/scope';
 	import { onMount } from 'svelte';
 	import Mirador from 'mirador';
 	import { miradorImageToolsPlugin } from 'mirador-image-tools';
@@ -12,8 +13,10 @@
 		goto(`${base}/404.html`);
 	}
 
+
 	const afile = data.props.afile;
 	const startCanvasId = data.props.canvasId;
+	let scopeIndex = getScopeIndex(data.props.tab);
 
 	const manifestId = data.props.manifest_url;
 	const currentPageIdx = writable(0);
@@ -27,19 +30,6 @@
 		const json = await resp.json();
 		return json;
 	}
-
-	const structurePageField = (field) => {
-		// const startIndex = (page - 1) * itemsPerPage;
-		// const endIndex = startIndex + itemsPerPage;
-		// return afiles.slice(startIndex, endIndex).map((afile) => ({
-		// 	id: afile.id,
-		// 	name: `${afile.fields.last_name.nara}, ${afile.fields.first_name.nara}`,
-		// 	thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${afile.id}_0000/square/250,/0/default.jpg`,
-		// 	details: `DOB: ${afile.fields.dob?.nara}; SEX: ${afile.fields.sex?.nara}; DOE: ${afile.fields.doe?.nara}, COB: ${afile.fields.cob?.nara}, POE: ${afile.fields.poe?.nara}`,
-		// 	url: `${base}/view/afile/${afile.id}/0000`,
-		// 	pageCount: afile.page_count || 0
-		// }));
-	};
 
 	onMount(() => {
 		const config = {
@@ -90,12 +80,18 @@
 </script>
 
 <h1 class="py-4">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
+
 <div class="flex flex-wrap gap-6 md:flex-nowrap">
 	<div class="relative h-[60vh] basis-3/5 border-none">
 		<div id="mirador"></div>
 	</div>
 	<div class="basis-2/5 pb-12">
-		<Tabs autoWidth type="container" class="h-full">
+		<Tabs 
+			selected={scopeIndex}
+			autoWidth type="container" 
+			class="h-full"
+			on:change={(e) => updateScopeIndex(e.detail)}
+		>
 			<Tab id="afile" label="About this A-File" />
 			<Tab id="page" label="About this Page ({$currentPageIdx + 1}/{afile.page_count})" />
 			<svelte:fragment slot="content">

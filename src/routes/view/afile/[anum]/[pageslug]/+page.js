@@ -1,7 +1,9 @@
 import { error } from '@sveltejs/kit';
 import afiles from '$lib/data/afiles.json';
 
-export async function load({ params }) {
+export async function load({ params, url }) {
+	const vUrl = new URL(url.href);
+	const searchParams = new URLSearchParams(vUrl.search);
 	const afile = afiles.find((file) => file['id'] === params.anum);
 	const pageIndex = parseInt(params.pageslug) || 0;
 
@@ -20,7 +22,8 @@ export async function load({ params }) {
 			props: {
 				afile: afile,
 				manifest_url: manifest_url,
-				canvasId: canvas['@id']
+				canvasId: canvas['@id'],
+				tab: searchParams.get('tab') || 'afile'
 			}
 		};
 	}
