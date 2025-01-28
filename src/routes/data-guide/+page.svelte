@@ -1,6 +1,15 @@
 <script>
 	import { base } from '$app/paths';
 	import { Breadcrumb, BreadcrumbItem, Link, Tag } from 'carbon-components-svelte';
+
+	const ms_provenance_tags = [
+		'ms_ocr_v1', 
+		'ms_doctype_v1', 
+		'ms_sex_llm_v1', 
+		'ms_form_title_llm_v1',
+		'ms_countries_nlp_v1',
+		'ms_years_nlp_v1'
+	]
 </script>
 
 <Breadcrumb noTrailingSlash class="mb-8">
@@ -32,7 +41,7 @@
 <h2 class="py-4">Provenance Tags</h2>
 <div class="w-full">
 	<div class="flex gap-6 py-4">
-		<div class="min-w-32">
+		<div class="min-w-40">
 			<Link href="#nara">
 				<Tag interactive id="nara" type="blue"># nara</Tag>
 			</Link>
@@ -40,60 +49,25 @@
 		<div>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend diam orci, sed
-				aliquet enim malesuada sit amet. Sed sollicitudin viverra elit, non vehicula lacus posuere
-				ut. Suspendisse et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae
-				venenatis porttitor, ipsum mi posuere est, at accumsan dolor tellus vitae purus. Suspendisse
-				porttitor gravida laoreet. Integer tristique elementum ipsum fermentum accumsan. Vivamus
-				arcu elit, pulvinar nec semper et, auctor et augue. Nunc sed fringilla nisl, sit amet
-				placerat tellus. Etiam nec mollis nisi, vel tincidunt erat. Maecenas vel porta mi, sit amet
-				faucibus massa. Nulla facilisi. Suspendisse tortor diam, egestas vel lobortis rutrum,
-				fermentum eu orci. Nam vehicula dignissim neque ac sollicitudin. Morbi vel hendrerit metus,
-				non tristique nunc.
+				aliquet enim malesuada sit amet.
 			</p>
 		</div>
 	</div>
 
-	<div class="flex gap-6 py-4">
-		<div class="min-w-32">
-			<Link href="#ms_sex_llm_v1">
-				<Tag interactive id="ms_sex_llm_v1" type="green"># ms_sex_llm_v1</Tag>
-			</Link>
+	{#each ms_provenance_tags as tag}
+		<div class="flex gap-6 py-4">
+			<div class="min-w-40">
+				<Link href={`#${tag}`}>
+					<Tag interactive id={tag} type="green">{tag}</Tag>
+				</Link>
+			</div>
+			<div>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend diam orci, sed
+					aliquet enim malesuada sit amet. Sed sollicitudin viverra elit, non vehicula lacus posuere
+					ut. Suspendisse et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae. 
+				</p>
+			</div>
 		</div>
-		<div>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend diam orci, sed
-				aliquet enim malesuada sit amet. Sed sollicitudin viverra elit, non vehicula lacus posuere
-				ut. Suspendisse et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae
-				venenatis porttitor, ipsum mi posuere est, at accumsan dolor tellus vitae purus. Suspendisse
-				porttitor gravida laoreet. Integer tristique elementum ipsum fermentum accumsan. Vivamus
-				arcu elit, pulvinar nec semper et, auctor et augue. Nunc sed fringilla nisl, sit amet
-				placerat tellus. Etiam nec mollis nisi, vel tincidunt erat. Maecenas vel porta mi, sit amet
-				faucibus massa. Nulla facilisi. Suspendisse tortor diam, egestas vel lobortis rutrum,
-				fermentum eu orci. Nam vehicula dignissim neque ac sollicitudin. Morbi vel hendrerit metus,
-				non tristique nunc.
-			</p>
-		</div>
-	</div>
-
-	<div class="flex gap-6 py-4">
-		<div class="min-w-32">
-			<Link href="#ms_ocr_v1">
-				<Tag interactive id="ms_ocr_v1" type="green"># ms_ocr_v1</Tag>
-			</Link>
-		</div>
-		<div>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend diam orci, sed
-				aliquet enim malesuada sit amet. Sed sollicitudin viverra elit, non vehicula lacus posuere
-				ut. Suspendisse et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae
-				venenatis porttitor, ipsum mi posuere est, at accumsan dolor tellus vitae purus. Suspendisse
-				porttitor gravida laoreet. Integer tristique elementum ipsum fermentum accumsan. Vivamus
-				arcu elit, pulvinar nec semper et, auctor et augue. Nunc sed fringilla nisl, sit amet
-				placerat tellus. Etiam nec mollis nisi, vel tincidunt erat. Maecenas vel porta mi, sit amet
-				faucibus massa. Nulla facilisi. Suspendisse tortor diam, egestas vel lobortis rutrum,
-				fermentum eu orci. Nam vehicula dignissim neque ac sollicitudin. Morbi vel hendrerit metus,
-				non tristique nunc.
-			</p>
-		</div>
-	</div>
+	{/each}	
 </div>

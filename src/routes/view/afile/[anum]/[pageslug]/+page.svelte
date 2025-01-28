@@ -151,21 +151,27 @@
 												<dt class="pt-2 text-lg font-semibold">{key}</dt>
 												<dd class="px-4">
 													{v.join('; ')}
-													<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+													<Link href="{base}/data-guide#{k}">
+														<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+													</Link>
 												</dd>
 											{:else if typeof v === 'object'}
 												{#each Object.entries(v) as [kk, vv]}
 													<dt class="pt-2 text-lg font-semibold">{k}</dt>
 													<dd class="px-4">
 														{vv}
-														<Tag interactive size="sm" type="green" class="font-mono">{kk}</Tag>
+														<Link href="{base}/data-guide#{kk}">
+															<Tag interactive size="sm" type="green" class="font-mono">{kk}</Tag>
+														</Link>
 													</dd>
 												{/each}
 											{:else}
 												<dt class="pt-2 text-lg font-semibold">{key}</dt>
 												<dd class="px-4">
 													{v}
-													<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+													<Link href="{base}/data-guide#{k}">
+														<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
+													</Link>
 												</dd>
 											{/if}
 										{/each}
