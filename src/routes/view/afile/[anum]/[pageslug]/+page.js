@@ -1,9 +1,13 @@
 import { error } from '@sveltejs/kit';
-import afiles from '$lib/data/afiles.json';
+import { base } from '$app/paths';
 
 export async function load({ params, url }) {
 	const vUrl = new URL(url.href);
 	const searchParams = new URLSearchParams(vUrl.search);
+	const jsonPath = `${base}/api/index/afile.json`;
+	const resp = await fetch(jsonPath);
+	const afiles = await resp.json() || [];
+
 	const afile = afiles.find((file) => file['id'] === params.anum);
 	const pageIndex = parseInt(params.pageslug) || 0;
 

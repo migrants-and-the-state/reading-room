@@ -9,6 +9,7 @@
 	import { Link, Tabs, Tab, TabContent, Tag } from 'carbon-components-svelte';
 
 	let { data } = $props();
+	
 	if (data.status == 404) {
 		goto(`${base}/404.html`);
 	}
@@ -31,6 +32,7 @@
 	}
 
 	onMount(() => {
+		const previousURL = document.referrer;
 		const config = {
 			id: 'mirador',
 			window: {
