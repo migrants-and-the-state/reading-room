@@ -9,7 +9,7 @@
 	import { Link, Tabs, Tab, TabContent, Tag } from 'carbon-components-svelte';
 
 	let { data } = $props();
-	
+
 	if (data.status == 404) {
 		goto(`${base}/404.html`);
 	}
@@ -81,14 +81,17 @@
 			// Update the current page based on the canvas index
 			currentPageIdx.set(currentCanvasIndex);
 			let paddedIdx = currentCanvasIndex.toString().padStart(4, '0');
-			let newTarget = window.location.href.replace(getLastUrlSegment(window.location.href), paddedIdx);
+			let newTarget = window.location.href.replace(
+				getLastUrlSegment(window.location.href),
+				paddedIdx
+			);
 			window.history.replaceState(history.state, '', newTarget);
 		});
 	});
 </script>
 
 {#if localStorage.getItem('resultReferrer')}
-<a href="{localStorage.getItem('resultReferrer')}">Back to results</a>
+	<a href={localStorage.getItem('resultReferrer')}>Back to results</a>
 {/if}
 
 <h1 class="py-4">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
@@ -98,9 +101,10 @@
 		<div id="mirador"></div>
 	</div>
 	<div class="basis-2/5 pb-12">
-		<Tabs 
+		<Tabs
 			selected={scopeIndex}
-			autoWidth type="container" 
+			autoWidth
+			type="container"
 			class="h-full"
 			on:change={(e) => updateScopeIndex(e.detail)}
 		>
