@@ -12,6 +12,7 @@ export async function load({ url, params }) {
 		const resp = await fetch(jsonPath);
 		const results = await resp.json() || [];
 		return {
+			url: url.href,
 			scope: scope,
 			results: results,
 			searchParams: searchParams

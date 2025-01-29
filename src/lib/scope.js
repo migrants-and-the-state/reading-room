@@ -1,4 +1,4 @@
-import { goto } from '$app/navigation';
+// import { goto } from '$app/navigation';
 
 export const validScopes = ['afile', 'page', 'g325a', 'natcert'];
 
@@ -8,5 +8,6 @@ export function getScopeIndex(scope) {
 
 export function updateScopeIndex(index) {
 	const newScope = validScopes[index];
-	goto(`?tab=${newScope}`);
+	window.history.replaceState(history.state, '', `?tab=${newScope}`);
+	// goto(`?tab=${newScope}`);
 }

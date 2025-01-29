@@ -15,6 +15,7 @@ export function search(query) {
 
 export function handleSubmit(event) {
 	event.preventDefault();
+	localStorage.setItem('formReferrer', window.location.href);
 	const data = new FormData(event.target);
 	const scope = event.target.attributes['scope'].value;
 	const formValues = {};

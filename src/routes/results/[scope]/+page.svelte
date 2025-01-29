@@ -6,6 +6,7 @@
 	console.log(data.searchParams);
 	console.log(data.results);
 	const results = data.results;
+	localStorage.setItem('resultReferrer', data.url);
 
 	// import { addDocument, search } from '$lib/search';
 
@@ -87,7 +88,11 @@
 	}
 </script>
 
-<h2 class="mb-6">Search Results</h2>
+{#if localStorage.getItem('formReferrer')}
+<a href="{localStorage.getItem('formReferrer')}">Back to search</a>
+{/if}
+
+<h1 class="py-4">Search Results</h1>
 
 <Pagination
 	class="mb-6"

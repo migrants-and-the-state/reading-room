@@ -22,6 +22,10 @@
 	const currentPageIdx = writable(0);
 	const numPages = afile.page_count;
 
+	function getLastUrlSegment(url) {
+		return new URL(url).pathname.split('/').filter(Boolean).pop();
+	}
+
 	async function pageDataFromIdx(currentPageIdx) {
 		const paddedPageIdx = currentPageIdx.toString().padStart(4, '0');
 		const jsonPath = `${base}/api/page/${afile.id}_${paddedPageIdx}.json`;
@@ -76,9 +80,16 @@
 
 			// Update the current page based on the canvas index
 			currentPageIdx.set(currentCanvasIndex);
+			let paddedIdx = currentCanvasIndex.toString().padStart(4, '0');
+			let newTarget = window.location.href.replace(getLastUrlSegment(window.location.href), paddedIdx);
+			window.history.replaceState(history.state, '', newTarget);
 		});
 	});
 </script>
+
+{#if localStorage.getItem('resultReferrer')}
+<a href="{localStorage.getItem('resultReferrer')}">Back to results</a>
+{/if}
 
 <h1 class="py-4">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
 
