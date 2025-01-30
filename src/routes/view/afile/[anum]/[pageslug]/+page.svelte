@@ -20,6 +20,15 @@
 
 	const manifestId = data.props.manifest_url;
 	const currentPageIdx = writable(0);
+	// if currentPageIdx is updated, update the window location
+	currentPageIdx.subscribe((val) => {
+		let paddedIdx = val.toString().padStart(4, '0');
+		let newTarget = window.location.href.replace(
+			getLastUrlSegment(window.location.href),
+			paddedIdx
+		);
+		goto(newTarget, { replaceState: true, invalidateAll: true });
+	});
 	const numPages = afile.page_count;
 
 	function getLastUrlSegment(url) {
@@ -80,12 +89,6 @@
 
 			// Update the current page based on the canvas index
 			currentPageIdx.set(currentCanvasIndex);
-			let paddedIdx = currentCanvasIndex.toString().padStart(4, '0');
-			let newTarget = window.location.href.replace(
-				getLastUrlSegment(window.location.href),
-				paddedIdx
-			);
-			window.history.replaceState(history.state, '', newTarget);
 		});
 	});
 </script>
