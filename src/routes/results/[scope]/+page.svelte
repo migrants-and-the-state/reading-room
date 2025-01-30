@@ -6,6 +6,7 @@
 	console.log(data.searchParams);
 	console.log(data.results);
 	const results = data.results;
+	localStorage.setItem('resultReferrer', data.url);
 
 	// import { addDocument, search } from '$lib/search';
 
@@ -26,11 +27,10 @@
 	const safeDetail = (result, label, key, method) => {
 		if (result?.fields?.[key]?.[method]) {
 			return `${label}: ${result.fields[key][method]}; `;
-		}
-		else {
+		} else {
 			return '';
 		}
-	}
+	};
 
 	const totalItems = results.length;
 
@@ -39,12 +39,12 @@
 	$: items = getPaginatedItems(currentPage);
 
 	const templatePageResult = (result) => {
-		const full_text = (result?.full_text ?? '').substring(0,266);
+		const full_text = (result?.full_text ?? '').substring(0, 266);
 		const page_number = (result.page_index || 0) + 1;
 		let details = '';
-		details += safeDetail(result, "FORM TITLE", 'form_title', 'ms_form_title_llm_v1');
-		details += safeDetail(result, "DOCUMENT TYPE", 'doctype', 'ms_doctype_v1');
-		details += safeDetail(result, "COUNTRIES", 'countries', 'ms_countries_nlp_v1');
+		details += safeDetail(result, 'FORM TITLE', 'form_title', 'ms_form_title_llm_v1');
+		details += safeDetail(result, 'DOCUMENT TYPE', 'doctype', 'ms_doctype_v1');
+		details += safeDetail(result, 'COUNTRIES', 'countries', 'ms_countries_nlp_v1');
 
 		return {
 			id: result.id,
@@ -55,7 +55,7 @@
 			url: `${base}/view/afile/${result.id.replace('_', '/')}?tab=page`,
 			pageInfo: ''
 		};
-	}
+	};
 
 	const templateAFileResult = (result) => {
 		return {
@@ -67,14 +67,16 @@
 			url: `${base}/view/afile/${result.id}/0000?tab=afile`,
 			pageInfo: (result.page_count || 0) + ' pages'
 		};
-	}
+	};
 
 	const getPaginatedItems = (page) => {
 		const startIndex = (page - 1) * itemsPerPage;
 		const endIndex = startIndex + itemsPerPage;
-		return results.slice(startIndex, endIndex).map((result) => (
-			data.scope === 'afile' ? templateAFileResult(result) : templatePageResult(result)
-		));
+		return results
+			.slice(startIndex, endIndex)
+			.map((result) =>
+				data.scope === 'afile' ? templateAFileResult(result) : templatePageResult(result)
+			);
 	};
 
 	function handlePaginationChange(event) {
@@ -87,7 +89,11 @@
 	}
 </script>
 
-<h2 class="mb-6">Search Results</h2>
+{#if localStorage.getItem('formReferrer')}
+	<a href={localStorage.getItem('formReferrer')}>Back to search</a>
+{/if}
+
+<h1 class="py-4">Search Results</h1>
 
 <Pagination
 	class="mb-6"

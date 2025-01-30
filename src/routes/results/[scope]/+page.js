@@ -10,8 +10,9 @@ export async function load({ url, params }) {
 	if (validScopes.includes(scope)) {
 		const jsonPath = `${base}/api/index/${scope}.json`;
 		const resp = await fetch(jsonPath);
-		const results = await resp.json() || [];
+		const results = (await resp.json()) || [];
 		return {
+			url: url.href,
 			scope: scope,
 			results: results,
 			searchParams: searchParams

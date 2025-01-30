@@ -3,13 +3,13 @@
 	import { Breadcrumb, BreadcrumbItem, Link, Tag } from 'carbon-components-svelte';
 
 	const ms_provenance_tags = [
-		'ms_ocr_v1', 
-		'ms_doctype_v1', 
-		'ms_sex_llm_v1', 
+		'ms_ocr_v1',
+		'ms_doctype_v1',
+		'ms_sex_llm_v1',
 		'ms_form_title_llm_v1',
 		'ms_countries_nlp_v1',
 		'ms_years_nlp_v1'
-	]
+	];
 </script>
 
 <Breadcrumb noTrailingSlash class="mb-8">
@@ -65,9 +65,9 @@
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend diam orci, sed
 					aliquet enim malesuada sit amet. Sed sollicitudin viverra elit, non vehicula lacus posuere
-					ut. Suspendisse et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae. 
+					ut. Suspendisse et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae.
 				</p>
 			</div>
 		</div>
-	{/each}	
+	{/each}
 </div>

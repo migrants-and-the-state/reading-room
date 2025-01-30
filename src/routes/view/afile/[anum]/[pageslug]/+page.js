@@ -6,7 +6,7 @@ export async function load({ params, url }) {
 	const searchParams = new URLSearchParams(vUrl.search);
 	const jsonPath = `${base}/api/index/afile.json`;
 	const resp = await fetch(jsonPath);
-	const afiles = await resp.json() || [];
+	const afiles = (await resp.json()) || [];
 
 	const afile = afiles.find((file) => file['id'] === params.anum);
 	const pageIndex = parseInt(params.pageslug) || 0;
