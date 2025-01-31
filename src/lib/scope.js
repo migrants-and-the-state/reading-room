@@ -8,5 +8,5 @@ export function getScopeIndex(scope) {
 
 export function updateScopeIndex(index) {
 	const newScope = validScopes[index];
-	goto(`?tab=${newScope}`, { replaceState: true, invalidateAll: true })
+	goto(`?tab=${newScope}`, { replaceState: true, invalidateAll: true });
 }

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { validScopes } from '$lib/scope';
-import { base } from '$app/paths';
+import { search } from '$lib/search';
 
 export async function load({ url, params }) {
 	const vUrl = new URL(url.href);
@@ -8,14 +8,12 @@ export async function load({ url, params }) {
 	const scope = params.scope;
 
 	if (validScopes.includes(scope)) {
-		const jsonPath = `${base}/api/index/${scope}.json`;
-		const resp = await fetch(jsonPath);
-		const results = (await resp.json()) || [];
+		const results = await search(scope, searchParams);
+		console.log('results', results);
 		return {
 			url: url.href,
 			scope: scope,
-			results: results,
-			searchParams: searchParams
+			results: results
 		};
 	} else {
 		error(404, 'Not Found');
