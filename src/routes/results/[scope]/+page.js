@@ -7,7 +7,7 @@ export async function load({ url, params }) {
 	const searchParams = new URLSearchParams(vUrl.search);
 	const scope = params.scope;
 
-	if (validScopes.includes(scope)) {	
+	if (validScopes.includes(scope)) {
 		const results = await search(scope, searchParams);
 		console.log('results', results);
 		return {
