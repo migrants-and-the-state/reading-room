@@ -1,17 +1,34 @@
 import { goto } from '$app/navigation';
 import { base } from '$app/paths';
+import MiniSearch from 'minisearch';
 
-const FlexSearch = require('flexsearch');
+//A10712 A2870
 
-const index = FlexSearch.Index({});
+const pMiniConfig = {
+	fields: ['id', 'full_text'], // fields to index for full-text search
+	storeFields: ['id', 'anumber', 'full_text', 'fields'] // fields to return with search results
+};
 
-export function addDocument(id, content) {
-	index.add(id, content);
+const aMiniConfig = {
+	fields: ['id'], // fields to index for full-text search
+	storeFields: ['id', 'fields'] // fields to return with search results
+};
+
+export async function search(scope, searchParams) {
+	const jsonPath = `${base}/api/index/${scope}.json`
+	const miniSearch = new MiniSearch(scope == 'afile' ? aMiniConfig : pMiniConfig); 
+	const query = searchParams.get('query') || MiniSearch.wildcard;
+	const results = await fetch(jsonPath)
+			.then(resp => resp.json())
+			.then(data => {
+				miniSearch.addAll(data);
+				console.log('miniSearch', miniSearch);
+				return miniSearch.search(query, { prefix: true, combine: 'AND', fuzzy: 0.1 });
+			})
+			.catch(err => console.error(err));
+	return results;
 }
 
-export function search(query) {
-	return index.search(query);
-}
 
 export function handleSubmit(event) {
 	event.preventDefault();
@@ -27,6 +44,6 @@ export function handleSubmit(event) {
 			formValues[key] = value;
 		}
 	}
-	const queryString = new URLSearchParams(formValues).toString();
+	const queryString = new URLSearchParams(formValues).toString();	
 	goto(`${base}/results/${scope}?${queryString}`);
 }

@@ -8,22 +8,6 @@
 	const results = data.results;
 	localStorage.setItem('resultReferrer', data.url);
 
-	// import { addDocument, search } from '$lib/search';
-
-	// Sample documents
-	// const documents = [
-	// 	{ id: 1, content: 'First document content' },
-	// 	{ id: 2, content: 'Second document content' }
-	// ];
-
-	// onMount(() => {
-	// 	documents.forEach((doc) => addDocument(doc.id, doc.content));
-	// });
-
-	// function handleSearch() {
-	// 	results = search(query, { suggest: true });
-	// }
-
 	const safeDetail = (result, label, key, method) => {
 		if (result?.fields?.[key]?.[method]) {
 			return `${label}: ${result.fields[key][method]}; `;
@@ -93,7 +77,7 @@
 	<a href={localStorage.getItem('formReferrer')}>Back to search</a>
 {/if}
 
-<h1 class="py-4">Search Results</h1>
+<h1 class="py-4">Search Results ({totalItems})</h1>
 
 <Pagination
 	class="mb-6"

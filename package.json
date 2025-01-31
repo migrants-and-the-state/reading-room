@@ -28,7 +28,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-		"flexsearch": "^0.7.43",
+		"minisearch": "^7.1.1",
 		"mirador": "^3.3.0",
 		"mirador-image-tools": "^0.11.0",
 		"vite-plugin-commonjs": "^0.10.4"
