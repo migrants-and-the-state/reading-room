@@ -3,8 +3,6 @@
 	import { ClickableTile, Pagination } from 'carbon-components-svelte';
 
 	export let data;
-	console.log(data.searchParams);
-	console.log(data.results);
 	const results = data.results;
 	localStorage.setItem('resultReferrer', data.url);
 

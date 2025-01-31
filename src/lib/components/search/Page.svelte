@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
+	import { fieldsToSearchWithin } from '$lib/fields';
 
 	import ButtonControls from './forms/ButtonControls.svelte';
 	import { Document as PageIcon } from 'carbon-icons-svelte';
@@ -43,12 +44,7 @@
 					bind:selectedIds={selectedFields}
 					size="lg"
 					sortItem={() => {}}
-					items={[
-						{ id: 'Page Text', text: 'Page Text (OCR)' },
-						{ id: 'Countries', text: 'Countries (NLP)' },
-						{ id: 'Form Title', text: 'Form Title (LLM)' },
-						{ id: 'Years', text: 'Years (NLP)' }
-					]}
+					items={fieldsToSearchWithin['page']}
 				/>
 			</div>
 			<div class="basis-2/3">

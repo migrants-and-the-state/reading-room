@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
+	import { fieldsToSearchWithin } from '$lib/fields';
 
 	import ButtonControls from './forms/ButtonControls.svelte';
 	import { FolderShared as AFileIcon } from 'carbon-icons-svelte';
@@ -44,15 +45,7 @@
 					bind:selectedIds={selectedFields}
 					size="lg"
 					sortItem={() => {}}
-					items={[
-						{ id: 'A-Number', text: 'A-Number (NARA)' },
-						{ id: 'CoB', text: 'Country of birth (NARA)' },
-						{ id: 'Last Name', text: 'Last name (NARA)' },
-						{ id: 'First Name', text: 'First name (NARA)' },
-						{ id: 'PoE', text: 'Port of entry (NARA)' },
-						{ id: 'Doc Types', text: 'Document Types (CNN)' },
-						{ id: 'Form Titles', text: 'Form Titles (LLM)' }
-					]}
+					items={fieldsToSearchWithin['afile']}
 				/>
 			</div>
 			<div class="basis-2/3">
