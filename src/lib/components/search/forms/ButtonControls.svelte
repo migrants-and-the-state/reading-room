@@ -2,7 +2,6 @@
 	import { base } from '$app/paths';
 	import { Button, ButtonSet } from 'carbon-components-svelte';
 	export let isSearchInvalid;
-
 </script>
 
 <ButtonSet>
