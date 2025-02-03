@@ -58,5 +58,5 @@
 		</div>
 	</FormGroup>
 
-	<ButtonControls />
+	<ButtonControls bind:isSearchInvalid />
 </Form>
