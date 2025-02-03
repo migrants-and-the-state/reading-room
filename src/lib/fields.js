@@ -84,9 +84,25 @@ const pageFieldMap = {
 	}
 };
 
+export const g325aFieldMap = {
+	id: {
+		text: 'A-Number',
+		keypath: 'id'
+	}
+};
+
+export const natcertFieldMap = {
+	id: {
+		text: 'A-Number',
+		keypath: 'id'
+	}
+};
+
 export const fieldMap = {
 	afile: afileFieldMap,
-	page: pageFieldMap
+	page: pageFieldMap,
+	g325a: g325aFieldMap,
+	natcert: natcertFieldMap
 };
 
 const pageFieldsToSearchWithin = [
@@ -117,5 +133,7 @@ const afileFieldsToSearchWithin = [
 
 export const fieldsToSearchWithin = {
 	afile: afileFieldsToSearchWithin,
-	page: pageFieldsToSearchWithin
+	page: pageFieldsToSearchWithin,
+	g325a: [],
+	natcert: []
 };
