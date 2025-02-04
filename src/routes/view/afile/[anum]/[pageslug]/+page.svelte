@@ -7,6 +7,7 @@
 	import { miradorImageToolsPlugin } from 'mirador-image-tools';
 	import { writable } from 'svelte/store';
 	import { Link, Tabs, Tab, TabContent, Tag } from 'carbon-components-svelte';
+	import { fields } from '$lib/fields';
 
 	let { data } = $props();
 
@@ -20,7 +21,6 @@
 
 	const manifestId = data.props.manifest_url;
 	const currentPageIdx = writable(0);
-	// if currentPageIdx is updated, update the window location
 	currentPageIdx.subscribe((val) => {
 		let paddedIdx = val.toString().padStart(4, '0');
 		let newTarget = window.location.href.replace(
@@ -30,6 +30,10 @@
 		goto(newTarget, { replaceState: true, invalidateAll: true });
 	});
 	const numPages = afile.page_count;
+
+	function objGet(obj, path) {
+		return path.split('.').reduce((r, k) => r?.[k], obj);
+	}
 
 	function getLastUrlSegment(url) {
 		return new URL(url).pathname.split('/').filter(Boolean).pop();
@@ -116,38 +120,43 @@
 			<svelte:fragment slot="content">
 				<TabContent class="scroll-y h-full w-full bg-white">
 					<dl>
-						{#each Object.entries(afile.fields) as [key, value]}
-							{#if typeof value === 'object'}
-								{#each Object.entries(value) as [k, v]}
-									{#if Array.isArray(v)}
-										<!-- <dt class="font-extrabold">{key}</dt>
-										<dd>
-											<Tag size="sm" type="magenta">{k}</Tag>
-											<ol class="list-decimal list-inside text-xs">
-												{#each v as subvalue}
-													<li>{subvalue}</li>
-												{/each}
-											</ol>
-										</dd> -->
-									{:else}
-										<dt class="pt-2 text-lg font-semibold">{key}</dt>
-										<dd>
-											<p class="px-4">
-												{v}
-												<Link href="{base}/data-guide#{k}">
-													{#if k.startsWith('nara')}
-														<Tag interactive size="sm" type="blue" class="font-mono">{k}</Tag>
-													{:else}
-														<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
-													{/if}
-												</Link>
-											</p>
-										</dd>
+						{#each Object.entries(fields['afile'].filter((field) => field.view)) as [_i, field]}
+							{@const label = field.text.replace(/\([^)]*\)/, '').trim()}
+							{@const ptag = field.id.split('.').slice(-1)[0].trim()}
+							{@const value = objGet(afile, field.id)}
+
+							{#if Array.isArray(value)}
+								<dt class="pt-2 text-lg font-semibold">
+									{label}
+									<Link href="{base}/data-guide#{ptag}">
+										<Tag size="sm" type="green"># {ptag}</Tag>
+									</Link>
+								</dt>
+								<dd>
+									<ul class="list-inside list-disc px-4 text-xs">
+										{#each value as subvalue}
+											<li>{subvalue}</li>
+										{/each}
+									</ul>
+								</dd>
+							{:else if value}
+								<dt class="pt-2 text-lg font-semibold">
+									{label}
+									{#if ptag.startsWith('nara')}
+										<Link href="{base}/data-guide#{ptag}">
+											<Tag interactive size="sm" type="blue" class="font-mono">#{ptag}</Tag>
+										</Link>
+									{:else if ptag.startsWith('ms')}
+										<Link href="{base}/data-guide#{ptag}">
+											<Tag interactive size="sm" type="green" class="font-mono">#{ptag}</Tag>
+										</Link>
 									{/if}
-								{/each}
-							{:else}
-								<dt class="pt-2 text-lg font-semibold">{key}</dt>
-								<dd>{value}</dd>
+								</dt>
+								<dd>
+									<p class="px-4">
+										{value}
+									</p>
+								</dd>
 							{/if}
 						{/each}
 					</dl>
@@ -156,58 +165,58 @@
 				<TabContent class="scroll-y h-full bg-white">
 					{#await pageDataFromIdx($currentPageIdx) then pageData}
 						{#if pageData}
-							{#each Object.entries(pageData.fields) as [key, value]}
-								<dl>
-									{#if typeof value === 'boolean'}
-										<!--skip for now-->
-									{:else}
-										{#each Object.entries(value) as [k, v]}
-											{#if Array.isArray(v)}
-												<dt class="pt-2 text-lg font-semibold">{key}</dt>
-												<dd class="px-4">
-													{v.join('; ')}
-													<Link href="{base}/data-guide#{k}">
-														<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
-													</Link>
-												</dd>
-											{:else if typeof v === 'object'}
-												{#each Object.entries(v) as [kk, vv]}
-													<dt class="pt-2 text-lg font-semibold">{k}</dt>
-													<dd class="px-4">
-														{vv}
-														<Link href="{base}/data-guide#{kk}">
-															<Tag interactive size="sm" type="green" class="font-mono">{kk}</Tag>
-														</Link>
-													</dd>
-												{/each}
-											{:else}
-												<dt class="pt-2 text-lg font-semibold">{key}</dt>
-												<dd class="px-4">
-													{v}
-													<Link href="{base}/data-guide#{k}">
-														<Tag interactive size="sm" type="green" class="font-mono">{k}</Tag>
-													</Link>
-												</dd>
-											{/if}
-										{/each}
-									{/if}
-								</dl>
-							{/each}
 							<dl>
-								<dt class="pt-2 text-lg font-semibold">
-									full_text <Link href="{base}/data-guide#ms_ocr_v1"
-										><Tag interactive size="sm" type="green" class="font-mono">ms_ocr_v1</Tag></Link
-									>
-								</dt>
-								<dd>
-									<p class="w-[50ch] max-w-full text-wrap break-words px-4 font-mono text-xs">
-										{#if pageData.full_text}
+								{#each Object.entries(fields['page'].filter((field) => field.view)) as [_i, field]}
+									{@const label = field.text.replace(/\([^)]*\)/, '').trim()}
+									{@const ptag = field.id.split('.').slice(-1)[0].trim()}
+									{@const value = objGet(pageData, field.id)}
+									{#if Array.isArray(value)}
+										<dt class="pt-2 text-lg font-semibold">
+											{label}
+											<Link href="{base}/data-guide#{ptag}">
+												<Tag size="sm" type="green">#{ptag}</Tag>
+											</Link>
+										</dt>
+										<dd>
+											<ul class="list-inside list-disc px-4 text-xs">
+												{#each value as subvalue}
+													<li>{subvalue}</li>
+												{/each}
+											</ul>
+										</dd>
+									{:else if value}
+										<dt class="pt-2 text-lg font-semibold">
+											{label}
+											{#if ptag.startsWith('nara')}
+												<Link href="{base}/data-guide#{ptag}">
+													<Tag interactive size="sm" type="blue" class="font-mono">#{ptag}</Tag>
+												</Link>
+											{:else if ptag.startsWith('ms')}
+												<Link href="{base}/data-guide#{ptag}">
+													<Tag interactive size="sm" type="green" class="font-mono">#{ptag}</Tag>
+												</Link>
+											{/if}
+										</dt>
+										<dd>
+											<p class="px-4">
+												{value}
+											</p>
+										</dd>
+									{/if}
+								{/each}
+								{#if pageData.hasOwnProperty('full_text')}
+									<dt class="pt-2 text-lg font-semibold">
+										Full Text
+										<Link href="{base}/data-guide#ms_ocr_v1">
+											<Tag size="sm" type="green">#ms_ocr_v1</Tag>
+										</Link>
+									</dt>
+									<dd>
+										<p class="w-[50ch] max-w-full text-wrap break-words px-4 font-mono text-xs">
 											{pageData.full_text}
-										{:else}
-											None
-										{/if}
-									</p>
-								</dd>
+										</p>
+									</dd>
+								{/if}
 							</dl>
 						{:else}
 							<p>loading...</p>

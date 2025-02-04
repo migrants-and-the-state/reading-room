@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
+	import { fields } from '$lib/fields';
 
 	import ButtonControls from './forms/ButtonControls.svelte';
 	import { Identification as G325AIcon } from 'carbon-icons-svelte';
@@ -38,12 +39,7 @@
 					bind:selectedIds={selectedFields}
 					size="lg"
 					sortItem={() => {}}
-					items={[
-						{ id: 'Page Text', text: 'Page Text (OCR)' },
-						{ id: 'State City', text: 'State/City (LLM)' },
-						{ id: 'Country', text: 'Country (LLM)' },
-						{ id: 'Occupation', text: 'Occupation (LLM)' }
-					]}
+					items={fields['g325a'].filter((field) => field.search)}
 				/>
 			</div>
 			<div class="basis-2/3">

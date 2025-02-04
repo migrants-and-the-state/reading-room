@@ -1,7 +1,7 @@
 <script>
 	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
-	import { fieldsToSearchWithin } from '$lib/fields';
+	import { fields } from '$lib/fields';
 
 	import ButtonControls from './forms/ButtonControls.svelte';
 	import { FolderShared as AFileIcon } from 'carbon-icons-svelte';
@@ -45,7 +45,7 @@
 					bind:selectedIds={selectedFields}
 					size="lg"
 					sortItem={() => {}}
-					items={fieldsToSearchWithin['afile']}
+					items={fields['afile'].filter((field) => field.search)}
 				/>
 			</div>
 			<div class="basis-2/3">
