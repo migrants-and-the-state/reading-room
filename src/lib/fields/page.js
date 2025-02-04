@@ -25,8 +25,8 @@ export const pageFields = [
 	},
 	{
 		text: 'Document Type (LLM)',
-		id: 'fields.doctype.ms_doctype_llm_v1',
-		search: true,
+		id: 'fields.doctype.ms_doctype_v1',
+		search: false,
 		view: true
 	},
 	{

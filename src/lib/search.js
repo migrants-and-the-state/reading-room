@@ -45,7 +45,7 @@ export async function search(scope, searchParams) {
 			miniSearch.addAll(data);
 			console.log('miniSearch', miniSearch);
 
-			return miniSearch.search(query, { combine: 'AND', fuzzy: 0.2 });
+			return miniSearch.search(query, { prefix: true, combineWith: 'AND', fuzzy: 0.2 });
 		})
 		.catch((err) => console.error(err));
 	return results;
