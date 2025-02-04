@@ -1,9 +1,31 @@
 <script>
 	import { base } from '$app/paths';
-	import { ClickableTile, Pagination } from 'carbon-components-svelte';
+	import { ClickableTile, Loading, Pagination } from 'carbon-components-svelte';
+	import { search } from '$lib/search';
 
 	export let data;
-	const results = data.results;
+
+	$: currentPage = 1;
+	$: itemsPerPage = 10;
+	$: items = [];
+
+	// Create reactive async function
+	$: searchPromise = (async () => {
+		return await search(data.scope, data.params);
+	})();
+
+	// Reactive pagination based on results
+	$: getPaginatedItems = async (page) => {
+		const results = await searchPromise;
+		const start = (page - 1) * itemsPerPage;
+		const end = start + itemsPerPage;
+		return results
+			.slice(start, end)
+			.map((result) =>
+				data.scope === 'afile' ? templateAFileResult(result) : templatePageResult(result)
+			);
+	};
+
 	localStorage.setItem('resultReferrer', data.url);
 
 	const safeDetail = (result, label, key, method) => {
@@ -13,12 +35,6 @@
 			return '';
 		}
 	};
-
-	const totalItems = results.length;
-
-	$: currentPage = 1;
-	$: itemsPerPage = 10;
-	$: items = getPaginatedItems(currentPage);
 
 	const templatePageResult = (result) => {
 		const full_text = (result?.full_text ?? '').substring(0, 266);
@@ -51,16 +67,6 @@
 		};
 	};
 
-	const getPaginatedItems = (page) => {
-		const startIndex = (page - 1) * itemsPerPage;
-		const endIndex = startIndex + itemsPerPage;
-		return results
-			.slice(startIndex, endIndex)
-			.map((result) =>
-				data.scope === 'afile' ? templateAFileResult(result) : templatePageResult(result)
-			);
-	};
-
 	function handlePaginationChange(event) {
 		const { page, pageSize } = event.detail;
 
@@ -75,31 +81,44 @@
 	<a href={localStorage.getItem('formReferrer')}>Back to search</a>
 {/if}
 
-<h1 class="py-4">Search Results ({totalItems})</h1>
-
-<Pagination
-	class="mb-6"
-	{totalItems}
-	pageSizes={[10, 20, 50]}
-	pageSize={itemsPerPage}
-	on:update={handlePaginationChange}
-/>
-
-<div class="space-y-4">
-	{#each items as item}
-		<ClickableTile
-			href={item.url}
-			class="rounded-lg border p-4 shadow transition-shadow duration-200 hover:shadow-lg"
-		>
-			<div class="flex items-center">
-				<img src={item.thumbnail} alt={item.label} class="mr-4 h-40 w-36 rounded object-cover" />
-				<div>
-					<div class="text-lg font-semibold">{item.label}</div>
-					<div class="text-sm text-gray-500">{item.pageInfo}</div>
-					<div class="my-2 text-xs text-gray-700">{item.details}</div>
-					<div class="my-2 font-mono text-xs text-gray-700">{item.full_text}</div>
-				</div>
-			</div>
-		</ClickableTile>
-	{/each}
-</div>
+{#await searchPromise}
+	<h1 class="py-4">Search Results</h1>
+	<Loading />
+{:then results}
+	{#await getPaginatedItems(currentPage)}
+		<Loading />
+	{:then items}
+		<h1 class="py-4">Search Results ({results.length})</h1>
+		<Pagination
+			class="mb-6"
+			bind:page={currentPage}
+			totalItems={results.length}
+			pageSize={itemsPerPage}
+			on:update={handlePaginationChange}
+		/>
+		<div class="space-y-4">
+			{#each items as item}
+				<ClickableTile
+					href={item.url}
+					class="rounded-lg border p-4 shadow transition-shadow duration-200 hover:shadow-lg"
+				>
+					<div class="flex items-center">
+						<img
+							src={item.thumbnail}
+							alt={item.label}
+							class="mr-4 h-40 w-36 rounded object-cover"
+						/>
+						<div>
+							<div class="text-lg font-semibold">{item.label}</div>
+							<div class="text-sm text-gray-500">{item.pageInfo}</div>
+							<div class="my-2 text-xs text-gray-700">{item.details}</div>
+							<div class="my-2 font-mono text-xs text-gray-700">{item.full_text}</div>
+						</div>
+					</div>
+				</ClickableTile>
+			{/each}
+		</div>
+	{/await}
+{:catch error}
+	<div>Error loading results: {error.message}</div>
+{/await}

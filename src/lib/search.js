@@ -40,11 +40,10 @@ export async function search(scope, searchParams) {
 	);
 	const query = searchParams.get('query') || MiniSearch.wildcard;
 	const results = await fetch(jsonPath)
-		.then((resp) => resp.json())
+		.then((response) => response.json())
 		.then((data) => {
 			miniSearch.addAll(data);
 			console.log('miniSearch', miniSearch);
-
 			return miniSearch.search(query, { prefix: true, combineWith: 'AND', fuzzy: 0.2 });
 		})
 		.catch((err) => console.error(err));
