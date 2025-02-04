@@ -26,7 +26,7 @@ function aMiniConfig(selectedFields) {
 				return doc && doc[isNaN(intKey) ? key : intKey];
 			}, document);
 		},
-		storeFields: ['id', 'fields'] // fields to return with search results
+		storeFields: ['id', 'fields', 'page_count'] // fields to return with search results
 	};
 }
 
