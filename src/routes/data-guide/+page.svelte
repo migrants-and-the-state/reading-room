@@ -43,7 +43,7 @@
 	<div class="flex gap-6 py-4">
 		<div class="min-w-40">
 			<Link href="#nara">
-				<Tag interactive id="nara" type="blue"># nara</Tag>
+				<Tag interactive id="nara" type="blue">#nara</Tag>
 			</Link>
 		</div>
 		<div>
@@ -58,7 +58,7 @@
 		<div class="flex gap-6 py-4">
 			<div class="min-w-40">
 				<Link href={`#${tag}`}>
-					<Tag interactive id={tag} type="green">{tag}</Tag>
+					<Tag interactive id={tag} type="green">#{tag}</Tag>
 				</Link>
 			</div>
 			<div>
