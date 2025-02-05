@@ -62,7 +62,7 @@
 	</FormGroup>
 	<div class="py-4 font-bold">Advanced Filters</div>
 
-	<FormGroup disabled legendText="Date of Naturalization (LLM)">
+	<FormGroup disabled legendText="Year of Naturalization (LLM)">
 		<div class="flex justify-start py-2">
 			<div class="basis-1/2">
 				<NumberInput

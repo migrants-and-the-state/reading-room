@@ -14,7 +14,6 @@ export async function load({ params, url }) {
 	if (!afile) {
 		error(404, 'Not Found');
 	} else {
-		console.log(afile);
 		const og_id = 'og-2023-kc-nara';
 		const manifest_url = `https://mats-aperitiiif-presenation-api-store-v1.s3.us-east-1.amazonaws.com/${og_id}/${afile.id}/manifest.json`;
 		const resp = await fetch(manifest_url);

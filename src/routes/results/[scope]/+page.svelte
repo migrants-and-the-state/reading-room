@@ -69,10 +69,8 @@
 
 	function handlePaginationChange(event) {
 		const { page, pageSize } = event.detail;
-
 		itemsPerPage = pageSize;
 		currentPage = page;
-		console.log('updating!');
 		items = getPaginatedItems(page);
 	}
 </script>
@@ -111,7 +109,7 @@
 						<div>
 							<div class="text-lg font-semibold">{item.label}</div>
 							<div class="text-sm text-gray-500">{item.pageInfo}</div>
-							<div class="my-2 text-xs text-gray-700">{item.details}</div>
+							<div class="my-2 text-xs text-gray-700">{item.details.substring(0, 200)}</div>
 							<div class="my-2 font-mono text-xs text-gray-700">{item.full_text}</div>
 						</div>
 					</div>
