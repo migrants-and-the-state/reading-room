@@ -1,6 +1,91 @@
 <script>
 	import { base } from '$app/paths';
 	import { Breadcrumb, BreadcrumbItem, Link, OutboundLink } from 'carbon-components-svelte';
+
+	const directors = [
+		{
+			name: 'Sibylle Fischer',
+			title: 'Associate Professor of History, Spanish and Portuguese, and Latin American Studies, NYU'
+		},
+		{
+			name: 'Ellen Noonan',
+			title: 'Clinical Professor of History and Director, Archives and Public History Program, NYU'
+		},
+		{
+			name: 'Bryan Zehngut-Willits',
+			title: 'Immigration historian and doctoral candidate in History, NYU'
+		}
+	];
+
+	const collaborators = [
+		{
+			name: 'Marii Nyrop',
+			title: 'Data Engineer and UI Developer, NYU'
+		},
+		{
+			name: 'Ajay Krishnan Gopalan',
+			title: 'Data Scientist, NYU'
+		},
+		{
+			name: 'Joaquin Navarrette',
+			title: 'Data Assistant, NYU'
+		},
+		{
+			name: 'Elijah VanderMolen',
+			title: 'Student Assistant, NYU'
+		},
+		{
+			name: 'Emma Jeong',
+			title: 'Student Assistant, NYU'
+		},
+		{
+			name: 'Ashley Sarkisian',
+			title: 'Student Assistant, NYU'
+		},
+		{
+			name: 'Marco Garcia',
+			title: 'Student Assistant, NYU'
+		}
+	];
+
+	const advisors = [
+		{
+			name: 'Adam Cox',
+			title: 'Robert A. Kindler Professor of Law, NYU'
+		},
+		{
+			name: 'Juliana Freire',
+			title: 'Professor of Computer Science and Data Science, NYU'
+		},
+		{
+			name: 'Maria Cristina Garcia',
+			title: 'Howard A. Newman Professor of American Studies in the Department of History, Cornell University'
+		},
+		{
+			name: 'Irvin Ibarguen',
+			title: 'Assistant Professor of History, NYU'
+		},
+		{
+			name: 'Kevin Kenny',
+			title: 'Professor of History and Director of Glucksman Ireland House, NYU'
+		},
+		{
+			name: 'Shannon O’Neill',
+			title: 'Curator for Tamiment-Wagner Collections, NYU'
+		},
+		{
+			name: 'Alexandra Provo',
+			title: 'Research Curation Librarian, NYU'
+		},
+		{
+			name: 'Marian Smith',
+			title: 'Senior Historian at U.S. Citizenship'
+		},
+		{
+			name: 'Lauren Tilton',
+			title: 'Associate Professor of Digital Humanities, University of Richmond'
+		}
+	]
 </script>
 
 <Breadcrumb noTrailingSlash class="mb-8">
@@ -8,21 +93,73 @@
 	<BreadcrumbItem href="/about" isCurrentPage>About + Credits</BreadcrumbItem>
 </Breadcrumb>
 
-<h1 class="mb-4">About + Credits</h1>
-<p class="py-1">
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend diam orci, sed aliquet
-	enim malesuada sit amet. Sed sollicitudin viverra elit, non vehicula lacus posuere ut. Suspendisse
-	et porttitor mauris. Nam at convallis leo. Vestibulum cursus, magna vitae venenatis porttitor,
-	ipsum mi posuere est, at accumsan dolor tellus vitae purus. Suspendisse porttitor gravida laoreet.
-	Integer tristique elementum ipsum fermentum accumsan. Vivamus arcu elit, pulvinar nec semper et,
-	auctor et augue. Nunc sed fringilla nisl, sit amet placerat tellus. Etiam nec mollis nisi, vel
-	tincidunt erat. Maecenas vel porta mi, sit amet faucibus massa. Nulla facilisi. Suspendisse tortor
-	diam, egestas vel lobortis rutrum, fermentum eu orci. Nam vehicula dignissim neque ac
-	sollicitudin. Morbi vel hendrerit metus, non tristique nunc.
-</p>
-<p class="py-1">
-	Aenean sit amet sapien nunc. Nam bibendum libero et augue varius, in lobortis ipsum fringilla.
-	Duis aliquet mauris non ultricies porta. Curabitur risus mauris, ultricies et molestie id,
-	venenatis posuere dolor. Maecenas non nibh justo. Maecenas eget pellentesque lorem. Aliquam
-	vehicula purus et egestas rhoncus. Aliquam erat volutpat.
-</p>
+<h1 class="mb-8">About + Credits</h1>
+<div class="max-w-[90ch]">
+	<p class="py-2">
+		Migrants and the State began in 2020 when a group of NYU faculty and graduate students came together to investigate the record-keeping practices of migrant advocates, attorneys, and the federal government. It became clear that our era’s so-called “border crisis” is ultimately inseparable from the long history of migrations and migration restrictions in the hemisphere and throughout the world. This history is amply documented in the approximately 1.6 million public domain A-files held by the U.S. National Archives, yet because of the limited information available in NARA’s catalog, these files are virtually impossible to explore at scale. (A-files enter the public domain when the birth year of the file holder is at least 100 years in the past.) A-files open a window into migrant experiences and the operations of the administrative state and have exceptional potential for humanities research as well as for explorations in personal, family, and community history. The Migrants and the State team is working to harness machine learning and data curation methods to increase visibility into the contents of each A-file, thus enabling members of migrant communities and scholars to tap into the rich trove of information contained within them and understand histories of migration in new ways. While this prototype contains XX files comprising XXX pages, we used a training set of xx files totalling xxx pages to test and refine our machine learning models.
+	</p>
+	<p class="py-2">
+		Migrants and the State received early stage funding from the NYU Bennett-Polonsky Humanities Lab program, NYU Center for the Humanities, and the NYU Office of the Provost Humanities Mega-Grants Initiative Seed Fund. The Migrants and the State digital prototype has been made possible in part by a major grant from the National Endowment for the Humanities Digital Humanities Advancement Grant program: Democracy demands wisdom.
+	</p>
+	<p class="py-2">
+		Any views, findings, conclusions, or recommendations expressed in this web resource do not necessarily represent those of the National Endowment for the Humanities.
+	</p>
+
+	<div class="my-12 flex items-center max-w-[80%] gap-12">
+		<div class="basis-1/2">
+			<img class="invert max-w-full" alt="National Endowment for the Humanities Logo" src="https://migrants-and-the-state.github.io/images/neh.png"/>
+		</div>
+		<div class="basis-1/2">
+			<img class="max-w-full" alt="New York University Logo" src="https://migrants-and-the-state.github.io/images/nyu.png"/>
+		</div>
+	</div>
+
+	<h2 class="my-4">Project Directors</h2>
+	<ul class="py-2">
+		{#each directors as director}
+			<li class="py-2">
+				<span class="text-lg font-bold">{director.name}</span><br>
+				{director.title}
+			</li>
+		{/each}
+	</ul>
+
+	<h2 class="my-4">Project Collaborators</h2>
+	<ul class="py-2">
+		{#each collaborators as collaborator}
+			<li class="py-2">
+				<span class="text-lg font-bold">{collaborator.name}</span><br>
+				{collaborator.title}
+			</li>
+		{/each}
+	</ul>
+
+	<h2 class="my-4">Project Advisors</h2>
+	<ul class="py-2">
+		{#each advisors as collaborator}
+			<li class="py-2">
+				<span class="text-lg font-bold">{collaborator.name}</span><br>
+				{collaborator.title}
+			</li>
+		{/each}
+	</ul>
+
+	<h2 class="my-4">Special thanks to</h2>
+	<p class="py-2">
+		 Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra, Calista LaMotte, Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach, Maddalena Marinari, Adam Goodman, Anna Law, Benjamin Berman-Gladstone, Bita Mousavi, Barbara Perez Curiel, Sarah Sklaw, Alexia Orengo-Green, Jason Ahlenius, and Alec Ferretti.
+	</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

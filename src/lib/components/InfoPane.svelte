@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import {
 		StructuredList,
 		StructuredListHead,
@@ -17,10 +18,7 @@
 <div class="flex w-full flex-wrap md:flex-nowrap md:gap-10">
 	<div class="basis-full md:basis-1/2">
 		<p class="py-6">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet malesuada odio. Sed
-			laoreet tortor eu orci ornare, condimentum commodo metus egestas. Donec vitae felis purus.
-			Nulla ullamcorper venenatis varius. Vivamus varius in diam ut iaculis. Curabitur elementum
-			risus non accumsan tincidunt.
+			<a href="https://migrants-and-the-state.github.io/" target="_blank">Migrants and the State</a> aims to provide large-scale access to the public domain migrant records held by the U.S. National Archives (NARA). <a href="{base}/about">This prototype</a> is designed to gather feedback on our current methods of enhancing A-file searchability and solicit ideas for future project development. For detailed information on our data curation choices and machine learning model training, please see the <a href="{base}/data-guide">Data Guide</a>. 
 		</p>
 	</div>
 	<div class="basis-full md:basis-1/2">

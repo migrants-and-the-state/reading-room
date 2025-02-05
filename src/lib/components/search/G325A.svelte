@@ -18,10 +18,9 @@
 	$: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
 </script>
 
-<div class="max-w-prose py-4">
+<div class="max-w-[75ch] py-4">
 	<p class="py-2">
-		<G325AIcon class="inline" size="20" /> <span class="font-bold">G325A Forms</span> are Fusce non accumsan
-		diam. Quisque ex felis, semper nec lorem vitae, gravida efficitur ligula.
+		<G325AIcon class="inline" size="20" /> <span class="font-bold">G325 Forms </span> are official forms used by INS/USCIS to collect biographical information including country and date of birth, citizenship and nationality, marital and family status, previous residences, and employment history and locations. 
 	</p>
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
