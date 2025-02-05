@@ -6,7 +6,7 @@ import { natcertFields } from '$lib/fields/natcert';
 export const fields = {
 	afile: afileFields,
 	page: pageFields,
-	g325a: [...g325aFields, ...pageFields],
-	natcert: [...natcertFields, ...pageFields],
+	g325a: [...pageFields, ...g325aFields],
+	natcert: [...pageFields, ...natcertFields],
 	xPage: [...pageFields, ...g325aFields, ...natcertFields]
 };

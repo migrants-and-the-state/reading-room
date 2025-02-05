@@ -63,11 +63,18 @@
 	<div class="py-4 font-bold">Advanced Filters</div>
 
 	<FormGroup>
-		<RadioButtonGroup legendText="Sex (NARA)" name="sex" selected="any">
+		<RadioButtonGroup legendText="Sex (NARA)" name="limit_fields.sex.nara" selected="any">
 			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Undefined" value="undefined" />
 			<RadioButton labelText="F" value="F" />
 			<RadioButton labelText="M" value="M" />
+		</RadioButtonGroup>
+	</FormGroup>
+
+	<FormGroup>
+		<RadioButtonGroup legendText="Sex (LLM)" name="limit_fields.sex.ms_sex_llm_v1" selected="any">
+			<RadioButton labelText="Any" value="any" />
+			<RadioButton labelText="Female" value="female" />
+			<RadioButton labelText="Male" value="male" />
 		</RadioButtonGroup>
 	</FormGroup>
 

@@ -62,9 +62,12 @@
 	<div class="py-4 font-bold">Advanced Filters</div>
 
 	<FormGroup>
-		<RadioButtonGroup legendText="Document Type (CNN)" name="document type" selected="any">
+		<RadioButtonGroup
+			legendText="Document Type (CNN)"
+			name="limit_fields.doctype.ms_doctype_v1"
+			selected="any"
+		>
 			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Undefined" value="undefined" />
 			<RadioButton labelText="Form" value="form" />
 			<RadioButton labelText="Letter" value="letter" />
 			<RadioButton labelText="Photograph" value="photograph" />
@@ -73,15 +76,14 @@
 	</FormGroup>
 
 	<FormGroup>
-		<RadioButtonGroup legendText="Sex (LLM)" name="sex" selected="any">
+		<RadioButtonGroup legendText="Sex (LLM)" name="limit_fields.sex.ms_sex_llm_v1" selected="any">
 			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Undefined" value="undefined" />
-			<RadioButton labelText="F" value="F" />
-			<RadioButton labelText="M" value="M" />
+			<RadioButton labelText="Female" value="female" />
+			<RadioButton labelText="Male" value="male" />
 		</RadioButtonGroup>
 	</FormGroup>
 
-	<FormGroup disabled legendText="Date of Birth (LLM)">
+	<FormGroup disabled legendText="Years (NLP)">
 		<div class="flex justify-start py-2">
 			<div class="basis-1/2">
 				<NumberInput

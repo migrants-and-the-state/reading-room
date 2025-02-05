@@ -3,16 +3,20 @@ import { base } from '$app/paths';
 import { fields } from '$lib/fields';
 import MiniSearch from 'minisearch';
 
+function dotExtractField(document, fieldName) {
+	return fieldName.split('.').reduce((doc, key) => {
+		const intKey = parseInt(key, 10);
+		return doc && doc[isNaN(intKey) ? key : intKey];
+	}, document);
+}
+
 function pMiniConfig(selectedFields) {
 	return {
-		fields: selectedFields, //fields to index for full-text search
+		fields: selectedFields,
 		extractField: (document, fieldName) => {
-			return fieldName.split('.').reduce((doc, key) => {
-				const intKey = parseInt(key, 10);
-				return doc && doc[isNaN(intKey) ? key : intKey];
-			}, document);
+			return dotExtractField(document, fieldName);
 		},
-		storeFields: ['id', 'anumber', 'page_index', 'full_text', 'fields'] // fields to return with search results
+		storeFields: ['id', 'anumber', 'page_index', 'full_text', 'fields']
 	};
 }
 
@@ -20,7 +24,6 @@ function aMiniConfig(selectedFields) {
 	return {
 		fields: selectedFields, // fields to index for full-text search
 		extractField: (document, field) => {
-			console.log('f', field);
 			return field.split('.').reduce((doc, key) => {
 				const intKey = parseInt(key, 10);
 				return doc && doc[isNaN(intKey) ? key : intKey];
@@ -31,6 +34,9 @@ function aMiniConfig(selectedFields) {
 }
 
 export async function search(scope, searchParams) {
+	const limitParams = Object.fromEntries(
+		[...searchParams.entries()].filter(([key]) => key.startsWith('limit_'))
+	);
 	const jsonPath = `${base}/api/index/${scope}.json`;
 	const selectedFields = searchParams
 		.getAll('selectedFields')
@@ -43,8 +49,18 @@ export async function search(scope, searchParams) {
 		.then((response) => response.json())
 		.then((data) => {
 			miniSearch.addAll(data);
-			console.log('miniSearch', miniSearch);
-			return miniSearch.search(query, { prefix: true, combineWith: 'AND', fuzzy: 0.2 });
+			let options = { prefix: true, combineWith: 'AND', fuzzy: 0.2 };
+			if (Object.keys(limitParams).length > 0) {
+				options.filter = (result) => {
+					let res = Object.entries(limitParams).every(([key, value]) => {
+						const field = key.replace('limit_', '');
+						const fieldValue = dotExtractField(result, field);
+						return fieldValue === value;
+					});
+					return res;
+				};
+			}
+			return miniSearch.search(query, options);
 		})
 		.catch((err) => console.error(err));
 	return results;
@@ -53,8 +69,14 @@ export async function search(scope, searchParams) {
 export function handleSubmit(event) {
 	event.preventDefault();
 	localStorage.setItem('formReferrer', window.location.href);
-	const data = new FormData(event.target);
 	const scope = event.target.attributes['scope'].value;
-	const params = new URLSearchParams(data);
+	const data = new FormData(event.target);
+	const cleanData = {};
+	data.forEach((value, key) => {
+		if (!key.startsWith('limit') || value !== 'any') {
+			cleanData[key] = value;
+		}
+	});
+	const params = new URLSearchParams(cleanData);
 	goto(`${base}/results/${scope}?${params.toString()}`);
 }
