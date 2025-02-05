@@ -26,7 +26,7 @@
 >
 	<Tab id="afile" label="Find A-Files" />
 	<Tab id="page" label="Find Pages" />
-	<Tab id="g325a" label="Find G325A Forms *" />
+	<Tab id="g325a" label="Find G325 Forms *" />
 	<Tab id="natcert" label="Find Naturalization Certificates *" />
 	<svelte:fragment slot="content">
 		<TabContent class="bg-white">

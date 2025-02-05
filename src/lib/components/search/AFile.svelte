@@ -24,10 +24,11 @@
 	$: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
 </script>
 
-<div class="max-w-prose py-4">
+<div class="max-w-[75ch] py-4">
 	<p class="py-2">
-		<AFileIcon class="inline" size="20" /> <span class="font-bold"> A-Files</span> are Fusce non accumsan
-		diam. Quisque ex felis, semper nec lorem vitae, gravida efficitur ligula.
+		<AFileIcon class="inline" size="20" /> <span class="font-bold">A-Files</span> (short for Alien Files)
+		are individual immigration records, each identified by a unique Alien Registration Number (A-Number).
+		They contain all documentation of a person's interactions with immigration bureaucracies.
 	</p>
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
