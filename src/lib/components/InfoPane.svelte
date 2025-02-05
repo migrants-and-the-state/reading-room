@@ -18,7 +18,12 @@
 <div class="flex w-full flex-wrap md:flex-nowrap md:gap-10">
 	<div class="basis-full md:basis-1/2">
 		<p class="py-6">
-			<a href="https://migrants-and-the-state.github.io/" target="_blank">Migrants and the State</a> aims to provide large-scale access to the public domain migrant records held by the U.S. National Archives (NARA). <a href="{base}/about">This prototype</a> is designed to gather feedback on our current methods of enhancing A-file searchability and solicit ideas for future project development. For detailed information on our data curation choices and machine learning model training, please see the <a href="{base}/data-guide">Data Guide</a>. 
+			<a href="https://migrants-and-the-state.github.io/" target="_blank">Migrants and the State</a>
+			aims to provide large-scale access to the public domain migrant records held by the U.S.
+			National Archives (NARA). This prototype is designed to gather
+			feedback on our current methods of enhancing A-file searchability and solicit ideas for future
+			project development. For detailed information on our data curation choices and machine
+			learning model training, please see the <a href="{base}/data-guide">Data Guide</a>.
 		</p>
 	</div>
 	<div class="basis-full md:basis-1/2">
@@ -34,30 +39,29 @@
 				<StructuredListBody>
 					<StructuredListRow>
 						<StructuredListCell noWrap><AFileIcon class="inline" /> A-Files</StructuredListCell>
-						<StructuredListCell>0</StructuredListCell>
-						<StructuredListCell>0</StructuredListCell>
+						<StructuredListCell>423</StructuredListCell>
+						<StructuredListCell>751</StructuredListCell>
 					</StructuredListRow>
 
 					<StructuredListRow>
 						<StructuredListCell noWrap><PageIcon class="inline" /> Pages</StructuredListCell>
-						<StructuredListCell>0</StructuredListCell>
-						<StructuredListCell>0</StructuredListCell>
+						<StructuredListCell>20,516</StructuredListCell>
+						<StructuredListCell>37,396</StructuredListCell>
 					</StructuredListRow>
 
 					<StructuredListRow>
-						<StructuredListCell noWrap
-							><G325AIcon class="inline" /> G325A Forms *</StructuredListCell
+						<StructuredListCell noWrap><G325AIcon class="inline" /> G325 Forms *</StructuredListCell
 						>
-						<StructuredListCell>0</StructuredListCell>
-						<StructuredListCell>0</StructuredListCell>
+						<StructuredListCell>504</StructuredListCell>
+						<StructuredListCell>?</StructuredListCell>
 					</StructuredListRow>
 
 					<StructuredListRow>
 						<StructuredListCell noWrap
 							><NatCertIcon class="inline" /> Naturalization Certificates *</StructuredListCell
 						>
-						<StructuredListCell>0</StructuredListCell>
-						<StructuredListCell>0</StructuredListCell>
+						<StructuredListCell>87</StructuredListCell>
+						<StructuredListCell>?</StructuredListCell>
 					</StructuredListRow>
 				</StructuredListBody>
 			</StructuredList>

@@ -27,7 +27,9 @@
 <div class="max-w-[75ch] py-4">
 	<p class="py-2">
 		<NatCertIcon class="inline" size="20" />
-		<span class="font-bold">Naturalization Certificates</span> are issued to immigrants who have become naturalized U.S. citizens, these certificates contain photographs and both biographical and biometric data.
+		<span class="font-bold">Naturalization Certificates</span> are issued to immigrants who have become
+		naturalized U.S. citizens, these certificates contain photographs and both biographical and biometric
+		data.
 	</p>
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>

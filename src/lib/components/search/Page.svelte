@@ -26,7 +26,9 @@
 
 <div class="max-w-[75ch] py-4">
 	<p class="py-2">
-		<PageIcon class="inline" size="20" /> <span class="font-bold">Pages</span> within an A-File may comprise documents like official forms, photographs, correspondence, affidavits, identity documents, vital records, interview transcripts, medical and employment records, and interagency communications.
+		<PageIcon class="inline" size="20" /> <span class="font-bold">Pages</span> within an A-File may comprise
+		documents like official forms, photographs, correspondence, affidavits, identity documents, vital
+		records, interview transcripts, medical and employment records, and interagency communications.
 	</p>
 	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
