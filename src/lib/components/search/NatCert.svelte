@@ -12,6 +12,8 @@
 		MultiSelect,
 		TextInput,
 		NumberInput,
+		RadioButton,
+		RadioButtonGroup,
 		Link
 	} from 'carbon-components-svelte';
 
@@ -61,6 +63,20 @@
 		</div>
 	</FormGroup>
 	<div class="py-4 font-bold">Advanced Filters</div>
+
+	<FormGroup>
+		<RadioButtonGroup
+			legendText="Marital status (LLM)"
+			name="limit_fields.certificate_naturalization.marital_status.marital_status_llm_v1"
+			selected="any"
+		>
+			<RadioButton labelText="Any" value="any" />
+			<RadioButton labelText="Single" value="single" />
+			<RadioButton labelText="Married" value="married" />
+			<RadioButton labelText="Divorced" value="divorced" />
+			<RadioButton labelText="Widowed" value="widowed" />
+		</RadioButtonGroup>
+	</FormGroup>
 
 	<FormGroup disabled legendText="Year of Naturalization (LLM)">
 		<div class="flex justify-start py-2">

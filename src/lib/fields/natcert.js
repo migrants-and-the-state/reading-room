@@ -8,7 +8,7 @@ export const natcertFields = [
 	{
 		id: 'fields.certificate_naturalization.marital_status.marital_status_llm_v1',
 		text: 'Marital status (LLM)',
-		search: true,
+		search: false,
 		view: true
 	},
 	{

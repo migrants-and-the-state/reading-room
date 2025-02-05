@@ -71,7 +71,7 @@
 			<RadioButton labelText="Form" value="form" />
 			<RadioButton labelText="Letter" value="letter" />
 			<RadioButton labelText="Photograph" value="photograph" />
-			<RadioButton labelText="Miscellaneous" value="miscellaneous" />
+			<RadioButton labelText="Misc" value="misc" />
 		</RadioButtonGroup>
 	</FormGroup>
 

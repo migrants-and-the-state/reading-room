@@ -54,7 +54,11 @@ export async function search(scope, searchParams) {
 				options.filter = (result) => {
 					let res = Object.entries(limitParams).every(([key, value]) => {
 						const field = key.replace('limit_', '');
-						const fieldValue = dotExtractField(result, field);
+						let fieldValue = dotExtractField(result, field);
+						if (typeof fieldValue === 'string') {
+							fieldValue = fieldValue.toLowerCase();
+							value = value.toLowerCase();
+						}
 						return fieldValue === value;
 					});
 					return res;
