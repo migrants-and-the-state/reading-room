@@ -12,7 +12,7 @@ export const pageFields = [
 		view: false
 	},
 	{
-		text: 'Full Text (OCR)',
+		text: 'Full text (OCR)',
 		id: 'full_text',
 		search: true,
 		view: false
@@ -24,13 +24,13 @@ export const pageFields = [
 		search: false
 	},
 	{
-		text: 'Document Type (LLM)',
+		text: 'Document type (LLM)',
 		id: 'fields.doctype.ms_doctype_v1',
 		search: false,
 		view: true
 	},
 	{
-		text: 'Form Title (LLM)',
+		text: 'Form title (LLM)',
 		id: 'fields.form_title.ms_form_title_llm_v1',
 		search: true,
 		view: true

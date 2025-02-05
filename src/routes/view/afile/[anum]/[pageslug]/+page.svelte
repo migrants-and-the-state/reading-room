@@ -166,7 +166,7 @@
 					{#await pageDataFromIdx($currentPageIdx) then pageData}
 						{#if pageData}
 							<dl>
-								{#each Object.entries(fields['page'].filter((field) => field.view)) as [_i, field]}
+								{#each Object.entries(fields['xPage'].filter((field) => field.view)) as [_i, field]}
 									{@const label = field.text.replace(/\([^)]*\)/, '').trim()}
 									{@const ptag = field.id.split('.').slice(-1)[0].trim()}
 									{@const value = objGet(pageData, field.id)}

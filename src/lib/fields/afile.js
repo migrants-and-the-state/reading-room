@@ -6,41 +6,41 @@ export const afileFields = [
 		search: true
 	},
 	{
-		text: 'Page Count',
+		text: 'Page count',
 		id: 'page_count',
 		view: true,
 		search: false
 	},
 	{
-		text: 'Last Name (NARA)',
+		text: 'Last name (NARA)',
 		id: 'fields.last_name.nara'
 	},
 	{
-		text: 'First Name (NARA)',
+		text: 'First name (NARA)',
 		id: 'fields.first_name.nara',
 		view: true,
 		search: true
 	},
 	{
-		text: 'Date of Birth (NARA)',
+		text: 'Date of birth (NARA)',
 		id: 'fields.dob.nara',
 		view: true,
 		search: false
 	},
 	{
-		text: 'Date of Entry (NARA)',
+		text: 'Date of entry (NARA)',
 		id: 'fields.doe.nara',
 		view: true,
 		search: false
 	},
 	{
-		text: 'Port of Entry (NARA)',
+		text: 'Port of entry (NARA)',
 		id: 'fields.poe.nara',
 		view: true,
 		search: true
 	},
 	{
-		text: 'Country of Birth (NARA)',
+		text: 'Country of birth (NARA)',
 		id: 'fields.cob.nara',
 		view: true,
 		search: true
@@ -58,7 +58,7 @@ export const afileFields = [
 		search: false
 	},
 	{
-		text: 'Form Titles (LLM)',
+		text: 'Form titles (LLM)',
 		id: 'fields.form_titles.ms_form_titles_llm_v1',
 		view: true,
 		search: true
