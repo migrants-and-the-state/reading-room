@@ -1,5 +1,6 @@
 <script>
 	import { base } from '$app/paths';
+	import { updateScopeIndex } from '$lib/scope';
 	import {
 		StructuredList,
 		StructuredListHead,
@@ -16,13 +17,16 @@
 </script>
 
 <div class="flex w-full flex-wrap md:flex-nowrap md:gap-10">
-	<div class="basis-full md:basis-1/2">
-		<p class="py-6">
-			<a href="https://migrants-and-the-state.github.io/" target="_blank">Migrants and the State</a>
-			aims to provide large-scale access to the public domain migrant records held by the U.S.
-			National Archives (NARA). This prototype is designed to gather
-			feedback on our current methods of enhancing A-file searchability and solicit ideas for future
-			project development. For detailed information on our data curation choices and machine
+	<div class="basis-full md:basis-1/2 my-6">
+		<p class="py-2">
+			<a href="https://migrants-and-the-state.github.io/" target="_blank">Migrants and the State (M/S)</a>
+			aims to provide large-scale access to the public domain migrant records (A-Files) held by the <a href="https://www.archives.gov/" target="_blank">U.S.
+			National Archives (NARA)</a>. This prototype is designed to gather feedback on our current methods of enhancing A-file searchability and 
+			solicit ideas for future project development. </p>
+		<p class="py-2">
+			Below you can search for entire <a href="?tab=afile">A-Files</a> or specific <a href="?tab=page">Pages</a> within them using both NARA-cataloged 
+			and experimentally-extracted metadata. Some pages have been machine-identified as <a href="">G-325 Forms</a> or <a href="">Naturalization Certificates</a>; these special pages include additional metadata fields created by our project team.
+			For more detailed information on our data curation choices and machine
 			learning model training, please see the <a href="{base}/data-guide">Data Guide</a>.
 		</p>
 	</div>
