@@ -13,7 +13,9 @@ export const afileFields = [
 	},
 	{
 		text: 'Last name (NARA)',
-		id: 'fields.last_name.nara'
+		id: 'fields.last_name.nara',
+		view: true,
+		search: true
 	},
 	{
 		text: 'First name (NARA)',
