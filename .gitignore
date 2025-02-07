@@ -1,5 +1,6 @@
 node_modules
 ms-prototype-data-wrangle
+.vscode
 
 # Output
 .output
