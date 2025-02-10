@@ -76,6 +76,7 @@
 			<RadioButton labelText="Married" value="married" />
 			<RadioButton labelText="Divorced" value="divorced" />
 			<RadioButton labelText="Widowed" value="widowed" />
+			<RadioButton labelText="N.A" value="n.a" />
 		</RadioButtonGroup>
 	</FormGroup>
 
