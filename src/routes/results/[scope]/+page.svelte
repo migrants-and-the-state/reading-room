@@ -92,6 +92,7 @@
 			bind:page={currentPage}
 			totalItems={results.length}
 			pageSize={itemsPerPage}
+			pageSizes={[10, 20, 50]}
 			on:update={handlePaginationChange}
 		/>
 		<div class="space-y-4">
