@@ -18,12 +18,6 @@ export const pageFields = [
 		view: false
 	},
 	{
-		text: 'Sex (LLM)',
-		id: 'fields.sex.ms_sex_llm_v1',
-		view: true,
-		search: false
-	},
-	{
 		text: 'Document type (LLM)',
 		id: 'fields.doctype.ms_doctype_v1',
 		search: false,
@@ -46,5 +40,11 @@ export const pageFields = [
 		id: 'fields.years.ms_years_nlp_v1',
 		search: false,
 		view: true
+	},
+	{
+		text: 'Sex (LLM)',
+		id: 'fields.sex.ms_sex_llm_v1',
+		view: true,
+		search: false
 	}
 ];

@@ -12,6 +12,18 @@ export const afileFields = [
 		search: false
 	},
 	{
+		text: 'Country of birth (NARA)',
+		id: 'fields.cob.nara',
+		view: true,
+		search: true
+	},
+	{
+		text: 'Date of birth (NARA)',
+		id: 'fields.dob.nara',
+		view: true,
+		search: false
+	},
+	{
 		text: 'Last name (NARA)',
 		id: 'fields.last_name.nara',
 		view: true,
@@ -24,14 +36,14 @@ export const afileFields = [
 		search: true
 	},
 	{
-		text: 'Date of birth (NARA)',
-		id: 'fields.dob.nara',
+		text: 'Sex (NARA)',
+		id: 'fields.sex.nara',
 		view: true,
 		search: false
 	},
 	{
-		text: 'Date of entry (NARA)',
-		id: 'fields.doe.nara',
+		text: 'Sex (LLM)',
+		id: 'fields.sex.ms_sex_llm_v1',
 		view: true,
 		search: false
 	},
@@ -42,20 +54,8 @@ export const afileFields = [
 		search: true
 	},
 	{
-		text: 'Country of birth (NARA)',
-		id: 'fields.cob.nara',
-		view: true,
-		search: true
-	},
-	{
-		text: 'Sex (NARA)',
-		id: 'fields.sex.nara',
-		view: true,
-		search: false
-	},
-	{
-		text: 'Sex (LLM)',
-		id: 'fields.sex.ms_sex_llm_v1',
+		text: 'Date of entry (NARA)',
+		id: 'fields.doe.nara',
 		view: true,
 		search: false
 	},
