@@ -21,7 +21,12 @@
 	let yearMin = 1800;
 	let yearMax = 1980;
 
+	const countryCodeTableURL = 'https://docs.google.com/spreadsheets/d/1LfmR0QLmalz_6rJT_37QjRyFggsCXXOl5e24nOuw6XI/';
+	const portCodeTableURL = 'https://docs.google.com/spreadsheets/d/1Zhs2RUElDE96EJmXGOCogfUdukj6mpbhWwsd6e2Sb34/edit?gid=1972875230#gid=1972875230';
+
 	$: isSearchInvalid = selectedFields.length === 0 && query.length > 0;
+	$: cobSelected = selectedFields.includes('fields.cob.nara');
+	$: poeSelected = selectedFields.includes('fields.poe.nara');
 </script>
 
 <div class="max-w-[75ch] py-4">
@@ -55,6 +60,14 @@
 					bind:value={query}
 					invalid={isSearchInvalid}
 				/>
+				<div class='my-2 ml-4 text-xs opacity-7'>
+					{#if cobSelected}
+					* Please use the country code (see: <a target='_blank' href='{countryCodeTableURL}'>reference table</a>) to search Country of Birth (NARA).<br>
+					{/if}
+					{#if poeSelected}
+					* Please use the port code (see: <a target='_blank' href='{portCodeTableURL}'>reference table</a>) to search Port of Entry (NARA).
+					{/if}
+				</div>
 			</div>
 		</div>
 	</FormGroup>
