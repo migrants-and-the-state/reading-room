@@ -6,7 +6,15 @@
 	import Mirador from 'mirador';
 	import { miradorImageToolsPlugin } from 'mirador-image-tools';
 	import { writable } from 'svelte/store';
-	import { Link, Tabs, Tab, TabContent, Tag } from 'carbon-components-svelte';
+	import {
+		Breadcrumb,
+		BreadcrumbItem,
+		Link,
+		Tabs,
+		Tab,
+		TabContent,
+		Tag
+	} from 'carbon-components-svelte';
 	import { fields } from '$lib/fields';
 
 	let { data } = $props();
@@ -97,17 +105,21 @@
 	});
 </script>
 
-{#if localStorage.getItem('resultReferrer')}
-	<a href={localStorage.getItem('resultReferrer')}>Back to results</a>
-{/if}
+<Breadcrumb noTrailingSlash class="mb-8">
+	{#if localStorage.getItem('resultReferrer')}
+		<BreadcrumbItem href={localStorage.getItem('resultReferrer')}>Back to results</BreadcrumbItem>
+	{:else}
+		<BreadcrumbItem href={base}>Home</BreadcrumbItem>
+	{/if}
+</Breadcrumb>
 
-<h1 class="py-4">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
+<h1 class="mb-8">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
 
 <div class="flex flex-wrap gap-6 md:flex-nowrap">
-	<div class="relative h-[60vh] basis-3/5 border-none">
+	<div class="relative h-[60vh] basis-full border-none md:basis-3/5">
 		<div id="mirador"></div>
 	</div>
-	<div class="basis-2/5 pb-12">
+	<div class="basis-full pb-12 md:basis-2/5">
 		<Tabs
 			selected={scopeIndex}
 			autoWidth
@@ -118,7 +130,7 @@
 			<Tab id="afile" label="About this A-File" />
 			<Tab id="page" label="About this Page ({$currentPageIdx + 1}/{afile.page_count})" />
 			<svelte:fragment slot="content">
-				<TabContent class="scroll-y h-full w-full bg-white">
+				<TabContent class="bg-white">
 					<dl>
 						{#each Object.entries(fields['afile'].filter((field) => field.view)) as [_i, field]}
 							{@const label = field.text.replace(/\([^)]*\)/, '').trim()}

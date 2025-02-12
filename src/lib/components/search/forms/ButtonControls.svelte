@@ -4,8 +4,8 @@
 	export let isSearchInvalid;
 </script>
 
-<ButtonSet>
-	<Button href="javascript:window.location.reload(true)" kind="secondary">Reset</Button>
+<ButtonSet class="flex flex-row flex-wrap">
+	<!-- <Button href="javascript:window.location.reload(true)" kind="secondary">Reset</Button> -->
 	{#if isSearchInvalid}
 		<Button disabled type="submit">Submit</Button>
 	{:else}

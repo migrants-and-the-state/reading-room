@@ -39,11 +39,11 @@
 <Form scope="natcert" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>
 	<FormGroup legendText="Fields">
-		<div class="flex flex-row justify-start">
-			<div class="basis-1/3">
+		<div class="flex flex-row flex-wrap justify-start">
+			<div class="basis-full md:basis-1/3">
 				<MultiSelect
 					name="fields"
-					label="Select fields"
+					label="Select"
 					selectionFeedback="fixed"
 					itemToInput={(item) => ({ name: 'selectedFields', value: item.id })}
 					bind:selectedIds={selectedFields}
@@ -52,7 +52,7 @@
 					items={fields['natcert'].filter((field) => field.search)}
 				/>
 			</div>
-			<div class="basis-2/3">
+			<div class="basis-full md:basis-2/3">
 				<TextInput
 					name="query"
 					placeholder="Search..."
@@ -71,12 +71,14 @@
 			name="limit_fields.certificate_naturalization.marital_status.marital_status_llm_v1"
 			selected="any"
 		>
-			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Single" value="single" />
-			<RadioButton labelText="Married" value="married" />
-			<RadioButton labelText="Divorced" value="divorced" />
-			<RadioButton labelText="Widowed" value="widowed" />
-			<RadioButton labelText="N.A" value="n.a" />
+			<div class="flex flex-row flex-wrap justify-start gap-2">
+				<RadioButton labelText="Any" value="any" />
+				<RadioButton labelText="Single" value="single" />
+				<RadioButton labelText="Married" value="married" />
+				<RadioButton labelText="Divorced" value="divorced" />
+				<RadioButton labelText="Widowed" value="widowed" />
+				<RadioButton labelText="N.A" value="n.a" />
+			</div>
 		</RadioButtonGroup>
 	</FormGroup>
 
