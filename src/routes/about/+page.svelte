@@ -94,8 +94,21 @@
 	<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 </Breadcrumb>
 
-<h1 class="mb-8">About + Credits</h1>
+<h1 class="mb-8 md:text-5xl">M/S About + Credits</h1>
+
+<div class="my-6">
+	<h2 class="mb-2">Contents</h2>
+	<ul class="list-inside list-disc [&_ul]:list-[revert]">
+		<li class="py-1"><a href="#project-description">Project Description</a></li>
+		<li class="py-1"><a href="#project-directors">Project Directors</a></li>
+		<li class="py-1"><a href="#project-collaborators">Project Collaborators</a></li>
+		<li class="py-1"><a href="#project-advisors">Project Advisors</a></li>
+		<li class="py-1"><a href="#gratitude">Gratitude</a></li>
+	</ul>
+</div>
+
 <div class="max-w-[90ch]">
+	<h2 id="project-description" class="my-4">Project Description</h2>
 	<p class="py-2">
 		Migrants and the State began in 2020 when a group of NYU faculty and graduate students came
 		together to investigate the record-keeping practices of migrant advocates, attorneys, and the
@@ -143,7 +156,7 @@
 		</div>
 	</div>
 
-	<h2 class="my-4">Project Directors</h2>
+	<h2 id="project-directors" class="my-4">Project Directors</h2>
 	<ul class="py-2">
 		{#each directors as director}
 			<li class="py-2">
@@ -153,7 +166,7 @@
 		{/each}
 	</ul>
 
-	<h2 class="my-4">Project Collaborators</h2>
+	<h2 id="project-collaborators" class="my-4">Project Collaborators</h2>
 	<ul class="py-2">
 		{#each collaborators as collaborator}
 			<li class="py-2">
@@ -163,7 +176,7 @@
 		{/each}
 	</ul>
 
-	<h2 class="my-4">Project Advisors</h2>
+	<h2 id="project-advisors" class="my-4">Project Advisors</h2>
 	<ul class="py-2">
 		{#each advisors as collaborator}
 			<li class="py-2">
@@ -173,11 +186,11 @@
 		{/each}
 	</ul>
 
-	<h2 class="my-4">Special thanks to</h2>
+	<h2 id="gratitude" class="my-4">Gratitude</h2>
 	<p class="py-2">
-		Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra, Calista LaMotte,
-		Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach, Maddalena
-		Marinari, Adam Goodman, Anna Law, Benjamin Berman-Gladstone, Bita Mousavi, Barbara Perez Curiel,
-		Sarah Sklaw, Alexia Orengo-Green, Jason Ahlenius, and Alec Ferretti.
+		Special thanks to: Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra,
+		Calista LaMotte, Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach,
+		Maddalena Marinari, Adam Goodman, Anna Law, Benjamin Berman-Gladstone, Bita Mousavi, Barbara
+		Perez Curiel, Sarah Sklaw, Alexia Orengo-Green, Jason Ahlenius, and Alec Ferretti.
 	</p>
 </div>

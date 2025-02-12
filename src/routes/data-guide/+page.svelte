@@ -1,6 +1,6 @@
 <script>
 	import { base } from '$app/paths';
-	import { Breadcrumb, BreadcrumbItem, Link, Tag } from 'carbon-components-svelte';
+	import { Breadcrumb, BreadcrumbItem, Link, Tag, Tile } from 'carbon-components-svelte';
 
 	const ms_provenance_tags = {
 		ms_ocr_v1:
@@ -35,11 +35,28 @@
 </Breadcrumb>
 
 <div class="max-w-[85ch]">
-	<h1 class="mb-8">Data Guide</h1>
+	<h1 class="mb-8 md:text-5xl">M/S Data Guide</h1>
+	<div class="my-6">
+		<h2 class="mb-2">Contents</h2>
+		<ul class="list-inside list-disc [&_ul]:list-[revert]">
+			<li class="pt-2">
+				<a href="#introduction">Introduction</a>
+				<ul class="list-inside indent-4">
+					<li class="pt-2"><a href="#sources">Metadata Sources and Training Set</a></li>
+					<li class="pt-2"><a href="#model-training">Model Training</a></li>
+					<li class="pt-2"><a href="#metadata-note">Metadata on Sex and Race</a></li>
+				</ul>
+			</li>
+			<li class="pt-2"><a href="#methods-glossary">Methods Glossary</a></li>
+			<li class="pt-2"><a href="#tags">Data Provenance Tags</a></li>
+		</ul>
+	</div>
 
-	<h2 class="my-4">Introduction</h2>
+	<h2 id="introduction" class="my-4">Introduction</h2>
 
-	<h3 class="my-2 text-xl font-semibold">Metadata Sources and Training Set</h3>
+	<h3 id="sources" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
+		Metadata Sources and Training Set
+	</h3>
 	<p class="py-2">
 		This prototype allows users to search the test set of A-files using metadata derived from two
 		sources: the publicly available U.S. National Archives (NARA) catalog metadata and metadata
@@ -75,7 +92,9 @@
 		purposes only and are not included in this prototype.
 	</p>
 
-	<h3 class="my-2 text-xl font-semibold">Model Training</h3>
+	<h3 id="model-training" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
+		Model Training
+	</h3>
 	<p class="py-2">
 		The model training work has involved two main stages: categorizing documents and extracting
 		information from them. In general, our approach has prioritized training models to address a
@@ -102,7 +121,9 @@
 		scalable technique that can later be applied to other forms.
 	</p>
 
-	<h3 class="my-2 text-xl font-semibold">Metadata on Sex and Race</h3>
+	<h3 id="metadata-note" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
+		Metadata on Sex and Race
+	</h3>
 	<p class="py-2">
 		The NARA catalogue metadata, compiled as a limited subset of the metadata created by INS /
 		USCIS, frequently lacks entries corresponding to the field designating biological sex. But
@@ -124,7 +145,7 @@
 	</p>
 </div>
 
-<h2 class="py-4">Methods Glossary</h2>
+<h2 id="methods-glossary" class="py-4">Methods Glossary</h2>
 <div class="my-10 flex flex-wrap gap-8">
 	<dl class="basis-1/4">
 		<dt class="font-semibold">Large Language Model (LLM)</dt>
@@ -152,7 +173,7 @@
 	</dl>
 </div>
 
-<h2 class="py-4">Data Provenance Tags</h2>
+<h2 id="tags" class="py-4">Data Provenance Tags</h2>
 <div class="w-full">
 	<div class="flex gap-6 py-4">
 		<div class="min-w-56">
