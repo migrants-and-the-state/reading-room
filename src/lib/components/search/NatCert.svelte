@@ -1,5 +1,4 @@
 <script>
-	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
 	import { fields } from '$lib/fields';
 
@@ -30,10 +29,8 @@
 	<p class="py-2">
 		<NatCertIcon class="inline" size="20" />
 		<span class="font-bold">Naturalization Certificates</span> are issued to immigrants who have become
-		naturalized U.S. citizens, these certificates contain photographs and both biographical and biometric
-		data.
+		naturalized U.S. citizens. They contain photographs and both biographical and biometric data.
 	</p>
-	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
 
 <Form scope="natcert" on:submit={handleSubmit}>

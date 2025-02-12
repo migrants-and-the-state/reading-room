@@ -1,8 +1,8 @@
 <script>
 	import { base } from '$app/paths';
-	import { goto } from '$app/navigation';
 	import { updateScopeIndex } from '$lib/scope';
 	import {
+		Link,
 		StructuredList,
 		StructuredListHead,
 		StructuredListRow,
@@ -11,39 +11,42 @@
 	} from 'carbon-components-svelte';
 	import {
 		FolderShared as AFileIcon,
-		Document as PageIcon,
-		Identification as G325AIcon,
+		DocumentBlank as PageIcon,
+		LicenseDraft as G325AIcon,
 		Policy as NatCertIcon
 	} from 'carbon-icons-svelte';
 
 	const stats = {
 		afile: { label: 'A-Files', sample: 423, full: 751 },
 		page: { label: 'Pages', sample: 20516, full: 37396 },
-		g325a: { label: 'G325 Forms *', sample: 504, full: 'unknown' },
-		natcert: { label: 'Naturalization Certificates *', sample: 87, full: 'unknown' }
+		g325a: { label: 'G-325 Forms*', sample: 504, full: 'unknown' },
+		natcert: { label: 'Naturalization Certificates*', sample: 87, full: 'unknown' }
 	};
 </script>
 
 <div class="mb-8 flex w-full flex-wrap gap-4 md:flex-nowrap md:gap-10">
 	<div class="my-6 basis-full md:basis-1/2">
 		<p class="py-2 text-sm md:text-base">
-			<a href="https://migrants-and-the-state.github.io/" target="_blank"
-				>Migrants and the State (M/S)</a
-			>
-			aims to provide large-scale access to the public domain migrant records (A-Files) held by the
-			<a href="https://www.archives.gov/" target="_blank">U.S. National Archives (NARA)</a>. This
-			prototype is designed to gather feedback on our current methods of enhancing A-file
-			searchability and solicit ideas for future project development.
+			<Link
+				class="text-sm md:text-base"
+				href="https://migrants-and-the-state.github.io"
+				target="_blank">Migrants and the State (M/S)</Link
+			> aims to provide large-scale access to the public domain migrant records held by the U.S. National
+			Archives (NARA). This prototype is designed to gather feedback on our current methods of enhancing
+			A-file searchability and solicit ideas for future project development.
 		</p>
 		<p class="py-2 text-sm md:text-base">
-			Below you can search for entire <span class="font-semibold">A-Files</span> or specific
-			<span class="font-semibold">Pages</span>
-			within them using both NARA-cataloged and experimentally-extracted metadata. Some pages have been
-			machine-identified as <span class="font-semibold">G-325 Forms</span> or
-			<span class="font-semibold">Naturalization Certificates</span>; these special pages include
-			additional metadata fields created by our project team. For more detailed information on our
-			data curation choices and machine learning model training, please see the
-			<a href="{base}/data-guide">Data Guide</a>.
+			Below you can search for entire <strong>A-Files</strong> or specific <strong>Pages</strong>
+			within them using both NARA-cataloged and experimentally-extracted metadata. Some pages have
+			been machine-identified as <strong>G-325 Forms</strong> or
+			<strong>Naturalization Certificates</strong>; these special pages include additional metadata
+			fields created by our project team.
+		</p>
+		<p class="py-2 text-sm md:text-base">
+			Prior to using the site, please read about our data curation choices and machine learning
+			model training in the <Link class="text-sm md:text-base" href="{base}/data-guide"
+				>Data Guide</Link
+			>.
 		</p>
 	</div>
 	<div class="my-6 basis-full md:basis-1/2">
@@ -59,9 +62,20 @@
 				<StructuredListBody>
 					{#each Object.keys(stats) as key}
 						<StructuredListRow>
-							<StructuredListCell noWrap>{stats[key].label || key}</StructuredListCell>
 							<StructuredListCell>
-								<a href="{base}/results/{key}?query=">{stats[key].sample.toLocaleString()}</a>
+								{#if key === 'afile'}
+									<AFileIcon class="inline" />
+								{:else if key === 'page'}
+									<PageIcon class="inline" />
+								{:else if key === 'g325a'}
+									<G325AIcon class="inline" />
+								{:else if key === 'natcert'}
+									<NatCertIcon class="inline" />
+								{/if}
+								{stats[key].label || key}
+							</StructuredListCell>
+							<StructuredListCell>
+								<Link href="{base}/results/{key}?query=">{stats[key].sample.toLocaleString()}</Link>
 							</StructuredListCell>
 							<StructuredListCell>{stats[key].full.toLocaleString()}</StructuredListCell>
 						</StructuredListRow>

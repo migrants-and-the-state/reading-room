@@ -1,24 +1,39 @@
 <script>
 	import { base } from '$app/paths';
-	import { Link, OutboundLink } from 'carbon-components-svelte';
+	import { Link } from 'carbon-components-svelte';
+	import ArrowUpRight from 'carbon-icons-svelte/lib/ArrowUpRight.svelte';
 </script>
 
 <header class="sticky top-0 z-50">
-	<div class="mb-10 bg-slate-900 px-4 py-2 md:px-8 lg:px-36">
-		<nav class="flex flex-row flex-wrap gap-2 md:gap-8">
-			<Link class="pr-2 text-xs !text-white" href={base}><strong>M/S Reading Room v1</strong></Link>
-			<Link class="pr-2 !text-white" href="{base}/about">About + Credits</Link>
-			<Link class="pr-2 !text-white" href="{base}/data-guide">Data Guide</Link>
-			<OutboundLink class="pr-2 !text-white" href="https://migrants-and-the-state.github.io/"
-				>M/S Project</OutboundLink
-			>
-			<OutboundLink class="pr-2 !text-white" href="https://github.com/migrants-and-the-state"
-				>GitHub</OutboundLink
-			>
-			<OutboundLink
-				class="pr-2 !text-white"
-				href="https://migrants-and-the-state.github.io/#contact">Contact</OutboundLink
-			>
+	<div class="mb-10 bg-slate-900 px-4 py-2 md:px-8 lg:px-28">
+		<nav class="flex w-full flex-row flex-wrap items-center justify-between gap-2 md:gap-8">
+			<div class="flex items-center justify-start gap-2 md:gap-8">
+				<Link class="pr-2 text-xs !text-white" href={base}>
+					<span class="text-lg font-bold">M/S Reading Room v1</span>
+				</Link>
+				<Link class="pr-2 !text-white" href="{base}/about">About + Credits</Link>
+				<Link class="pr-2 !text-white" href="{base}/data-guide">Data Guide</Link>
+			</div>
+			<div class="flex items-center justify-end">
+				<Link
+					target="_blank"
+					icon={ArrowUpRight}
+					class="pr-2 !text-white"
+					href="https://migrants-and-the-state.github.io/">M/S Project</Link
+				>
+				<Link
+					icon={ArrowUpRight}
+					target="_blank"
+					class="pr-2 !text-white"
+					href="https://github.com/migrants-and-the-state">GitHub</Link
+				>
+				<Link
+					icon={ArrowUpRight}
+					target="_blank"
+					class="pr-2 !text-white"
+					href="https://migrants-and-the-state.github.io/#contact">Contact</Link
+				>
+			</div>
 		</nav>
 	</div>
 </header>

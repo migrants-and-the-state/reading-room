@@ -1,10 +1,9 @@
 <script>
-	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
 	import { fields } from '$lib/fields';
 
 	import ButtonControls from './forms/ButtonControls.svelte';
-	import { Document as PageIcon } from 'carbon-icons-svelte';
+	import { DocumentBlank as PageIcon } from 'carbon-icons-svelte';
 	import {
 		Form,
 		FormGroup,
@@ -26,11 +25,10 @@
 
 <div class="max-w-[75ch] py-4">
 	<p class="py-2">
-		<PageIcon class="inline" size="20" /> <span class="font-bold">Pages</span> within an A-File may comprise
+		<PageIcon class="inline" size="20" /> <span class="font-bold">Pages</span> within an A-File may be
 		documents like official forms, photographs, correspondence, affidavits, identity documents, vital
-		records, interview transcripts, medical and employment records, and interagency communications.
+		records, interview transcripts, medical and employment records, or interagency communications.
 	</p>
-	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
 <Form scope="page" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>

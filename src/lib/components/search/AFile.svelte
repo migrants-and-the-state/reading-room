@@ -1,5 +1,4 @@
 <script>
-	import { base } from '$app/paths';
 	import { handleSubmit } from '$lib/search';
 	import { fields } from '$lib/fields';
 
@@ -34,10 +33,9 @@
 <div class="max-w-[75ch] py-4">
 	<p class="py-2">
 		<AFileIcon class="inline" size="20" /> <span class="font-bold">A-Files</span> are individual immigration
-		records, each identified by a unique registration number (A-Number). They contain all the documentation
+		records, each identified by a unique registration number (A-Number). They contain the documentation
 		of a person's interactions with immigration bureaucracies.
 	</p>
-	<p class="py-2">Read more in the <Link href="{base}/data-guide">Data Guide</Link>.</p>
 </div>
 
 <Form scope="afile" on:submit={handleSubmit}>
