@@ -86,9 +86,9 @@
 	}
 </script>
 
-<Breadcrumb noTrailingSlash class="mb-8">
+<Breadcrumb class="mb-8">
 	{#if localStorage.getItem('formReferrer')}
-		<BreadcrumbItem href={localStorage.getItem('formReferrer')}>Back to search</BreadcrumbItem>
+		<BreadcrumbItem href={localStorage.getItem('formReferrer')}>Home</BreadcrumbItem>
 	{:else}
 		<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 	{/if}

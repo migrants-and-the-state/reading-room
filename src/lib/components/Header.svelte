@@ -3,7 +3,7 @@
 	import { Link, OutboundLink } from 'carbon-components-svelte';
 </script>
 
-<header>
+<header class="sticky top-0 z-50">
 	<div class="mb-10 bg-slate-900 px-4 py-2 md:px-8 lg:px-36">
 		<nav class="flex flex-row flex-wrap gap-2 md:gap-8">
 			<Link class="pr-2 text-xs !text-white" href={base}>M/S Reading Room v1</Link>

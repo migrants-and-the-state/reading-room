@@ -27,7 +27,7 @@
 
 <div class="min-h-screen">
 	<Header />
-	<main class="mb-36 w-full px-4 pb-20 md:px-8 lg:px-36">
+	<main class="relative mb-36 w-full px-4 pb-20 md:px-8 lg:px-36">
 		{@render children()}
 	</main>
 </div>

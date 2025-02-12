@@ -43,11 +43,3 @@
 		</TabContent>
 	</svelte:fragment>
 </Tabs>
-
-<!-- <div>
-	<ul>
-		{#each results as result}
-			<li>{result}</li>
-		{/each}
-	</ul>
-</div> -->

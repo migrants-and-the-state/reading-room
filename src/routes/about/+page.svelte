@@ -90,7 +90,7 @@
 	];
 </script>
 
-<Breadcrumb noTrailingSlash class="mb-8">
+<Breadcrumb class="mb-8">
 	<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 </Breadcrumb>
 

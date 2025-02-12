@@ -62,6 +62,7 @@
 			id: 'mirador',
 			window: {
 				imageToolsEnabled: true,
+				hideWindowTitle: true,
 				allowClose: false,
 				allowFullscreen: true,
 				allowMaximize: false,
@@ -106,11 +107,15 @@
 </script>
 
 <Breadcrumb noTrailingSlash class="mb-8">
-	{#if localStorage.getItem('resultReferrer')}
-		<BreadcrumbItem href={localStorage.getItem('resultReferrer')}>Back to results</BreadcrumbItem>
+	{#if localStorage.getItem('formReferrer')}
+		<BreadcrumbItem href={localStorage.getItem('formReferrer')}>Home</BreadcrumbItem>
 	{:else}
 		<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 	{/if}
+	{#if localStorage.getItem('resultReferrer')}
+		<BreadcrumbItem href={localStorage.getItem('resultReferrer')}>Search Results</BreadcrumbItem>
+	{/if}
+	<BreadcrumbItem isCurrentPage>{afile.id}</BreadcrumbItem>
 </Breadcrumb>
 
 <h1 class="mb-8">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
