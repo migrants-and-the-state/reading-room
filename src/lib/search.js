@@ -49,7 +49,7 @@ export async function search(scope, searchParams) {
 		.then((response) => response.json())
 		.then((data) => {
 			miniSearch.addAll(data);
-			let options = { prefix: true, combineWith: 'AND', fuzzy: 0.2 };
+			let options = { prefix: true, combineWith: 'AND' };
 			if (Object.keys(limitParams).length > 0) {
 				options.filter = (result) => {
 					let res = Object.entries(limitParams).every(([key, value]) => {
@@ -75,9 +75,11 @@ export function handleSubmit(event) {
 	localStorage.setItem('formReferrer', window.location.href);
 	const scope = event.target.attributes['scope'].value;
 	const data = new FormData(event.target);
-	const cleanData = {};
+	const cleanData = {
+		query: data.get('query')
+	};
 	data.forEach((value, key) => {
-		if (!key.startsWith('limit') || value !== 'any') {
+		if (value !== 'any' && value !== '') {
 			cleanData[key] = value;
 		}
 	});

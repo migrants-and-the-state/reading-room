@@ -1,6 +1,13 @@
 <script>
 	import { base } from '$app/paths';
-	import { ClickableTile, Loading, Pagination } from 'carbon-components-svelte';
+	import {
+		Breadcrumb,
+		BreadcrumbItem,
+		ClickableTile,
+		Loading,
+		Pagination,
+		SkeletonPlaceholder
+	} from 'carbon-components-svelte';
 	import { search } from '$lib/search';
 
 	export let data;
@@ -47,7 +54,7 @@
 		return {
 			id: result.id,
 			label: `${result.anumber} Page ${page_number}`,
-			thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${result.id}/square/300,/0/default.jpg`,
+			thumbnail: `https://dctn4zjpwgdwdiiy5odjv7o2se0bqgjb.lambda-url.us-east-1.on.aws/iiif/3/og-2023-kc-nara_${result.id}/full/450,/0/default.jpg`,
 			details: details,
 			full_text: full_text,
 			url: `${base}/view/afile/${result.id.replace('_', '/')}?tab=page`,
@@ -73,20 +80,28 @@
 		currentPage = page;
 		items = getPaginatedItems(page);
 	}
+	function handleImageLoad(event) {
+		event.target.style.display = 'block';
+		event.target.previousElementSibling.style.display = 'none';
+	}
 </script>
 
-{#if localStorage.getItem('formReferrer')}
-	<a href={localStorage.getItem('formReferrer')}>Back to search</a>
-{/if}
+<Breadcrumb noTrailingSlash class="mb-8">
+	{#if localStorage.getItem('formReferrer')}
+		<BreadcrumbItem href={localStorage.getItem('formReferrer')}>Back to search</BreadcrumbItem>
+	{:else}
+		<BreadcrumbItem href={base}>Home</BreadcrumbItem>
+	{/if}
+</Breadcrumb>
 
 {#await searchPromise}
-	<h1 class="py-4">Search Results</h1>
+	<h1 class="mb-8">Results</h1>
 	<Loading />
 {:then results}
 	{#await getPaginatedItems(currentPage)}
 		<Loading />
 	{:then items}
-		<h1 class="py-4">Search Results ({results.length})</h1>
+		<h1 class="mb-8">Results ({results.length})</h1>
 		<Pagination
 			class="mb-6"
 			bind:page={currentPage}
@@ -99,21 +114,28 @@
 			{#each items as item}
 				<ClickableTile
 					href={item.url}
-					class="rounded-lg border p-4 shadow transition-shadow duration-200 hover:shadow-lg"
+					class="rounded-lg border p-0 shadow transition-shadow duration-200 hover:shadow-lg md:p-4"
 				>
-					<div class="flex items-center">
-						<img
-							src={item.thumbnail}
-							alt={item.label}
-							class="mr-4 h-40 w-36 rounded object-cover"
-						/>
-						<div>
-							<div class="text-lg font-semibold">{item.label}</div>
-							<div class="text-sm text-gray-500">{item.pageInfo}</div>
-							<div class="my-2 text-xs text-gray-700">
+					<div class="flex items-start gap-4 md:gap-8">
+						<div class="basis-1/3 md:basis-1/6">
+							<SkeletonPlaceholder class="rounded object-cover" style="width:100%;height:10rem;" />
+							<img
+								src={item.thumbnail}
+								alt={item.label}
+								class="max-h-40 w-full rounded object-cover"
+								style="display: none"
+								on:load={handleImageLoad}
+							/>
+						</div>
+						<div class="basis-2/3 md:basis-5/6">
+							<div class="max-w-prose font-semibold md:text-lg">{item.label}</div>
+							<div class="max-w-prose text-sm text-gray-500">{item.pageInfo}</div>
+							<div class="my-2 max-w-prose text-xs text-gray-700">
 								{item.details.substring(0, 200)}
 							</div>
-							<div class="my-2 font-mono text-xs text-gray-700">{item.full_text}</div>
+							<div class="my-2 max-w-prose font-mono text-[.7em] text-gray-700 md:text-xs">
+								{item.full_text}
+							</div>
 						</div>
 					</div>
 				</ClickableTile>

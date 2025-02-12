@@ -31,8 +31,7 @@
 </script>
 
 <Breadcrumb noTrailingSlash class="mb-8">
-	<BreadcrumbItem href={base}>M/S Corpus UI v1-Sample</BreadcrumbItem>
-	<BreadcrumbItem href="/data-guide" isCurrentPage>Data Guide</BreadcrumbItem>
+	<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 </Breadcrumb>
 
 <div class="max-w-[85ch]">

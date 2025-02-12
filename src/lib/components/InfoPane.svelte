@@ -24,9 +24,9 @@
 	};
 </script>
 
-<div class="mb-6 flex w-full flex-wrap md:flex-nowrap md:gap-10">
+<div class="mb-8 flex w-full flex-wrap gap-4 md:flex-nowrap md:gap-10">
 	<div class="my-6 basis-full md:basis-1/2">
-		<p class="py-2">
+		<p class="py-2 text-sm md:text-base">
 			<a href="https://migrants-and-the-state.github.io/" target="_blank"
 				>Migrants and the State (M/S)</a
 			>
@@ -35,7 +35,7 @@
 			prototype is designed to gather feedback on our current methods of enhancing A-file
 			searchability and solicit ideas for future project development.
 		</p>
-		<p class="py-2">
+		<p class="py-2 text-sm md:text-base">
 			Below you can search for entire <span class="font-semibold">A-Files</span> or specific
 			<span class="font-semibold">Pages</span>
 			within them using both NARA-cataloged and experimentally-extracted metadata. Some pages have been
@@ -46,14 +46,14 @@
 			<a href="{base}/data-guide">Data Guide</a>.
 		</p>
 	</div>
-	<div class="basis-full md:basis-1/2">
+	<div class="my-6 basis-full md:basis-1/2">
 		<div class="mb-12 max-w-prose">
 			<StructuredList condensed class="!mb-1">
 				<StructuredListHead>
 					<StructuredListRow head>
 						<StructuredListCell head>Statistics</StructuredListCell>
-						<StructuredListCell head>This v1-Sample</StructuredListCell>
-						<StructuredListCell head>Full Corpus (Ongoing)</StructuredListCell>
+						<StructuredListCell head>M/S Reading Room v1</StructuredListCell>
+						<StructuredListCell head>M/S Full Corpus (Ongoing)</StructuredListCell>
 					</StructuredListRow>
 				</StructuredListHead>
 				<StructuredListBody>

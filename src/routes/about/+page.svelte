@@ -91,8 +91,7 @@
 </script>
 
 <Breadcrumb noTrailingSlash class="mb-8">
-	<BreadcrumbItem href={base}>M/S Corpus UI v1-Sample</BreadcrumbItem>
-	<BreadcrumbItem href="/about" isCurrentPage>About + Credits</BreadcrumbItem>
+	<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 </Breadcrumb>
 
 <h1 class="mb-8">About + Credits</h1>
@@ -127,12 +126,12 @@
 		necessarily represent those of the National Endowment for the Humanities.
 	</p>
 
-	<div class="my-12 flex max-w-[80%] items-center gap-12">
+	<div class="my-12 flex max-w-[60%] items-center gap-12">
 		<div class="basis-1/2">
 			<img
-				class="max-w-full invert"
+				class="max-w-full"
 				alt="National Endowment for the Humanities Logo"
-				src="https://migrants-and-the-state.github.io/images/neh.png"
+				src="https://www.neh.gov/sites/default/files/styles/medium/public/2024-08/NEH%20Logo%20-%20Full%20Color%20-%20Vertical.jpg"
 			/>
 		</div>
 		<div class="basis-1/2">

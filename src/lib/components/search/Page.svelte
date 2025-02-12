@@ -35,11 +35,11 @@
 <Form scope="page" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>
 	<FormGroup legendText="Fields">
-		<div class="flex flex-row justify-start">
-			<div class="basis-1/3">
+		<div class="flex flex-row flex-wrap justify-start">
+			<div class="basis-full md:basis-1/3">
 				<MultiSelect
 					name="fields"
-					label="Select fields"
+					label="Select"
 					selectionFeedback="fixed"
 					itemToInput={(item) => ({ name: 'selectedFields', value: item.id })}
 					bind:selectedIds={selectedFields}
@@ -48,7 +48,7 @@
 					items={fields['page'].filter((field) => field.search)}
 				/>
 			</div>
-			<div class="basis-2/3">
+			<div class="basis-full md:basis-2/3">
 				<TextInput
 					name="query"
 					placeholder="Search..."
@@ -68,19 +68,23 @@
 			name="limit_fields.doctype.ms_doctype_v1"
 			selected="any"
 		>
-			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Form" value="form" />
-			<RadioButton labelText="Letter" value="letter" />
-			<RadioButton labelText="Photograph" value="photograph" />
-			<RadioButton labelText="Misc" value="misc" />
+			<div class="flex flex-row flex-wrap justify-start gap-2">
+				<RadioButton labelText="Any" value="any" />
+				<RadioButton labelText="Form" value="form" />
+				<RadioButton labelText="Letter" value="letter" />
+				<RadioButton labelText="Photograph" value="photograph" />
+				<RadioButton labelText="Misc" value="misc" />
+			</div>
 		</RadioButtonGroup>
 	</FormGroup>
 
 	<FormGroup>
 		<RadioButtonGroup legendText="Sex (LLM)" name="limit_fields.sex.ms_sex_llm_v1" selected="any">
-			<RadioButton labelText="Any" value="any" />
-			<RadioButton labelText="Female" value="female" />
-			<RadioButton labelText="Male" value="male" />
+			<div class="flex flex-row flex-wrap justify-start gap-2">
+				<RadioButton labelText="Any" value="any" />
+				<RadioButton labelText="Female" value="female" />
+				<RadioButton labelText="Male" value="male" />
+			</div>
 		</RadioButtonGroup>
 	</FormGroup>
 

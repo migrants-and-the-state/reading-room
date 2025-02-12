@@ -30,11 +30,11 @@
 <Form scope="g325a" on:submit={handleSubmit}>
 	<div class="py-4 font-bold">Search Within</div>
 	<FormGroup legendText="Fields">
-		<div class="flex flex-row justify-start">
-			<div class="basis-1/3">
+		<div class="flex flex-row flex-wrap justify-start">
+			<div class="basis-full md:basis-1/3">
 				<MultiSelect
 					name="fields"
-					label="Select fields"
+					label="Select"
 					selectionFeedback="fixed"
 					itemToInput={(item) => ({ name: 'selectedFields', value: item.id })}
 					bind:selectedIds={selectedFields}
@@ -43,7 +43,7 @@
 					items={fields['g325a'].filter((field) => field.search)}
 				/>
 			</div>
-			<div class="basis-2/3">
+			<div class="basis-full md:basis-2/3">
 				<TextInput
 					name="query"
 					placeholder="Search..."
