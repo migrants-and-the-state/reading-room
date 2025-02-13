@@ -11,7 +11,7 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: '/corpus-ui-sample'
+			base: '/reading-room-v1'
 		},
 		prerender: {
 			concurrency: 1,

@@ -1,6 +1,6 @@
 {
-	"name": "ms-corpus-ui-sample",
-	"version": "0.0.1",
+	"name": "reading-room-v1",
+	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
