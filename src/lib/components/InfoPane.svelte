@@ -40,10 +40,7 @@
 			within them using both NARA-cataloged and experimentally-extracted metadata. Some pages have
 			been machine-identified as <strong>G-325 Forms</strong> or
 			<strong>Naturalization Certificates</strong>; these special pages include additional metadata
-			fields created by our project team.
-		</p>
-		<p class="py-2 text-sm md:text-base">
-			Prior to using the site, please read about our data curation choices and machine learning
+			fields created by our project team. Prior to using the site, please read about our data curation choices and machine learning
 			model training in the <Link class="text-sm md:text-base" href="{base}/data-guide"
 				>Data Guide</Link
 			>.
@@ -55,7 +52,7 @@
 				<StructuredListHead>
 					<StructuredListRow head>
 						<StructuredListCell head>Statistics</StructuredListCell>
-						<StructuredListCell head>M/S Reading Room v1</StructuredListCell>
+						<StructuredListCell head>M/S Reading Room</StructuredListCell>
 						<StructuredListCell head>M/S Full Corpus (Ongoing)</StructuredListCell>
 					</StructuredListRow>
 				</StructuredListHead>

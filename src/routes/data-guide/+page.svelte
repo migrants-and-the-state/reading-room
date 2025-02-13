@@ -1,32 +1,9 @@
 <script>
 	import { base } from '$app/paths';
-	import { Breadcrumb, BreadcrumbItem, Link, Tag, Tile } from 'carbon-components-svelte';
+	import { Breadcrumb, BreadcrumbItem, Link, OutboundLink, Tag, Tile } from 'carbon-components-svelte';
 
 	const ms_provenance_tags = {
-		ms_ocr_v1:
-			'OCR (Optical Character Recognition) processes images of original A-File hard-copy scans by recognizing text in the images of documents and making it machine readable. Once characters are recognized as such, it becomes key-word searchable and the machine-learning models are then able to read, contextualize, and perform other tasks in relation to the text.',
-		ms_doctype_v1:
-			'Document types are derrived through use of a Convolutional Neural Network (CNN), a type of artificial intelligence that helps computers understand images by breaking them into small parts to find patterns like shapes, colors, or edges, this model identifies the difference between photos, long-form text documents like letters or affidavits, and government forms with repeated structured data and patters.',
-		ms_sex_llm_v1:
-			'This data is extracted by the LLM from the individual pages of A-Files, typically from forms where a biological sex designation (e.g. Male / Female) is required. The LLM then aggregates the total number of identifications for biological sex and predicts the sex of the A-File holder.',
-		ms_form_title_llm_v1:
-			'A Large Language Model (LLM), a type of artificial intelligence that understands text and language, analyzes any image identified as a form by the CNN model and extracts the form number and title which normally appear in the same locations across the various government form types. The field is then populated with a list of all of the form titles (which typically appear along with the form number) that appear in the file.',
-		ms_countries_nlp_v1:
-			'To extract country names from an image, the (OCR) software first converts the text in the images into machine-readable text. NLP then analyzes the extracted text to understand its structure and meaning, identifying patterns and extracting specific information like names or locations. Named Entity Recognition (NER), is a component of NLP trained on large datasets of country names and related linguistic features. NER uses context clues, grammar, and patterns to distinguish country names from other text by recognizing patterns like capitalization, proximity to keywords (e.g., "located in").  Once country names have been identified, they are compiled in thies field as a full list of all the country names identified on the page.',
-		ms_years_nlp_v1:
-			'The NLP model examines and parses text using Named Entity Recognition (NER) that relies on pattern identification (e.g. grammar, context, and repeated formulations like Date of Birth:____ or Date of Entry:____). The NLP identifies and extracts every instance where a date with a year appears on a page. The years are then compiled into this field as a list of all the years recorded on the page.',
-		nationality_llm_v1: '',
-		reason_llm_v1: '',
-		occupation_llm_v1:
-			'After the CNN model identies the an image as a form, the LLM extracts the form number and title from the OCR text. If the LLM identifies a form G325, it is then trained to examine that form spacially, and extract the occupation data listed by the A-File holder in a specific location on the form.',
-		complexion_llm_v1:
-			'After the CNN model identies the an image as a form, the LLM extracts the form number and title from the OCR text. If the LLM identifies a form Certificate of Naturalization, it is then trained to examine that form spacially, and extract the biometric complexion data which is consistently located in a certain spot on the form.',
-		marital_status_llm_v1:
-			'After the CNN model identies the an image as a form, the LLM extracts the form number and title from the OCR text. If the LLM identifies a form Certificate of Naturalization, it is then trained to examine that form spacially, and extract the mertial status data which is consistently located in a certain spot on the form.',
-		residence_naturlization_llm_v1:
-			'After the CNN model identies the an image as a form, the LLM extracts the form number and title from the OCR text. If the LLM identifies a form Certificate of Naturalization, it is then trained to examine that form spacially, and extract the residence at naturalization data which is consistently located in a certain spot on the form.',
-		year_naturalization_llm_v1:
-			'After the CNN model identies the an image as a form, the LLM extracts the form number and title from the OCR text. If the LLM identifies a form Certificate of Naturalization, it is then trained to examine that form spacially, and extract the date of naturalization data which is consistently located in a certain spot on the form.'
+		
 	};
 </script>
 
@@ -42,9 +19,9 @@
 			<li class="pt-2">
 				<a href="#introduction">Introduction</a>
 				<ul class="list-inside indent-4">
-					<li class="pt-2"><a href="#sources">Metadata Sources and Training Set</a></li>
-					<li class="pt-2"><a href="#model-training">Model Training</a></li>
-					<li class="pt-2"><a href="#metadata-note">Metadata on Sex and Race</a></li>
+					<li class="pt-2"><a href="#training-set">Training Set</a></li>
+					<li class="pt-2"><a href="#metadata-sources">Metadata Sources</a></li>
+					<li class="pt-2"><a href="#metadata-note">Metadata on Sex and Complexion</a></li>
 				</ul>
 			</li>
 			<li class="pt-2"><a href="#methods-glossary">Methods Glossary</a></li>
@@ -54,94 +31,43 @@
 
 	<h2 id="introduction" class="my-4">Introduction</h2>
 
-	<h3 id="sources" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
-		Metadata Sources and Training Set
+	<h3 id="training-set" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
+		Training Set
 	</h3>
 	<p class="py-2">
-		This prototype allows users to search the test set of A-files using metadata derived from two
-		sources: the publicly available U.S. National Archives (NARA) catalog metadata and metadata
-		based on information extracted by our machine learning models.
+		This M/S Reading Room prototype allows users to search the test set of A-Files using metadata derived from two sources: the publicly available U.S. National Archives (NARA) catalog metadata, and metadata based on information extracted by our machine learning models. 
 	</p>
 	<p class="py-2">
-		The metadata available in the NARA catalog for A-files varies; the process of transferring files
-		that have entered the public domain from the federal agency governing immigration (INS or USCIS)
-		to NARA takes place every five years. At the time of each of these transfers, the agencies
-		determine which metadata fields attached to the files will be transferred, resulting in
-		variability in metadata across the entire NARA catalog (approximately 1.6 million A-files). The
-		basic metadata always available from the NARA catalog for each A-file includes date of birth,
-		first name, last name, and country of birth. Additional metadata from the NARA catalog can
-		include sex, date of entry, port of entry, date file opened, father’s name, mother’s name, date
-		and location of naturalization, naturalization certificate number, and class of admission.
-		Reference tables are available to identify the agency codes used for countries, ports of entry,
-		and naturalization locations.
-	</p>
-	<p class="py-2">
-		The metadata created by the Migrants and the State project has been derived using a variety of
-		machine learning methods deployed on a training set of XXX files/XXX pages of A-files. Most of
-		the training set is made up of files ordered from the Kansas City regional office of NARA, where
-		the vast majority of public domain A-files are held. While these A-files are in the public
-		domain, NARA reviews each file for third-party privacy violations and redacts information as
-		necessary. NARA levies a processing charge of either $27 or $40 (depending on the file holder’s
-		year of birth) for each A-file ordered online. Faced with a catalog of a million files and a
-		budget for 550 files, we made selections designed to achieve regional and temporal breadth, with
-		additional files for two countries of origin (Mexico and Haiti) to enable greater depth of
-		research. The remainder of the training set comes from A-files made public by NARA’s San
-		Francisco regional office and a relatively small number of A-files obtained from USCIS via that
-		agency’s Electronic Reading Room and our Freedom of Information Act (FOIA) requests for the
-		A-files of verifiably deceased individuals. The USCIS files are being used for model training
-		purposes only and are not included in this prototype.
+		Most of the training set is made up of files ordered from the Kansas City regional office of NARA, where the vast majority of public domain A-Files are held. While these A-files are in the public domain (A-files enter the public domain when the birth year of the file holder is at least 100 years in the past), NARA reviews each file for third-party privacy violations and redacts information as necessary. NARA levies a processing  fee of either $27 or $40 (depending on the file holder’s year of birth) for each A-File ordered online. Faced with a catalog of a million files and a budget for 550 files, we made selections designed to achieve regional and temporal breadth, with additional files for two countries of origin (Mexico and Haiti) to enable greater depth of research. The remainder of the training set comes from <OutboundLink size="lg" href="https://catalog.archives.gov/search?typeOfMaterials=Textual%20Records&availableOnline=true&recordGroupNumber=566">A-Files made public by NARA’s San Francisco regional office</OutboundLink> and a relatively small number of A-Files obtained from USCIS via that agency’s Electronic Reading Room and our Freedom of Information Act (FOIA) requests for the A-Files of verifiably deceased individuals. The USCIS files are being used for model training purposes only and are not included in this prototype.
 	</p>
 
-	<h3 id="model-training" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
-		Model Training
+	<h3 id="metadata-sources" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
+		Metadata Sources
 	</h3>
 	<p class="py-2">
-		The model training work has involved two main stages: categorizing documents and extracting
-		information from them. In general, our approach has prioritized training models to address a
-		larger number of data identification tasks rather than attempting fewer tasks and refining the
-		models to achieve peak accuracy. We started by developing a model (using a convolutional neural
-		network approach) to create image embeddings for every page in the training set. Members of the
-		team reviewed each page to identify machine-generated errors and used that information to
-		improve the model’s performance to at least 85% accuracy in distinguishing among forms, letters,
-		photographs, and other kinds of materials (which we labelled “miscellaneous”).
+		The <OutboundLink size="lg" href="https://docs.google.com/document/u/0/d/1lnvN77_CaBnOzg9HBF-jtWTwJlisgKoD3E1RKHwQByQ/">metadata available in the NARA catalog</OutboundLink> for A-Files varies.  Every five years, files that have entered the public domain are transferred from the federal agency governing immigration (INS or USCIS) to NARA. At the time of  the transfer, the agencies determine which metadata fields attached to the files will be transferred, resulting in variability in metadata across the entire NARA catalog (approximately 1.6 million A-Files). The basic metadata always available from the NARA catalog for each A-File includes date of birth, first name, last name, and country of birth. Additional metadata from the NARA catalog can include sex, date of entry, port of entry, date file opened, father’s name, mother’s name, date and location of naturalization, naturalization certificate number, and class of admission. Reference tables are available to identify the agency codes used for <OutboundLink size="lg" href="https://docs.google.com/spreadsheets/d/1LfmR0QLmalz_6rJT_37QjRyFggsCXXOl5e24nOuw6XI/">countries</OutboundLink>, <OutboundLink size="lg" href="https://docs.google.com/spreadsheets/d/1Zhs2RUElDE96EJmXGOCogfUdukj6mpbhWwsd6e2Sb34/">ports of entry</OutboundLink>, and <OutboundLink size="lg" href="https://docs.google.com/spreadsheets/d/1DH_0Wf0ALAB72D-v1Gu3sl7Iv_d6doSMv5-jj_r5Crc/">naturalization locations</OutboundLink>. 
 	</p>
 	<p class="py-2">
-		While the model identifying document types relied on the visual information on each A-file page,
-		the ability to extract text information required the use of optical character recognition (OCR)
-		to create a machine readable text version of the training set. This text allows us to perform
-		general text extraction (identifying the presence of text in the body of a document, similar to
-		a keyword search) as well as extracting information from a specific location within a document
-		(for example, a form title or answer to a question). We used existing Named Entity Recognition
-		(NER) techniques to extract information about the years and country names included in each
-		A-file. For document-specific metadata extraction, we chose the G-325 and Certificate of
-		Naturalization forms as our test cases for developing models (using a large language model
-		approach) that can identify a form type and extract specific information from it. The
-		information the models can extract from these forms (employment history, residential addresses,
-		and biographical details) is valuable in its own right, but we are also attempting to develop a
-		scalable technique that can later be applied to other forms.
+		The metadata created by the <span class="italic">Migrants and the State</span> project has been derived using a variety of machine learning methods deployed on a training set of 751 files comprising 37,396 individual pages. The model training  involved two main stages: categorizing documents and extracting information from them. In general, our approach has prioritized training models to address a larger number of data identification tasks rather than attempting fewer tasks and refining the models to achieve peak accuracy. We started by developing a model (using <span class="font-bold text-red-600">Deep Neural Networks</span>) to create image embeddings for every page in the training set. Members of the team reviewed each page to identify machine-generated errors and used that information to improve the model’s performance in distinguishing among <Link size="lg" href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=form">forms</Link>, <Link size="lg" href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=letter">letters</Link>, <Link size="lg" href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=photograph">photographs</Link>, and other kinds of materials (which we labelled <Link size="lg" href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=misc">“misc”</Link>). 
+	</p>
+	<p class="py-2">
+		While the model identifying document types relied on the visual information on each A-File page, the ability to extract text information required the use of <span class="font-bold text-red-600">Optical Character Recognition (OCR)</span> to create a machine-readable text version of the training set. This text allows us to perform general text extraction (identifying the presence of text in the body of a document, similar to a keyword search) as well as extracting information from a specific location within a document (for example, a form title or answer to a question). 
+	</p>
+	<p class="py-2">
+		We used existing <span class="font-bold text-red-600">Named Entity Recognition (NER)</span> techniques to extract information about the years and country names included in each A-File. For document-specific metadata extraction, we chose the G-325 and Certificate of Naturalization forms as our test cases for training models (using a Large Language Model approach) that can identify a form type and extract specific information from it. The information the models can extract from these forms (employment history, residential addresses, and biographical details) is valuable in its own right, but we are also attempting to develop a scalable technique that can later be applied to other forms.  
 	</p>
 
 	<h3 id="metadata-note" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
-		Metadata on Sex and Race
+		Metadata on Sex and Complexion
 	</h3>
 	<p class="py-2">
-		The NARA catalogue metadata, compiled as a limited subset of the metadata created by INS /
-		USCIS, frequently lacks entries corresponding to the field designating biological sex. But
-		information on biological sex, along with other biometric data required by government forms,
-		appears frequently across documents in A-Files. We created a model to extract this data from the
-		individual pages of A-Files, typically from forms where a biological sex designation (e.g. Male
-		/ Female) is required. The model then aggregates the total number of identifications for
-		biological sex and predicts the sex of the A-File holder.
+		The NARA catalog metadata, compiled as a limited subset of the metadata created by INS / USCIS, often lacks entries corresponding to the field designating biological sex. But information on biological sex, along with other biometric data required by government forms, appears frequently across documents in A-Files. We used an open-source <span class="font-bold text-red-600">Large Language Model (LLM)</span> to extract this data from the individual pages of A-Files, typically from forms where a biological sex designation (e.g.  Male / Female) is required. The model then aggregates the total number of identifications for biological sex and predicts the sex of the A-File holder. The LLM derived metadata is not 100% accurate, and the prototype allows you to compare NARA’s metadata for sex with the metadata extracted by the M/S trained LLM. 
 	</p>
 	<p class="py-2">
-		Extracting metadata to reflect historical government categories and bureaucratic norms around
-		biological sex is relatively straightforward, given the binary categories then in use of male
-		and female. Extracting metadata about racial categorization is more complex. This information
-		often takes the form of indications of a file holder’s complexion, for which migrants and
-		immigration officers used a variety of adjectives, many of them offensive to contemporary
-		sensibilities. While our models extract that information from the G325 and Certificate of
-		Naturalization forms, we have not yet created a controlled vocabulary or other way of searching
-		for it. We look forward to receiving feedback about how best to handle this issue.
+		Extracting metadata to reflect historical government categories and bureaucratic norms around biological sex is relatively straightforward, given the binary categories of male and female then in use. Extracting metadata about ethno-racial categorization is more complex. This information often takes the form of indications of a file holder’s complexion, for which migrants and immigration officers used a variety of adjectives, many of them offensive to contemporary sensibilities. Currently, our models extract complexion data only from the Certificate of Naturalization forms. From the subset of data available in this prototype, complexion was recorded directly in these documents as <Link size="lg" href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=medium">medium</Link>, <Link size="lg" href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=dark">dark</Link>, or <Link size="lg" href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=fair">fair</Link>, if at all. Our models attempt to record these terms exactly or add an <Link size="lg" href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=n.a">N.A</Link> value if they do not find a complexion value on the page. 
+	</p>
+	<p class="py-2">
+		We crucially do not try to infer or profile a value through other cues in the A-File. Our aim is to organize the specific terms used by immigration bureaucracies over time as objects of study without intervention or curation. Nevertheless, please note that these metadata values, like others generated by machine learning in our corpus, are not 100% accurate. Additionally, more terms will likely emerge as we incorporate A-Files from broader time periods. For these reasons, we plan to solicit and incorporate user feedback to improve how we render this data with care. 
 	</p>
 </div>
 

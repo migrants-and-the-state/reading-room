@@ -1,6 +1,6 @@
 <script>
 	import { base } from '$app/paths';
-	import { Breadcrumb, BreadcrumbItem, Link } from 'carbon-components-svelte';
+	import { Breadcrumb, BreadcrumbItem, Link, OutboundLink } from 'carbon-components-svelte';
 
 	const directors = [
 		{
@@ -117,12 +117,12 @@
 		training set of 751 files totalling 37,396 pages to test and refine our machine learning models.
 	</p>
 	<p class="py-2">
-		Migrants and the State received early stage funding from the NYU Bennett-Polonsky Humanities Lab
+		<span class="italic">Migrants and the State</span> received early stage funding from the NYU Bennett-Polonsky Humanities Lab
 		program, NYU Center for the Humanities, and the NYU Office of the Provost Humanities Mega-Grants
 		Initiative Seed Fund. The M/S Reading Room digital prototype has been made possible in part by a
-		grant from the <Link size="lg" href="http://www.neh.gov" target="_blank"
-			>National Endowment for the Humanities</Link
-		> Digital Humanities Advancement Grant program: Democracy demands wisdom.
+		grant from the <OutboundLink size="lg" href="http://www.neh.gov"
+			>National Endowment for the Humanities</OutboundLink
+		> Digital Humanities Advancement Grant program.
 	</p>
 	<p class="py-2">
 		Any views, findings, conclusions, or recommendations expressed in this web resource do not
@@ -147,30 +147,29 @@
 	</div>
 
 	<h2 id="project-directors" class="my-4">Project Directors</h2>
-	<ul class="py-2">
+	<ul class="py-2 text-base">
 		{#each directors as director}
 			<li class="py-2">
-				<span class="text-lg font-bold">{director.name}</span><br />
+				<span class="font-bold">{director.name}</span><br />
 				{director.title}
 			</li>
 		{/each}
 	</ul>
 
 	<h2 id="project-collaborators" class="my-4">Project Collaborators</h2>
-	<ul class="py-2">
+	<ul class="py-2 text-base">
 		{#each collaborators as collaborator}
 			<li class="py-2">
-				<span class="text-lg font-bold">{collaborator.role}</span> <br />
-				{collaborator.value}
+				<span class="font-bold">{collaborator.role}</span>: {collaborator.value}
 			</li>
 		{/each}
 	</ul>
 
 	<h2 id="project-advisors" class="my-4">Project Advisors</h2>
-	<ul class="py-2">
+	<ul class="py-2 text-base">
 		{#each advisors as collaborator}
 			<li class="py-2">
-				<span class="text-lg font-bold">{collaborator.name}</span><br />
+				<span class="font-bold">{collaborator.name}</span><br />
 				{collaborator.title}
 			</li>
 		{/each}
@@ -180,7 +179,7 @@
 	<p class="py-2">
 		Special thanks to Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra,
 		Calista LaMotte, Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach,
-		Maddalena Marinari, Adam Goodman, Anna Law, Benjamin Berman-Gladstone, Bita Mousavi, Barbara
+		Benjamin Berman-Gladstone, Bita Mousavi, Barbara
 		Perez Curiel, Sarah Sklaw, Alexia Orengo-Green, Jason Ahlenius, and Alec Ferretti.
 	</p>
 </div>

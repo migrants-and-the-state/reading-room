@@ -11,7 +11,7 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: '/reading-room-v1'
+			base: '/reading-room'
 		},
 		prerender: {
 			concurrency: 1,

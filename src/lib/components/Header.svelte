@@ -1,7 +1,6 @@
 <script>
 	import { base } from '$app/paths';
-	import { Link } from 'carbon-components-svelte';
-	import ArrowUpRight from 'carbon-icons-svelte/lib/ArrowUpRight.svelte';
+	import { Link, OutboundLink } from 'carbon-components-svelte';
 </script>
 
 <header class="sticky top-0 z-50">
@@ -9,29 +8,23 @@
 		<nav class="flex w-full flex-row flex-wrap items-center justify-between gap-2 md:gap-8">
 			<div class="flex items-center justify-start gap-2 md:gap-8">
 				<Link class="pr-2 text-xs !text-white" href={base}>
-					<span class="text-lg font-bold">M/S Reading Room v1</span>
+					<span class="text-lg font-bold">M/S Reading Room</span>
 				</Link>
 				<Link class="pr-2 !text-white" href="{base}/about">About + Credits</Link>
 				<Link class="pr-2 !text-white" href="{base}/data-guide">Data Guide</Link>
 			</div>
 			<div class="flex items-center justify-end">
-				<Link
-					target="_blank"
-					icon={ArrowUpRight}
+				<OutboundLink
 					class="pr-2 !text-white"
-					href="https://migrants-and-the-state.github.io/">M/S Project</Link
+					href="https://migrants-and-the-state.github.io/">M/S Project</OutboundLink
 				>
-				<Link
-					icon={ArrowUpRight}
-					target="_blank"
+				<OutboundLink
 					class="pr-2 !text-white"
-					href="https://github.com/migrants-and-the-state">GitHub</Link
+					href="https://github.com/migrants-and-the-state">GitHub</OutboundLink
 				>
-				<Link
-					icon={ArrowUpRight}
-					target="_blank"
+				<OutboundLink
 					class="pr-2 !text-white"
-					href="https://migrants-and-the-state.github.io/#contact">Contact</Link
+					href="https://migrants-and-the-state.github.io/#contact">Contact</OutboundLink
 				>
 			</div>
 		</nav>
