@@ -1,9 +1,10 @@
 {
 	"name": "reading-room",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
+		"timestamp": "node timestamp",
 		"build": "vite build",
 		"preview": "vite preview",
 		"format": "prettier --write .",
