@@ -79,7 +79,7 @@ export const methods_glossary = [
 
 export const ms_provenance_tags = {
 	ms_sex_llm_v1:
-		'LLM data extracted from individual pages is then aggregated to predicted the sex of the A-File holder',
+		'An LLM extracts sex information found on individual pages. Those values are also aggregated to predict the sex of the A-File holder',
 	ms_form_titles_llm_v1:
 		'Identified by the LLM, this is a full list of every form number and corresponding title within the entire A-File',
 	ms_countries_nlp_v1:

@@ -208,6 +208,9 @@
 </div>
 
 <h2 id="tags" class="py-4">Data Provenance Tags</h2>
+<p class="pt-2 pb-6 max-w-[85ch]">
+	When exploring A-Files in the M/S Reading Room prototype, you'll see the following "data provenance tags" next to metadata fields by the A-File viewer. Clicking one will take you to the corresponding tag below, where you will find context for the source of that data. Definitions for terms like "LLM", "NLP", and "OCR" can be found above.
+</p>
 <div class="w-full">
 	<div class="flex gap-6 py-4">
 		<div class="min-w-56">
