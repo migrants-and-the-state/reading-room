@@ -2,3 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import 'carbon-components-svelte/css/g10';
+
+.bx--link__icon {
+	margin-left: 0.25rem;
+}

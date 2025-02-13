@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
-	import { Link, OutboundLink } from 'carbon-components-svelte';
+	import { Link } from 'carbon-components-svelte';
+	import OutboundLink from '$lib/components/links/OutboundLink.svelte';
 </script>
 
 <header class="sticky top-0 z-50">

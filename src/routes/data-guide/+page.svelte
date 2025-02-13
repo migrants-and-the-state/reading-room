@@ -1,13 +1,8 @@
 <script>
 	import { base } from '$app/paths';
-	import {
-		Breadcrumb,
-		BreadcrumbItem,
-		Link,
-		OutboundLink,
-		Tag,
-		Tile
-	} from 'carbon-components-svelte';
+	import { Breadcrumb, BreadcrumbItem, Link, Tag, Tile } from 'carbon-components-svelte';
+	import InformationSquare from 'carbon-icons-svelte/lib/InformationSquare.svelte';
+	import { InfoLink, OutboundLink, SearchResultLink } from '$lib/components/links';
 	import { methods_glossary, ms_provenance_tags } from '$lib/methods';
 </script>
 
@@ -98,35 +93,39 @@
 		documents and extracting information from them. In general, our approach has prioritized
 		training models to address a larger number of data identification tasks rather than attempting
 		fewer tasks and refining the models to achieve peak accuracy. We started by developing a model
-		(using <Link size="lg" href="#dnn">Deep Neural Networks</Link>) to create image embeddings for
-		every page in the training set. Members of the team reviewed each page to identify
-		machine-generated errors and used that information to improve the model’s performance in
-		distinguishing among <Link
+		(using <InfoLink size="lg" href="#dnn">Deep Neural Networks</InfoLink>) to create image
+		embeddings for every page in the training set. Members of the team reviewed each page to
+		identify machine-generated errors and used that information to improve the model’s performance
+		in distinguishing among <SearchResultLink
 			size="lg"
-			href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=form">forms</Link
-		>, <Link size="lg" href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=letter"
-			>letters</Link
-		>, <Link
+			href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=form"
+			>forms</SearchResultLink
+		>, <SearchResultLink
+			size="lg"
+			href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=letter"
+			>letters</SearchResultLink
+		>, <SearchResultLink
 			size="lg"
 			href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=photograph"
-			>photographs</Link
-		>, and other kinds of materials (which we labelled <Link
+			>photographs</SearchResultLink
+		>, and other kinds of materials (which we labelled <SearchResultLink
 			size="lg"
-			href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=misc">“misc”</Link
+			href="{base}/results/page?query=&limit_fields.doctype.ms_doctype_v1=misc"
+			>“misc”</SearchResultLink
 		>).
 	</p>
 	<p class="py-2">
 		While the model identifying document types relied on the visual information on each A-File page,
-		the ability to extract text information required the use of <Link size="lg" href="#ocr"
-			>Optical Character Recognition (OCR)</Link
+		the ability to extract text information required the use of <InfoLink size="lg" href="#ocr"
+			>Optical Character Recognition (OCR)</InfoLink
 		> to create a machine-readable text version of the training set. This text allows us to perform general
 		text extraction (identifying the presence of text in the body of a document, similar to a keyword
 		search) as well as extracting information from a specific location within a document (for example,
 		a form title or answer to a question).
 	</p>
 	<p class="py-2">
-		We used existing <Link size="lg" href="#ner">Named Entity Recognition (NER)</Link> techniques to
-		extract information about the years and country names included in each A-File. For document-specific
+		We used existing <InfoLink size="lg" href="#ner">Named Entity Recognition (NER)</InfoLink> techniques
+		to extract information about the years and country names included in each A-File. For document-specific
 		metadata extraction, we chose the G-325 and Certificate of Naturalization forms as our test cases
 		for training models (using a Large Language Model approach) that can identify a form type and extract
 		specific information from it. The information the models can extract from these forms (employment
@@ -141,8 +140,8 @@
 		The NARA catalog metadata, compiled as a limited subset of the metadata created by INS / USCIS,
 		often lacks entries corresponding to the field designating biological sex. But information on
 		biological sex, along with other biometric data required by government forms, appears frequently
-		across documents in A-Files. We used an open-source <Link size="lg" href="#llm"
-			>Large Language Model (LLM)</Link
+		across documents in A-Files. We used an open-source <InfoLink size="lg" href="#llm"
+			>Large Language Model (LLM)</InfoLink
 		> to extract this data from the individual pages of A-Files, typically from forms where a biological
 		sex designation (e.g. Male / Female) is required. The model then aggregates the total number of identifications
 		for biological sex and predicts the sex of the A-File holder. The LLM derived metadata is not 100%
@@ -157,22 +156,22 @@
 		migrants and immigration officers used a variety of adjectives, many of them offensive to
 		contemporary sensibilities. Currently, our models extract complexion data only from the
 		Certificate of Naturalization forms. From the subset of data available in this prototype,
-		complexion was recorded directly in these documents as <Link
+		complexion was recorded directly in these documents as <SearchResultLink
 			size="lg"
 			href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=medium"
-			>medium</Link
-		>, <Link
+			>medium</SearchResultLink
+		>, <SearchResultLink
 			size="lg"
 			href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=dark"
-			>dark</Link
-		>, or <Link
+			>dark</SearchResultLink
+		>, or <SearchResultLink
 			size="lg"
 			href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=fair"
-			>fair</Link
-		>, if at all. Our models attempt to record these terms exactly or add an <Link
+			>fair</SearchResultLink
+		>, if at all. Our models attempt to record these terms exactly or add an <SearchResultLink
 			size="lg"
 			href="{base}/results/natcert?selectedFields=fields.certificate_naturalization.complexion.complexion_llm_v1&query=n.a"
-			>N.A</Link
+			>N.A</SearchResultLink
 		> value if they do not find a complexion value on the page.
 	</p>
 	<p class="py-2">
@@ -190,7 +189,10 @@
 	{#each methods_glossary as method}
 		<Tile id={method.id}>
 			<dl class="w-full">
-				<dt class="text-base font-semibold">{method.term}</dt>
+				<dt class="text-base font-semibold">
+					<InformationSquare size={20} class="inline" />
+					{method.term}
+				</dt>
 				<dd class="py-2 leading-normal">
 					{method.description}
 					{#if method.models}
@@ -208,8 +210,11 @@
 </div>
 
 <h2 id="tags" class="py-4">Data Provenance Tags</h2>
-<p class="pt-2 pb-6 max-w-[85ch]">
-	When exploring A-Files in the M/S Reading Room prototype, you'll see the following "data provenance tags" next to metadata fields by the A-File viewer. Clicking one will take you to the corresponding tag below, where you will find context for the source of that data. Definitions for terms like "LLM", "NLP", and "OCR" can be found above.
+<p class="max-w-[85ch] pb-6 pt-2">
+	When exploring A-Files in the M/S Reading Room prototype, you'll see the following "data
+	provenance tags" next to metadata fields by the A-File viewer. Clicking one will take you to the
+	corresponding tag below, where you will find context for the source of that data. Definitions for
+	terms like "LLM", "NLP", and "OCR" can be found above.
 </p>
 <div class="w-full">
 	<div class="flex gap-6 py-4">

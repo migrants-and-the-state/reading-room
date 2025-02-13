@@ -1,6 +1,7 @@
 <script>
 	import { base } from '$app/paths';
-	import { Breadcrumb, BreadcrumbItem, Link, OutboundLink } from 'carbon-components-svelte';
+	import { Breadcrumb, BreadcrumbItem, Link } from 'carbon-components-svelte';
+	import { SearchResultLink, OutboundLink } from '$lib/components/links';
 
 	const directors = [
 		{
@@ -112,9 +113,12 @@
 		family, and community history. The M/S team is working to harness machine learning and data
 		curation methods to enable members of migrant communities and scholars to tap into the rich
 		trove of information contained within them and understand histories of migration in new ways.
-		While this prototype contains <Link size="lg" href="{base}/results/afile?query=">423 files</Link
-		> comprising <Link size="lg" href="{base}/results/page?query=">20,516 pages</Link>, we used a
-		training set of 751 files totalling 37,396 pages to test and refine our machine learning models.
+		While this prototype contains <SearchResultLink size="lg" href="{base}/results/afile?query="
+			>423 files</SearchResultLink
+		> comprising <SearchResultLink size="lg" href="{base}/results/page?query="
+			>20,516 pages</SearchResultLink
+		>, we used a training set of 751 files totalling 37,396 pages to test and refine our machine
+		learning models.
 	</p>
 	<p class="py-2">
 		<span class="italic">Migrants and the State</span> received early stage funding from the NYU

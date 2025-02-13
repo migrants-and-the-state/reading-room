@@ -15,6 +15,7 @@
 		LicenseDraft as G325AIcon,
 		Policy as NatCertIcon
 	} from 'carbon-icons-svelte';
+	import { OutboundLink } from '$lib/components/links';
 
 	const stats = {
 		afile: { label: 'A-Files', sample: 423, full: 751 },
@@ -27,10 +28,8 @@
 <div class="mb-8 flex w-full flex-wrap gap-4 md:flex-nowrap md:gap-10">
 	<div class="my-6 basis-full md:basis-1/2">
 		<p class="py-2 text-sm md:text-base">
-			<Link
-				class="text-sm md:text-base"
-				href="https://migrants-and-the-state.github.io"
-				target="_blank">Migrants and the State (M/S)</Link
+			<OutboundLink class="text-sm md:text-base" href="https://migrants-and-the-state.github.io"
+				>Migrants and the State (M/S)</OutboundLink
 			> aims to provide large-scale access to the public domain migrant records held by the U.S. National
 			Archives (NARA). This prototype is designed to gather feedback on our current methods of enhancing
 			A-file searchability and solicit ideas for future project development.
