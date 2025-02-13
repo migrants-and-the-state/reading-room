@@ -37,12 +37,13 @@
 		</p>
 		<p class="py-2 text-sm md:text-base">
 			Below you can search for entire <strong>A-Files</strong> or specific <strong>Pages</strong>
-			within them using both NARA-cataloged and experimentally-extracted metadata. Some pages have
-			been machine-identified as <strong>G-325 Forms</strong> or
+			within them using both NARA-cataloged and experimentally-extracted metadata. Some pages have been
+			machine-identified as <strong>G-325 Forms</strong> or
 			<strong>Naturalization Certificates</strong>; these special pages include additional metadata
-			fields created by our project team. Prior to using the site, please read about our data curation choices and machine learning
-			model training in the <Link class="text-sm md:text-base" href="{base}/data-guide"
-				>Data Guide</Link
+			fields created by our project team. Prior to using the site, please read about our data
+			curation choices and machine learning model training in the <Link
+				class="text-sm md:text-base"
+				href="{base}/data-guide">Data Guide</Link
 			>.
 		</p>
 	</div>

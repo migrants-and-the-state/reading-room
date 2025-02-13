@@ -117,11 +117,12 @@
 		training set of 751 files totalling 37,396 pages to test and refine our machine learning models.
 	</p>
 	<p class="py-2">
-		<span class="italic">Migrants and the State</span> received early stage funding from the NYU Bennett-Polonsky Humanities Lab
-		program, NYU Center for the Humanities, and the NYU Office of the Provost Humanities Mega-Grants
-		Initiative Seed Fund. The M/S Reading Room digital prototype has been made possible in part by a
-		grant from the <OutboundLink size="lg" href="http://www.neh.gov"
-			>National Endowment for the Humanities</OutboundLink
+		<span class="italic">Migrants and the State</span> received early stage funding from the NYU
+		Bennett-Polonsky Humanities Lab program, NYU Center for the Humanities, and the NYU Office of
+		the Provost Humanities Mega-Grants Initiative Seed Fund. The M/S Reading Room digital prototype
+		has been made possible in part by a grant from the <OutboundLink
+			size="lg"
+			href="http://www.neh.gov">National Endowment for the Humanities</OutboundLink
 		> Digital Humanities Advancement Grant program.
 	</p>
 	<p class="py-2">
@@ -179,7 +180,7 @@
 	<p class="py-2">
 		Special thanks to Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra,
 		Calista LaMotte, Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach,
-		Benjamin Berman-Gladstone, Bita Mousavi, Barbara
-		Perez Curiel, Sarah Sklaw, Alexia Orengo-Green, Jason Ahlenius, and Alec Ferretti.
+		Benjamin Berman-Gladstone, Bita Mousavi, Barbara Perez Curiel, Sarah Sklaw, Alexia Orengo-Green,
+		Jason Ahlenius, and Alec Ferretti.
 	</p>
 </div>

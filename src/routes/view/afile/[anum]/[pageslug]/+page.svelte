@@ -208,7 +208,7 @@
 												<Link href="{base}/data-guide#{ptag}">
 													<Tag interactive size="sm" type="blue" class="font-mono">#{ptag}</Tag>
 												</Link>
-											{:else if ptag.startsWith('ms')}
+											{:else}
 												<Link href="{base}/data-guide#{ptag}">
 													<Tag interactive size="sm" type="green" class="font-mono">#{ptag}</Tag>
 												</Link>

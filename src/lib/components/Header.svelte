@@ -14,13 +14,11 @@
 				<Link class="pr-2 !text-white" href="{base}/data-guide">Data Guide</Link>
 			</div>
 			<div class="flex items-center justify-end">
-				<OutboundLink
-					class="pr-2 !text-white"
-					href="https://migrants-and-the-state.github.io/">M/S Project</OutboundLink
+				<OutboundLink class="pr-2 !text-white" href="https://migrants-and-the-state.github.io/"
+					>M/S Project</OutboundLink
 				>
-				<OutboundLink
-					class="pr-2 !text-white"
-					href="https://github.com/migrants-and-the-state">GitHub</OutboundLink
+				<OutboundLink class="pr-2 !text-white" href="https://github.com/migrants-and-the-state"
+					>GitHub</OutboundLink
 				>
 				<OutboundLink
 					class="pr-2 !text-white"
