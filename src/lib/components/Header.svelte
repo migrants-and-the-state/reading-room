@@ -5,7 +5,7 @@
 </script>
 
 <header class="sticky top-0 z-50">
-	<div class="mb-10 bg-slate-900 px-4 py-2 md:px-8 lg:px-28">
+	<div class="bg-[#161616] px-4 py-2 md:px-8 lg:px-28">
 		<nav class="flex w-full flex-row flex-wrap items-center justify-between gap-2 md:gap-8">
 			<div class="flex items-center justify-start gap-2 md:gap-8">
 				<Link class="pr-2 text-xs !text-white" href={base}>

@@ -106,7 +106,7 @@
 	});
 </script>
 
-<Breadcrumb class="mb-8">
+<Breadcrumb class="mb-16">
 	{#if localStorage.getItem('formReferrer')}
 		<BreadcrumbItem href={localStorage.getItem('formReferrer')}>Home</BreadcrumbItem>
 	{:else}
@@ -118,7 +118,7 @@
 	<BreadcrumbItem isCurrentPage>{afile.id}</BreadcrumbItem>
 </Breadcrumb>
 
-<h1 class="mb-8 md:text-5xl">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
+<h1 class="md:mb-16 mb-8 md:text-5xl">{afile.fields.last_name?.nara}, {afile.fields.first_name?.nara}</h1>
 
 <div class="flex flex-wrap gap-6 md:flex-nowrap">
 	<div class="relative h-[60vh] basis-full border-none md:basis-3/5">

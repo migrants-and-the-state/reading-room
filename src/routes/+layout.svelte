@@ -29,10 +29,10 @@
 
 <div class="min-h-screen">
 	<Header />
-	<main class="relative mb-36 w-full px-4 pb-20 md:px-8 lg:px-28">
+	<main class="relative mt-6 mb-32 w-full px-4 md:px-8 lg:px-28">
 		{@render children()}
 	</main>
-	<footer class="bg-[#cacaca] px-4 py-2 md:px-8 lg:px-28 sticky mt-20 bottom-0 z-50">
-		<p class="py-2 text-[.8em] font-mono">M/S_RR v0.1.0; {timestamp}</p>
+	<footer class="bg-[#161616] text-white px-4 py-2 md:px-8 lg:px-28">
+		<p class="py-1 text-[.8em] font-mono">M/S_RR v0.1.0; {timestamp}</p>
 	</footer>
 </div>

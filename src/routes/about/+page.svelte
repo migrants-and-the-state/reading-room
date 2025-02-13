@@ -1,7 +1,7 @@
 <script>
 	import { base } from '$app/paths';
 	import { Breadcrumb, BreadcrumbItem, Link } from 'carbon-components-svelte';
-	import { SearchResultLink, OutboundLink } from '$lib/components/links';
+	import { JumpLink, SearchResultLink, OutboundLink } from '$lib/components/links';
 
 	const directors = [
 		{
@@ -79,26 +79,26 @@
 	];
 </script>
 
-<Breadcrumb class="mb-8">
+<Breadcrumb class="mb-16">
 	<BreadcrumbItem href={base}>Home</BreadcrumbItem>
 </Breadcrumb>
 
-<h1 class="mb-8 md:text-5xl">M/S About + Credits</h1>
+<h1 class="md:text-5xl">M/S About + Credits</h1>
 
-<div class="my-6">
-	<h2 class="mb-2">Contents</h2>
-	<ul class="list-inside list-disc [&_ul]:list-[revert]">
-		<li class="py-1"><a href="#project-description">Project Description</a></li>
-		<li class="py-1"><a href="#project-directors">Project Directors</a></li>
-		<li class="py-1"><a href="#project-collaborators">Project Collaborators</a></li>
-		<li class="py-1"><a href="#project-advisors">Project Advisors</a></li>
-		<li class="py-1"><a href="#gratitude">Gratitude</a></li>
+<div>
+	<h2 class="mt-12 mb-4">Contents</h2>
+	<ul>
+		<li class="py-1"><JumpLink size="lg" href="#project-description">Project Description</JumpLink></li>
+		<li class="py-1"><JumpLink size="lg" href="#project-directors">Project Directors</JumpLink></li>
+		<li class="py-1"><JumpLink size="lg" href="#project-collaborators">Project Collaborators</JumpLink></li>
+		<li class="py-1"><JumpLink size="lg" href="#project-advisors">Project Advisors</JumpLink></li>
+		<li class="py-1"><JumpLink size="lg" href="#gratitude">Gratitude</JumpLink></li>
 	</ul>
 </div>
 
 <div class="max-w-[90ch]">
-	<h2 id="project-description" class="my-4">Project Description</h2>
-	<p class="py-2">
+	<h2 id="project-description" class="mt-12 mb-4">Project Description</h2>
+	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
 		<span class="italic">Migrants and the State (M/S)</span> began in 2020 when a group of NYU faculty
 		and graduate students came together to investigate the record-keeping practices of migrant advocates,
 		attorneys, and the federal government. It became clear that our era’s “border crisis” is ultimately
@@ -107,7 +107,7 @@
 		A-files held by the U.S. National Archives, yet because of the limited information available in NARA’s
 		catalog, these files are virtually impossible to explore at scale.
 	</p>
-	<p class="py-2">
+	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
 		A-files open a window into migrant experiences and the operations of the administrative state
 		and have exceptional potential for humanities research as well as for explorations in personal,
 		family, and community history. The M/S team is working to harness machine learning and data
@@ -120,7 +120,7 @@
 		>, we used a training set of 751 files totalling 37,396 pages to test and refine our machine
 		learning models.
 	</p>
-	<p class="py-2">
+	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
 		<span class="italic">Migrants and the State</span> received early stage funding from the NYU
 		Bennett-Polonsky Humanities Lab program, NYU Center for the Humanities, and the NYU Office of
 		the Provost Humanities Mega-Grants Initiative Seed Fund. The M/S Reading Room digital prototype
@@ -129,12 +129,12 @@
 			href="http://www.neh.gov">National Endowment for the Humanities</OutboundLink
 		> Digital Humanities Advancement Grant program.
 	</p>
-	<p class="py-2">
+	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
 		Any views, findings, conclusions, or recommendations expressed in this web resource do not
 		necessarily represent those of the National Endowment for the Humanities.
 	</p>
 
-	<div class="my-12 flex max-w-[60%] items-center gap-12">
+	<div class="mt-12 mb-24 flex max-w-[60%] items-center gap-12">
 		<div class="basis-1/2">
 			<img
 				class="max-w-full"
@@ -151,7 +151,7 @@
 		</div>
 	</div>
 
-	<h2 id="project-directors" class="my-4">Project Directors</h2>
+	<h2 id="project-directors" class="mt-12 mb-4">Project Directors</h2>
 	<ul class="py-2 text-base">
 		{#each directors as director}
 			<li class="py-2">
@@ -161,7 +161,7 @@
 		{/each}
 	</ul>
 
-	<h2 id="project-collaborators" class="my-4">Project Collaborators</h2>
+	<h2 id="project-collaborators" class="mt-12 mb-4">Project Collaborators</h2>
 	<ul class="py-2 text-base">
 		{#each collaborators as collaborator}
 			<li class="py-2">
@@ -170,7 +170,7 @@
 		{/each}
 	</ul>
 
-	<h2 id="project-advisors" class="my-4">Project Advisors</h2>
+	<h2 id="project-advisors" class="mt-12 mb-4">Project Advisors</h2>
 	<ul class="py-2 text-base">
 		{#each advisors as collaborator}
 			<li class="py-2">
@@ -180,8 +180,8 @@
 		{/each}
 	</ul>
 
-	<h2 id="gratitude" class="my-4">Gratitude</h2>
-	<p class="py-2">
+	<h2 id="gratitude" class="mt-12 mb-4">Gratitude</h2>
+	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
 		Special thanks to Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra,
 		Calista LaMotte, Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach,
 		Benjamin Berman-Gladstone, Bita Mousavi, Barbara Perez Curiel, Sarah Sklaw, Alexia Orengo-Green,

@@ -86,7 +86,7 @@
 	}
 </script>
 
-<Breadcrumb class="mb-8">
+<Breadcrumb class="mb-16">
 	{#if localStorage.getItem('formReferrer')}
 		<BreadcrumbItem href={localStorage.getItem('formReferrer')}>Home</BreadcrumbItem>
 	{:else}
@@ -95,13 +95,13 @@
 </Breadcrumb>
 
 {#await searchPromise}
-	<h1 class="mb-8 md:text-5xl">Results</h1>
+	<h1 class="md:mb-16 mb-8 md:text-5xl">Results</h1>
 	<Loading />
 {:then results}
 	{#await getPaginatedItems(currentPage)}
 		<Loading />
 	{:then items}
-		<h1 class="mb-8 md:text-5xl">Results ({results.length})</h1>
+	<h1 class="md:mb-16 mb-8 md:text-5xl">Results ({results.length})</h1>
 		<Pagination
 			class="mb-6"
 			bind:page={currentPage}
