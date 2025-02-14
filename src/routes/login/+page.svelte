@@ -1,5 +1,5 @@
 <script>
-	import { Form, PasswordInput } from 'carbon-components-svelte';
+	import { Form, FormGroup, PasswordInput } from 'carbon-components-svelte';
 	import { handlePasswordSubmit } from '$lib/login.js';
 </script>
 
