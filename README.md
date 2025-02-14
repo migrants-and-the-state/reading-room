@@ -1,4 +1,4 @@
-# M/S Corpus UI (v1-Sample)
+# M/S Reading Room (v1-Sample)
 
 ## Development
 
