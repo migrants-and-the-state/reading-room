@@ -12,11 +12,11 @@ export function handlePasswordSubmit(event) {
 	password.set(pw);
 	if (verifyLoginStatus()) {
 		localStorage.setItem('password', pw);
-		goto('/').then(() => goto(base));
+		goto(base);
 	} else {
 		alert('Incorrect password');
 	}
-	// event.target.reset();
+	event.target.reset();
 }
 
 export function verifyLoginStatus() {
@@ -26,7 +26,7 @@ export function verifyLoginStatus() {
 export function handleLogout() {
 	localStorage.setItem('password', '');
 	password.set('');
-	goto('/').then(() => goto(`${base}/login`));
+	goto(`${base}/login`);
 }
 
 export function getUserPassword() {

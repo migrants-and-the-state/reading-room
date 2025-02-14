@@ -4,10 +4,9 @@
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
-	import LogInOut from '$lib/components/LogInOut.svelte';
 	import { Loading } from 'carbon-components-svelte';
-	import { timestamp } from '$lib/timestamp.js';
 	import { Api_1, ViewMode_1 } from 'carbon-icons-svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
 
@@ -33,19 +32,10 @@
 
 <div class="flex min-h-screen flex-col justify-between">
 	<div>
-		{#if !onLoginPage}
-			<Header />
-		{/if}
+		<Header />
 		<main class="relative mb-32 mt-6 w-full px-4 md:px-8 lg:px-28">
 			{@render children()}
 		</main>
 	</div>
-	<footer
-		class="flex items-center justify-between bg-[#161616] px-4 py-2 text-white md:px-8 lg:px-28"
-	>
-		<p class="py-1 font-mono text-[.8em]">M/S_RR v0.1.0; {timestamp}</p>
-		{#if !onLoginPage}
-			<LogInOut />
-		{/if}
-	</footer>
+	<Footer />
 </div>

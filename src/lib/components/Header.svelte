@@ -2,8 +2,11 @@
 	import { base } from '$app/paths';
 	import { Link } from 'carbon-components-svelte';
 	import OutboundLink from '$lib/components/links/OutboundLink.svelte';
+	// import { verifyLoginStatus } from '$lib/login';
+	// let loggedIn = !!verifyLoginStatus();
 </script>
 
+<!-- {#if !!loggedIn} -->
 <header class="sticky top-0 z-50">
 	<div class="bg-[#161616] px-4 py-2 md:px-8 lg:px-28">
 		<nav class="flex w-full flex-row flex-wrap items-center justify-between gap-2 md:gap-8">
@@ -29,3 +32,4 @@
 		</nav>
 	</div>
 </header>
+<!-- {/if} -->
