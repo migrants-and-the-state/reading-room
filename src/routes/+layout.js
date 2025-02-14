@@ -8,15 +8,13 @@ export const ssr = false;
 export async function load({ url }) {
 	let password;
 	let loggedIn;
-	const onLoginPage = url.pathname.includes('login'); 
+	const onLoginPage = url.pathname.includes('login');
 
-  if (browser) {
-    password = localStorage.getItem('password');
-    loggedIn = password === import.meta.env.VITE_PASSWORD;
-    console.log('loggedIn:', loggedIn);
-    if (!loggedIn && !onLoginPage) {
-      console.log('redirecting!');
-      redirect(302, `${base}/login`);
-    }
-  }
+	if (browser) {
+		password = localStorage.getItem('password');
+		loggedIn = password === import.meta.env.VITE_PASSWORD;
+		if (!loggedIn && !onLoginPage) {
+			redirect(302, `${base}/login`);
+		}
+	}
 }

@@ -13,28 +13,30 @@
 <div class="max-w-[85ch]">
 	<h1 class="md:text-5xl">M/S Data Guide</h1>
 	<div class="my-6">
-		<h2 class="mt-12 mb-4">Contents</h2>
+		<h2 class="mb-4 mt-12">Contents</h2>
 		<ul>
 			<li class="pt-2"><JumpLink size="lg" href="#introduction">Introduction</JumpLink></li>
 			<li class="pt-2"><JumpLink size="lg" href="#training-set">Training Set</JumpLink></li>
-			<li class="pt-2"><JumpLink size="lg" href="#metadata-sources"> Metadata Sources</JumpLink></li>
-			<li class="pt-2"><JumpLink size="lg" href="#metadata-note">Metadata on Sex and Complexion</JumpLink></li>
+			<li class="pt-2"><JumpLink size="lg" href="#metadata-sources">Metadata Sources</JumpLink></li>
+			<li class="pt-2">
+				<JumpLink size="lg" href="#metadata-note">Metadata on Sex and Complexion</JumpLink>
+			</li>
 			<li class="pt-2"><JumpLink size="lg" href="#methods-glossary">Methods Glossary</JumpLink></li>
 			<li class="pt-2"><JumpLink size="lg" href="#tags">Data Provenance Tags</JumpLink></li>
 		</ul>
 	</div>
 
-	<h2 id="introduction" class="mt-12 mb-4">Introduction</h2>
+	<h2 id="introduction" class="mb-4 mt-12">Introduction</h2>
 
 	<h3 id="training-set" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
 		Training Set
 	</h3>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		This M/S Reading Room prototype allows users to search the test set of A-Files using metadata
 		derived from two sources: the publicly available U.S. National Archives (NARA) catalog metadata,
 		and metadata based on information extracted by our machine learning models.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		Most of the training set is made up of files ordered from the Kansas City regional office of
 		NARA, where the vast majority of public domain A-Files are held. While these A-files are in the
 		public domain (A-files enter the public domain when the birth year of the file holder is at
@@ -55,7 +57,7 @@
 	<h3 id="metadata-sources" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
 		Metadata Sources
 	</h3>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		The <OutboundLink
 			size="lg"
 			href="https://docs.google.com/document/u/0/d/1lnvN77_CaBnOzg9HBF-jtWTwJlisgKoD3E1RKHwQByQ/"
@@ -82,7 +84,7 @@
 			>naturalization locations</OutboundLink
 		>.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		The metadata created by the <span class="italic">Migrants and the State</span> project has been
 		derived using a variety of machine learning methods deployed on a training set of 751 files
 		comprising 37,396 individual pages. The model training involved two main stages: categorizing
@@ -110,7 +112,7 @@
 			>“misc”</SearchResultLink
 		>).
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		While the model identifying document types relied on the visual information on each A-File page,
 		the ability to extract text information required the use of <InfoLink size="lg" href="#ocr"
 			>Optical Character Recognition (OCR)</InfoLink
@@ -119,7 +121,7 @@
 		search) as well as extracting information from a specific location within a document (for example,
 		a form title or answer to a question).
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		We used existing <InfoLink size="lg" href="#ner">Named Entity Recognition (NER)</InfoLink> techniques
 		to extract information about the years and country names included in each A-File. For document-specific
 		metadata extraction, we chose the G-325 and Certificate of Naturalization forms as our test cases
@@ -132,7 +134,7 @@
 	<h3 id="metadata-note" class="mb-4 mt-6 text-base uppercase tracking-widest md:text-lg">
 		Metadata on Sex and Complexion
 	</h3>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		The NARA catalog metadata, compiled as a limited subset of the metadata created by INS / USCIS,
 		often lacks entries corresponding to the field designating biological sex. But information on
 		biological sex, along with other biometric data required by government forms, appears frequently
@@ -144,7 +146,7 @@
 		accurate, and the prototype allows you to compare NARA’s metadata for sex with the metadata extracted
 		by the M/S trained LLM.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		Extracting metadata to reflect historical government categories and bureaucratic norms around
 		biological sex is relatively straightforward, given the binary categories of male and female
 		then in use. Extracting metadata about ethno-racial categorization is more complex. This
@@ -170,7 +172,7 @@
 			>N.A</SearchResultLink
 		> value if they do not find a complexion value on the page.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		We crucially do not try to infer or profile a value through other cues in the A-File. Our aim is
 		to organize the specific terms used by immigration bureaucracies over time as objects of study
 		without intervention or curation. Nevertheless, please note that these metadata values, like
@@ -180,7 +182,7 @@
 	</p>
 </div>
 
-<h2 id="methods-glossary" class="mt-12 mb-4">Methods Glossary</h2>
+<h2 id="methods-glossary" class="mb-4 mt-12">Methods Glossary</h2>
 <div class="my-10 grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3">
 	{#each methods_glossary as method}
 		<Tile id={method.id}>
@@ -205,8 +207,8 @@
 	{/each}
 </div>
 
-<h2 id="tags" class="mt-12 mb-4">Data Provenance Tags</h2>
-<p class="max-w-[85ch] mb-12">
+<h2 id="tags" class="mb-4 mt-12">Data Provenance Tags</h2>
+<p class="mb-12 max-w-[85ch]">
 	When exploring A-Files in the M/S Reading Room prototype, you'll see the following "data
 	provenance tags" next to metadata fields by the A-File viewer. Clicking one will take you to the
 	corresponding tag below, where you will find context for the source of that data. Definitions for

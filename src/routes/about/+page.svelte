@@ -86,19 +86,23 @@
 <h1 class="md:text-5xl">M/S About + Credits</h1>
 
 <div>
-	<h2 class="mt-12 mb-4">Contents</h2>
+	<h2 class="mb-4 mt-12">Contents</h2>
 	<ul>
-		<li class="py-1"><JumpLink size="lg" href="#project-description">Project Description</JumpLink></li>
+		<li class="py-1">
+			<JumpLink size="lg" href="#project-description">Project Description</JumpLink>
+		</li>
 		<li class="py-1"><JumpLink size="lg" href="#project-directors">Project Directors</JumpLink></li>
-		<li class="py-1"><JumpLink size="lg" href="#project-collaborators">Project Collaborators</JumpLink></li>
+		<li class="py-1">
+			<JumpLink size="lg" href="#project-collaborators">Project Collaborators</JumpLink>
+		</li>
 		<li class="py-1"><JumpLink size="lg" href="#project-advisors">Project Advisors</JumpLink></li>
 		<li class="py-1"><JumpLink size="lg" href="#gratitude">Gratitude</JumpLink></li>
 	</ul>
 </div>
 
 <div class="max-w-[90ch]">
-	<h2 id="project-description" class="mt-12 mb-4">Project Description</h2>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<h2 id="project-description" class="mb-4 mt-12">Project Description</h2>
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		<span class="italic">Migrants and the State (M/S)</span> began in 2020 when a group of NYU faculty
 		and graduate students came together to investigate the record-keeping practices of migrant advocates,
 		attorneys, and the federal government. It became clear that our era’s “border crisis” is ultimately
@@ -107,7 +111,7 @@
 		A-files held by the U.S. National Archives, yet because of the limited information available in NARA’s
 		catalog, these files are virtually impossible to explore at scale.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		A-files open a window into migrant experiences and the operations of the administrative state
 		and have exceptional potential for humanities research as well as for explorations in personal,
 		family, and community history. The M/S team is working to harness machine learning and data
@@ -120,7 +124,7 @@
 		>, we used a training set of 751 files totalling 37,396 pages to test and refine our machine
 		learning models.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		<span class="italic">Migrants and the State</span> received early stage funding from the NYU
 		Bennett-Polonsky Humanities Lab program, NYU Center for the Humanities, and the NYU Office of
 		the Provost Humanities Mega-Grants Initiative Seed Fund. The M/S Reading Room digital prototype
@@ -129,12 +133,12 @@
 			href="http://www.neh.gov">National Endowment for the Humanities</OutboundLink
 		> Digital Humanities Advancement Grant program.
 	</p>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		Any views, findings, conclusions, or recommendations expressed in this web resource do not
 		necessarily represent those of the National Endowment for the Humanities.
 	</p>
 
-	<div class="mt-12 mb-24 flex max-w-[60%] items-center gap-12">
+	<div class="mb-24 mt-12 flex max-w-[60%] items-center gap-12">
 		<div class="basis-1/2">
 			<img
 				class="max-w-full"
@@ -151,7 +155,7 @@
 		</div>
 	</div>
 
-	<h2 id="project-directors" class="mt-12 mb-4">Project Directors</h2>
+	<h2 id="project-directors" class="mb-4 mt-12">Project Directors</h2>
 	<ul class="py-2 text-base">
 		{#each directors as director}
 			<li class="py-2">
@@ -161,7 +165,7 @@
 		{/each}
 	</ul>
 
-	<h2 id="project-collaborators" class="mt-12 mb-4">Project Collaborators</h2>
+	<h2 id="project-collaborators" class="mb-4 mt-12">Project Collaborators</h2>
 	<ul class="py-2 text-base">
 		{#each collaborators as collaborator}
 			<li class="py-2">
@@ -170,7 +174,7 @@
 		{/each}
 	</ul>
 
-	<h2 id="project-advisors" class="mt-12 mb-4">Project Advisors</h2>
+	<h2 id="project-advisors" class="mb-4 mt-12">Project Advisors</h2>
 	<ul class="py-2 text-base">
 		{#each advisors as collaborator}
 			<li class="py-2">
@@ -180,8 +184,8 @@
 		{/each}
 	</ul>
 
-	<h2 id="gratitude" class="mt-12 mb-4">Gratitude</h2>
-	<p class="py-2 md:text-[1.2em] text-base leading-relaxed">
+	<h2 id="gratitude" class="mb-4 mt-12">Gratitude</h2>
+	<p class="py-2 text-base leading-relaxed md:text-[1.2em]">
 		Special thanks to Ben Schmidt, Molly Rogers, Elizabeth Burnes, Jake Ersland, Gabriela Basterra,
 		Calista LaMotte, Johanna Morales, Alexandra Cordero, Karin Burrell, Rebecca Maner, Alona Bach,
 		Benjamin Berman-Gladstone, Bita Mousavi, Barbara Perez Curiel, Sarah Sklaw, Alexia Orengo-Green,

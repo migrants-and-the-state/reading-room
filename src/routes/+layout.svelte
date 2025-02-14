@@ -1,7 +1,7 @@
 <script>
 	import { navigating } from '$app/stores';
-	import { page } from '$app/state';
-	import { writable, derived } from 'svelte/store';
+	import { writable } from 'svelte/store';
+	import { onMount } from 'svelte';
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
 	import LogInOut from '$lib/components/LogInOut.svelte';
@@ -11,12 +11,9 @@
 
 	let { children } = $props();
 
-	const onLoginPage = page.url.pathname.includes('login'); ;
-	let password = localStorage.getItem('password');
-	const loggedIn = writable(password === import.meta.env.VITE_PASSWORD);
-
 	let loadingTimeout;
-	let showLoading = false;
+	let showLoading;
+	let onLoginPage = new URL(window.location).pathname.includes('login');
 
 	$effect(() => {
 		if (!!$navigating) {
@@ -34,15 +31,21 @@
 	<Loading />
 {/if}
 
-<div class="min-h-screen flex flex-col justify-between">
+<div class="flex min-h-screen flex-col justify-between">
 	<div>
-		{#if !onLoginPage}<Header />{/if}
-		<main class="relative mt-6 mb-32 w-full px-4 md:px-8 lg:px-28">
+		{#if !onLoginPage}
+			<Header />
+		{/if}
+		<main class="relative mb-32 mt-6 w-full px-4 md:px-8 lg:px-28">
 			{@render children()}
 		</main>
 	</div>
-	<footer class="bg-[#161616] text-white px-4 py-2 md:px-8 lg:px-28 flex justify-between items-center">
-		<p class="py-1 text-[.8em] font-mono">M/S_RR v0.1.0; {timestamp}</p>
-		<LogInOut loggedIn={$loggedIn}/>
+	<footer
+		class="flex items-center justify-between bg-[#161616] px-4 py-2 text-white md:px-8 lg:px-28"
+	>
+		<p class="py-1 font-mono text-[.8em]">M/S_RR v0.1.0; {timestamp}</p>
+		{#if !onLoginPage}
+			<LogInOut />
+		{/if}
 	</footer>
 </div>
