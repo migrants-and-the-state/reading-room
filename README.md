@@ -1,8 +1,22 @@
 # M/S Reading Room (v1-Sample)
 
-## Development
+## Installation
 
-Once you've installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+npm install
+```
+
+## Ingest Data
+1. Clone the data repo (must have permissions)
+    ```
+    git clone https://github.com/migrants-and-the-state/extracted-data.git
+    ```
+2. Run ingest script
+    ```sh
+    npm run ingest
+    ```
+
+## Development
 
 ```bash
 npm run dev
