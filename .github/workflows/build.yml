@@ -1,0 +1,21 @@
+name: Build the site (test)
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install
+      - name: Generate timestamp
+        run: npm run-script timestamp
+      - name: Set up environment variables
+        run: echo "VITE_PASSWORD=${{ secrets.VITE_PASSWORD }}" >> .env
+      - name: Build the site
+        run: npm run build

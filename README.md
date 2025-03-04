@@ -1,5 +1,10 @@
 # M/S Reading Room (v1-Sample)
 
+## Ingest Data
+```sh
+bash ingest.sh
+```
+
 ## Development
 
 Once you've installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
