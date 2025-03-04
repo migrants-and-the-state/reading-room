@@ -26,6 +26,6 @@ vite.config.ts.timestamp-*
 
 
 # Data
-extracted-data
 static/api/**/*.json
+extracted-data 
 ingest.sh
