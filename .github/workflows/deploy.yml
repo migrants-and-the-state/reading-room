@@ -24,6 +24,8 @@ jobs:
           repository: migrants-and-the-state/extracted-data
           token: ${{ secrets.MS_DATA_PAT }}
           path: extracted-data
+      - name: Ingest data
+        run: npm run ingest
       - name: Build the site
         run: npm run build
       - name: Upload static files as artifact
